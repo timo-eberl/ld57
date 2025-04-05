@@ -7,8 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="5_2hs0m"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pkg7o"]
-radius = 34.0588
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
+radius = 29.0
+height = 88.5
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -48,13 +49,15 @@ _data = {
 &"spin": SubResource("Animation_hqtel")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
-radius = 37.0135
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jxqw"]
+radius = 26.6
+height = 82.4
 
 [node name="Player" type="RigidBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 3
 gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("1_onrkg")
 maxSpeed = 500.0
 acell = 1000.0
@@ -64,7 +67,9 @@ health = 5.0
 zoom = Vector2(0.72, 0.72)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_pkg7o")
+position = Vector2(0, 6.44)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2hs0m")
 
 [node name="Submarine" type="Sprite2D" parent="."]
 scale = Vector2(0.033, 0.033)
@@ -117,4 +122,6 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CircleShape2D_hqtel")
+position = Vector2(-2.58, 6.825)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1jxqw")

@@ -81,12 +81,16 @@ func _physics_process(delta):
 		
 		if !result.is_empty():
 			hit_position = result.position # used as endpoint for laser
-			# TODO destroy blocks / enemies
+			# TODO destroy enemies
 			var obstacles : Map = %ObstaclesTiles
 			if result.rid == _last_laser_rid:
 				if Time.get_ticks_msec() - _last_laser_rid_change_time > 250:
-					var coords := obstacles.get_coords_for_body_rid(result.rid)
-					obstacles.take_damage_at(coords)
+					if result.collider == obstacles:
+						var coords := obstacles.get_coords_for_body_rid(result.rid)
+						obstacles.take_damage_at(coords)
+					
+					# TODO else if handle enemies...
+					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
 				_last_laser_rid = result.rid
