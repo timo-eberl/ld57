@@ -1,7 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://dusk0t1syi6g"]
+[gd_scene load_steps=7 format=3 uid="uid://bn4e7xq7u6hrh"]
 
-[ext_resource type="Script" uid="uid://cubcx4gax0fdr" path="res://src/enemy.gd" id="1_md0e3"]
-[ext_resource type="Texture2D" uid="uid://dne6cs077rsyg" path="res://textures/Piranah.png" id="2_md0e3"]
+[ext_resource type="Script" uid="uid://b0wa3ilstk152" path="res://src/piranha.gd" id="1_ihjt4"]
+[ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemy_stats.gd" id="2_3ub0j"]
+[ext_resource type="Texture2D" uid="uid://dne6cs077rsyg" path="res://textures/Piranha.png" id="2_md0e3"]
+
+[sub_resource type="Resource" id="Resource_j1s6e"]
+script = ExtResource("2_3ub0j")
+max_speed = 100.0
+acell = 100.0
+damage = 1.0
+hit_cooldown = 1.0
+health = 10.0
+asleep = false
+metadata/_custom_type_script = "uid://bbq6supw7aall"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uy6h"]
 radius = 29.0689
@@ -9,11 +20,12 @@ radius = 29.0689
 [sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
 radius = 38.0
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Piranha" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 7
 gravity_scale = 0.0
-script = ExtResource("1_md0e3")
+script = ExtResource("1_ihjt4")
+enemy_stats = SubResource("Resource_j1s6e")
 
 [node name="Texture" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
