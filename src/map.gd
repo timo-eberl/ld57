@@ -1,3 +1,4 @@
+class_name Map
 extends TileMapLayer
 
 @export var first_slice : PackedScene

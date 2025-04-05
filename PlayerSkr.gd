@@ -6,6 +6,7 @@ extends RigidBody2D
 
 
 @onready var uBootSprite : Sprite2D = $Submarine;
+@onready var laser : Node2D = $Submarine/LaserPunkt
 @onready var laserLine : Line2D = $Submarine/LaserPunkt/Line2D;
 
 var rocketCooldown : float = 100.0;
@@ -45,8 +46,10 @@ func _process(delta):
 	if myPos.x < lookPos.x:
 		targetVec = -targetVec
 		uBootSprite.flip_h = true
+		laser.position.x = abs(laser.position.x) # i wanna cry
 	else:
 		uBootSprite.flip_h = false
+		laser.position.x = -abs(laser.position.x) # i wanna cry
 	
 	uBootDir = lerp(uBootDir, targetVec, delta * 2.0);
 	
@@ -63,7 +66,7 @@ func _process(delta):
 	
 	
 	
-func _integrate_forces(state: PhysicsDirectBodyState2D):
+func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	if self.linear_velocity.length() > maxSpeed:
 		self.linear_velocity = self.linear_velocity.normalized() * maxSpeed;
 	

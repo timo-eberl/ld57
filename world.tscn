@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://bqs525b40rnn6"]
+[gd_scene load_steps=10 format=4 uid="uid://bqs525b40rnn6"]
 
 [ext_resource type="TileSet" uid="uid://c7y50lkg28t25" path="res://tile_sets/kenney_tile_set.tres" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b5q72legtlg5i" path="res://src/map.gd" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://dgd5yd1eu703g" path="res://scenes/slices/tile_map_slice_tutorial.tscn" id="3_036b0"]
 [ext_resource type="PackedScene" uid="uid://cj43ehcah7dpi" path="res://scenes/slices/tile_map_slice_0.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://ciduonpgk4jyp" path="res://scenes/slices/tile_map_slice_1.tscn" id="4_aqk2v"]
-[ext_resource type="Script" path="res://PlayerSkr.gd" id="6_pkg7o"]
-[ext_resource type="Texture2D" uid="uid://c1vwcvsteuyqw" path="res://textures/submarine.png" id="7_gbfbk"]
+[ext_resource type="Script" uid="uid://bbanfje5hfgu4" path="res://src/water.gd" id="6_gbfbk"]
+[ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="6_pkg7o"]
+[ext_resource type="Texture2D" uid="uid://ynto0n3nxoxq" path="res://textures/submarine/submarine.png" id="7_gbfbk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pkg7o"]
 radius = 34.0588
@@ -25,7 +26,6 @@ tile_set = ExtResource("1_f3sb7")
 script = ExtResource("2_fj7yv")
 first_slice = ExtResource("3_036b0")
 slices = Array[PackedScene]([ExtResource("3_tlwt5"), ExtResource("4_aqk2v")])
-number_of_slices = null
 
 [node name="Player" type="RigidBody2D" parent="."]
 position = Vector2(724, 297)
@@ -41,11 +41,16 @@ zoom = Vector2(0.72, 0.72)
 shape = SubResource("CircleShape2D_pkg7o")
 
 [node name="Submarine" type="Sprite2D" parent="Player"]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.033, 0.033)
 texture = ExtResource("7_gbfbk")
 
 [node name="LaserPunkt" type="Node2D" parent="Player/Submarine"]
-position = Vector2(-20, -340)
+position = Vector2(-999.999, -484.849)
 
 [node name="Line2D" type="Line2D" parent="Player/Submarine/LaserPunkt"]
+width = 100.0
 default_color = Color(0.965113, 0.335176, 0.375048, 1)
+
+[node name="WaterTiles" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_f3sb7")
+script = ExtResource("6_gbfbk")
