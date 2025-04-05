@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwduwuk1x14w"]
+
+[ext_resource type="Texture2D" uid="uid://pal27nwurvmb" path="res://textures/Rakete.png" id="1_nl5c6"]
+[ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
+
+[node name="Rakete" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+script = ExtResource("1_oaujv")
+
+[node name="Rakete" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("1_nl5c6")
