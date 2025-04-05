@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=24 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
@@ -6,10 +6,48 @@
 [ext_resource type="Texture2D" uid="uid://cog5rkes82a3o" path="res://textures/submarine/submarine_cannon256.png" id="3_sweqy"]
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="5_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://bytc7yyopgo1i" path="res://textures/submarine/submarine_autsch.png" id="6_urp6f"]
+[ext_resource type="Texture2D" uid="uid://dfpsrijb4g7d4" path="res://textures/submarine/submarine_die0.png" id="8_bwjto"]
+[ext_resource type="Texture2D" uid="uid://beuswwpbu0igy" path="res://textures/submarine/submarine_die1.png" id="9_606se"]
+[ext_resource type="Texture2D" uid="uid://vyf6jqcqap22" path="res://textures/submarine/submarine_die3.png" id="10_u1c27"]
+[ext_resource type="Texture2D" uid="uid://by6xy23j4qmps" path="res://textures/submarine/submarine_die4.png" id="11_op7ga"]
+[ext_resource type="Texture2D" uid="uid://6y753dhb08f1" path="res://textures/submarine/submarine_die5.png" id="12_q13i1"]
+[ext_resource type="Animation" uid="uid://dtg230pyb26e3" path="res://autsch.res" id="13_pylmc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
 radius = 29.0
 height = 88.5
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pbfsw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_bwjto")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_606se")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_u1c27")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_op7ga")
+}, {
+"duration": 2.0,
+"texture": ExtResource("12_q13i1")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hqtel")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -53,6 +91,216 @@ _data = {
 radius = 26.6
 height = 82.4
 
+[sub_resource type="Animation" id="Animation_7ahtn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/main_sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hqtel")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Submarine/Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Submarine/main_sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Submarine/AnimatedSprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Submarine/AnimatedSprite2D:animation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"die"]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Submarine/laser:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Submarine/main_sprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Submarine/cannon:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Submarine/Node2D/Propeller:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7lmhl"]
+resource_name = "die"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/AnimatedSprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Submarine/AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"idle", &"die"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Submarine/laser:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.11),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Submarine/main_sprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.11),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Submarine/cannon:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.11),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Submarine/Node2D/Propeller:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_5tmop"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/main_sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hqtel")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dx0e4"]
+_data = {
+&"RESET": SubResource("Animation_7ahtn"),
+&"autsch": ExtResource("13_pylmc"),
+&"die": SubResource("Animation_7lmhl"),
+&"idle": SubResource("Animation_5tmop")
+}
+
 [node name="Player" type="RigidBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 3
@@ -80,6 +328,7 @@ scale = Vector2(17.7211, 17.7211)
 texture = ExtResource("3_sweqy")
 
 [node name="CannonSpawn" type="Node2D" parent="Submarine"]
+visible = false
 position = Vector2(-272.73, 424.242)
 
 [node name="Sprite2D" type="Sprite2D" parent="Submarine/CannonSpawn"]
@@ -101,6 +350,11 @@ position = Vector2(7.62939e-06, -7.62939e-06)
 scale = Vector2(17.7211, 17.7211)
 texture = ExtResource("2_hqtel")
 
+[node name="Sprite2D" type="Sprite2D" parent="Submarine"]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(17.7211, 17.7211)
+texture = ExtResource("6_urp6f")
+
 [node name="LaserPunkt" type="Node2D" parent="Submarine"]
 position = Vector2(-999.999, -484.849)
 
@@ -111,6 +365,12 @@ default_color = Color(0.965113, 0.335176, 0.375048, 1)
 [node name="laser" type="Sprite2D" parent="Submarine"]
 scale = Vector2(17.3666, 17.3666)
 texture = ExtResource("5_2hs0m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Submarine"]
+visible = false
+scale = Vector2(17.7211, 17.7211)
+sprite_frames = SubResource("SpriteFrames_pbfsw")
+animation = &"die"
 
 [node name="PropellerAnimation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -125,3 +385,8 @@ collision_mask = 4
 position = Vector2(-2.58, 6.825)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1jxqw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dx0e4")
+}
