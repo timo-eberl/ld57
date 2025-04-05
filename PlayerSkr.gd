@@ -87,8 +87,9 @@ func _physics_process(delta):
 			if result.rid == _last_laser_rid:
 				if Time.get_ticks_msec() - _last_laser_rid_change_time > (1000.0/hits_per_second):
 					if result.collider == obstacles: # destroy cells
-						var coords := obstacles.get_coords_for_body_rid(result.rid)
-						obstacles.take_damage_at(coords)
+						if result.collider == obstacles:
+							var coords := obstacles.get_coords_for_body_rid(result.rid)
+							obstacles.take_damage_at(coords)
 					elif result.collider is Enemy: # damage enemies
 						var enemy : Enemy = result.collider
 						enemy.enemy_stats.health -= laser_damage_per_second / hits_per_second
