@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwduwuk1x14w"]
 
-[ext_resource type="Texture2D" uid="uid://pal27nwurvmb" path="res://textures/Rakete.png" id="1_nl5c6"]
-[ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
+[ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="1_nl5c6"]
+[ext_resource type="Script" path="res://Rakete.gd" id="1_oaujv"]
 
 [node name="Rakete" type="Node2D"]
 
