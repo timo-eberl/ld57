@@ -26,10 +26,10 @@ func _ready() -> void:
 	propellerAnimation.speed_scale = 0.1
 	pass;
 
-func _process(_delta):
+func _process(delta):
 	if health <= 0.0:
 		print("Game Over")
-		queue_free()
+		visible = false
 
 func _physics_process(delta):
 	movementInput = Vector2.ZERO;
