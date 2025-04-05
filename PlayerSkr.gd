@@ -3,6 +3,8 @@ extends RigidBody2D
 @export var movementInput : Vector2;
 @export var maxSpeed : float = 50.0;
 @export var acell : float = 100.0;
+@export var laser_damage_per_second := 7.5
+@export var hits_per_second := 6.0
 
 @export var health : float = 50;
 
@@ -81,12 +83,16 @@ func _physics_process(delta):
 		
 		if !result.is_empty():
 			hit_position = result.position # used as endpoint for laser
-			# TODO destroy blocks / enemies
 			var obstacles : Map = %ObstaclesTiles
 			if result.rid == _last_laser_rid:
-				if Time.get_ticks_msec() - _last_laser_rid_change_time > 250:
-					var coords := obstacles.get_coords_for_body_rid(result.rid)
-					obstacles.take_damage_at(coords)
+				if Time.get_ticks_msec() - _last_laser_rid_change_time > (1000.0/hits_per_second):
+					if result.collider == obstacles: # destroy cells
+						var coords := obstacles.get_coords_for_body_rid(result.rid)
+						obstacles.take_damage_at(coords)
+					elif result.collider is Enemy: # damage enemies
+						var enemy : Enemy = result.collider
+						enemy.enemy_stats.health -= laser_damage_per_second / hits_per_second
+					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
 				_last_laser_rid = result.rid

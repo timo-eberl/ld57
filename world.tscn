@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://ciduonpgk4jyp" path="res://scenes/slices/tile_map_slice_1.tscn" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://bbanfje5hfgu4" path="res://src/water.gd" id="6_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bud2usxskygd8" path="res://player.tscn" id="6_pkg7o"]
-[ext_resource type="PackedScene" uid="uid://bn4e7xq7u6hrh" path="res://scenes/enemy.tscn" id="8_gbfbk"]
-[ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemy_stats.gd" id="9_ioo17"]
+[ext_resource type="PackedScene" uid="uid://dusk0t1syi6g" path="res://scenes/enemy.tscn" id="8_gbfbk"]
+[ext_resource type="Script" path="res://src/enemy_stats.gd" id="9_ioo17"]
 
 [sub_resource type="Resource" id="Resource_wse8f"]
 script = ExtResource("9_ioo17")

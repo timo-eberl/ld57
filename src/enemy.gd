@@ -18,8 +18,10 @@ func _process(delta):
 			%Player.apply_hit(enemy_stats.damage)
 			hit_timer = 0.0
 		hit_timer += delta
+	if enemy_stats.health <= 0.0:
+		queue_free()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not enemy_stats.asleep:
 		var direction : Vector2 = (%Player.global_position - global_position).normalized()
 		if direction.x > 0.0:
