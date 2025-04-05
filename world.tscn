@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bqs525b40rnn6"]
+[gd_scene load_steps=11 format=4 uid="uid://bqs525b40rnn6"]
 
 [ext_resource type="TileSet" uid="uid://c7y50lkg28t25" path="res://tile_sets/kenney_tile_set.tres" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b5q72legtlg5i" path="res://src/map.gd" id="2_fj7yv"]
@@ -7,6 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://ciduonpgk4jyp" path="res://scenes/slices/tile_map_slice_1.tscn" id="4_aqk2v"]
 [ext_resource type="Script" uid="uid://bbanfje5hfgu4" path="res://src/water.gd" id="6_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bud2usxskygd8" path="res://player.tscn" id="6_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://bn4e7xq7u6hrh" path="res://scenes/enemy.tscn" id="8_gbfbk"]
+[ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemy_stats.gd" id="9_ioo17"]
+
+[sub_resource type="Resource" id="Resource_wse8f"]
+script = ExtResource("9_ioo17")
+max_speed = 100.0
+acell = 100.0
+damage = 1.0
+asleep = false
+metadata/_custom_type_script = "uid://bbq6supw7aall"
 
 [node name="World" type="Node2D"]
 
@@ -30,3 +40,7 @@ position = Vector2(724, 297)
 [node name="WaterTiles" type="TileMapLayer" parent="."]
 tile_set = ExtResource("1_f3sb7")
 script = ExtResource("6_gbfbk")
+
+[node name="Enemy" parent="." instance=ExtResource("8_gbfbk")]
+position = Vector2(884, 406)
+enemy_stats = SubResource("Resource_wse8f")

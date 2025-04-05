@@ -42,6 +42,12 @@ Vertical_minus={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Terrain"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
