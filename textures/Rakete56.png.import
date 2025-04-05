@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pal27nwurvmb"
-path="res://.godot/imported/Rakete.png-1d2bd5b955aa93d2a84b47e2937eb42e.ctex"
+uid="uid://djnhj7sx1fcs6"
+path="res://.godot/imported/Rakete56.png-69a843086504a1aeddde051ca97985f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Rakete.png"
-dest_files=["res://.godot/imported/Rakete.png-1d2bd5b955aa93d2a84b47e2937eb42e.ctex"]
+source_file="res://textures/Rakete56.png"
+dest_files=["res://.godot/imported/Rakete56.png-69a843086504a1aeddde051ca97985f7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw3hc2ux3ugpm"
-path="res://.godot/imported/submarine_propeller.png-c9508534e6586236db31086ee2295463.ctex"
+uid="uid://bes2nxpo4mquk"
+path="res://.godot/imported/submarine_plain256.png-8e8f727514e48af1fa09c16774fec0ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/submarine/submarine_propeller.png"
-dest_files=["res://.godot/imported/submarine_propeller.png-c9508534e6586236db31086ee2295463.ctex"]
+source_file="res://textures/submarine/submarine_plain256.png"
+dest_files=["res://.godot/imported/submarine_plain256.png-8e8f727514e48af1fa09c16774fec0ad.ctex"]
 
 [params]
 
