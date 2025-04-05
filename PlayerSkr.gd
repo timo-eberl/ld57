@@ -13,13 +13,15 @@ extends RigidBody2D
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
 
+var _last_laser_rid : RID
+var _last_laser_rid_change_time : int
+
 func _ready() -> void:
 	laserLine.add_point(Vector2.ZERO)
 	laserLine.add_point(Vector2.ZERO)
 	propellerAnimation.play("spin")
 	propellerAnimation.speed_scale = 0.1
 	pass;
-
 
 func _physics_process(delta):
 	movementInput = Vector2.ZERO;
@@ -38,7 +40,6 @@ func _physics_process(delta):
 	
 	if rocketCooldown > 0:
 		rocketCooldown -= delta;
-	
 	
 	var lookPos = get_global_mouse_position();
 	var myPos = self.global_position;
@@ -71,10 +72,26 @@ func _physics_process(delta):
 		
 		var result : Dictionary = space_state.intersect_ray(query)
 		var hit_position := target # if nothing is hit, a very far away point is used as laser ending point
+		
 		if !result.is_empty():
 			hit_position = result.position # used as endpoint for laser
 			# TODO destroy blocks / enemies
+			var obstacles : Map = %ObstaclesTiles
+			if result.rid == _last_laser_rid:
+				if Time.get_ticks_msec() - _last_laser_rid_change_time > 250:
+					var coords := obstacles.get_coords_for_body_rid(result.rid)
+					obstacles.take_damage_at(coords)
+					_last_laser_rid_change_time = Time.get_ticks_msec()
+			else:
+				_last_laser_rid = result.rid
+				_last_laser_rid_change_time = Time.get_ticks_msec()
+		else:
+			_last_laser_rid = RID()
+			_last_laser_rid_change_time = Time.get_ticks_msec()
 		laserLine.set_point_position(1, laserLine.to_local(hit_position))
+	else:
+		_last_laser_rid = RID()
+		_last_laser_rid_change_time = Time.get_ticks_msec()
 	
 	var speed = self.linear_velocity.length()
 	var t = clamp(speed/ 30.0, 1.0, 3.0)
