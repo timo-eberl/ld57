@@ -1,14 +1,22 @@
+@tool
 class_name Map
 extends TileMapLayer
 
 @export var first_slice : PackedScene
 @export var slices : Array[PackedScene]
 @export var number_of_slices := 10
+@export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
 
 # height in number of tiles of the whole map
 var _height := 0
 
-func _ready() -> void:
+func generate_map():
+	_height = 0
+	# fill everything with default tile
+	for x in range(-30, 50):
+		for y in range(-30, 2000):
+			self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
+	
 	var first_slice_instance : TileMapSlice = first_slice.instantiate()
 	add_slice_to_map(first_slice_instance)
 	first_slice_instance.free() # not sure if necessary
@@ -18,6 +26,10 @@ func _ready() -> void:
 		var slice_instance : TileMapSlice = slices[randi() % slices.size()].instantiate()
 		add_slice_to_map(slice_instance)
 		slice_instance.free() # not sure if necessary
+
+func _ready() -> void:
+	if !Engine.is_editor_hint():
+		generate_map()
 
 func take_damage_at(coords : Vector2i):
 	var sid := self.get_cell_source_id(coords)
