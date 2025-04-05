@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=12 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://c302h78espg6h" path="res://textures/submarine/submarine_plain.png" id="2_hqtel"]
-[ext_resource type="Texture2D" uid="uid://w8b8pa7jmgwi" path="res://textures/submarine/submarine_laser.png" id="3_sweqy"]
-[ext_resource type="Texture2D" uid="uid://cw3hc2ux3ugpm" path="res://textures/submarine/submarine_propeller.png" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://d5wcx2bp1y8e" path="res://textures/submarine/submarine_propeller256.png" id="3_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://cog5rkes82a3o" path="res://textures/submarine/submarine_cannon256.png" id="3_sweqy"]
+[ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="5_2hs0m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pkg7o"]
 radius = 34.0588
@@ -46,11 +48,17 @@ _data = {
 &"spin": SubResource("Animation_hqtel")
 }
 
-[node name="Player" type="RigidBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
+radius = 37.0135
+
+[node name="Player" type="RigidBody2D" groups=["Player"]]
+collision_layer = 2
+collision_mask = 3
 gravity_scale = 0.0
 script = ExtResource("1_onrkg")
 maxSpeed = 500.0
 acell = 1000.0
+health = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.72, 0.72)
@@ -60,15 +68,32 @@ shape = SubResource("CircleShape2D_pkg7o")
 
 [node name="Submarine" type="Sprite2D" parent="."]
 scale = Vector2(0.033, 0.033)
+texture = ExtResource("2_hqtel")
+
+[node name="cannon" type="Sprite2D" parent="Submarine"]
+scale = Vector2(17.7211, 17.7211)
+texture = ExtResource("3_sweqy")
+
+[node name="CannonSpawn" type="Node2D" parent="Submarine"]
+position = Vector2(-272.73, 424.242)
+
+[node name="Sprite2D" type="Sprite2D" parent="Submarine/CannonSpawn"]
+position = Vector2(-0.00109863, -3.05176e-05)
+scale = Vector2(17.6768, 17.6768)
+texture = ExtResource("4_2hs0m")
+flip_h = true
 
 [node name="Node2D" type="Node2D" parent="Submarine"]
 position = Vector2(1090.91, 60.6062)
 
 [node name="Propeller" type="Sprite2D" parent="Submarine/Node2D"]
-position = Vector2(-1121.21, -60.6061)
-texture = ExtResource("4_2hs0m")
+position = Vector2(-1121.21, -60.6062)
+scale = Vector2(18.0755, 18.0755)
+texture = ExtResource("3_2hs0m")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Submarine"]
+[node name="main_sprite" type="Sprite2D" parent="Submarine"]
+position = Vector2(7.62939e-06, -7.62939e-06)
+scale = Vector2(17.7211, 17.7211)
 texture = ExtResource("2_hqtel")
 
 [node name="LaserPunkt" type="Node2D" parent="Submarine"]
@@ -78,10 +103,18 @@ position = Vector2(-999.999, -484.849)
 width = 100.0
 default_color = Color(0.965113, 0.335176, 0.375048, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Submarine"]
-texture = ExtResource("3_sweqy")
+[node name="laser" type="Sprite2D" parent="Submarine"]
+scale = Vector2(17.3666, 17.3666)
+texture = ExtResource("5_2hs0m")
 
 [node name="PropellerAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_2hs0m")
 }
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_hqtel")

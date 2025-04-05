@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn4e7xq7u6hrh"]
+
+[ext_resource type="Script" uid="uid://cubcx4gax0fdr" path="res://src/enemy.gd" id="1_md0e3"]
+[ext_resource type="Texture2D" uid="uid://dne6cs077rsyg" path="res://textures/Piranah.png" id="2_md0e3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5uy6h"]
+radius = 29.0689
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
+radius = 38.0
+
+[node name="Enemy" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 7
+gravity_scale = 0.0
+script = ExtResource("1_md0e3")
+
+[node name="Texture" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_md0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5uy6h")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_md0e3")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w8b8pa7jmgwi"
-path="res://.godot/imported/submarine_laser.png-ebb8640aabfb23572a3126b0b62d64ca.ctex"
+uid="uid://bes2nxpo4mquk"
+path="res://.godot/imported/submarine_plain256.png-8e8f727514e48af1fa09c16774fec0ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/submarine/submarine_laser.png"
-dest_files=["res://.godot/imported/submarine_laser.png-ebb8640aabfb23572a3126b0b62d64ca.ctex"]
+source_file="res://textures/submarine/submarine_plain256.png"
+dest_files=["res://.godot/imported/submarine_plain256.png-8e8f727514e48af1fa09c16774fec0ad.ctex"]
 
 [params]
 

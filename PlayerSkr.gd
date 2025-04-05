@@ -4,6 +4,7 @@ extends RigidBody2D
 @export var maxSpeed : float = 50.0;
 @export var acell : float = 100.0;
 
+@export var health : float = 50;
 
 @onready var uBootSprite : Sprite2D = $Submarine;
 @onready var laser : Node2D = $Submarine/LaserPunkt
@@ -22,6 +23,11 @@ func _ready() -> void:
 	propellerAnimation.play("spin")
 	propellerAnimation.speed_scale = 0.1
 	pass;
+
+func _process(_delta):
+	if health <= 0.0:
+		print("Game Over")
+		queue_free()
 
 func _physics_process(delta):
 	movementInput = Vector2.ZERO;
@@ -106,3 +112,6 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	self.linear_velocity = self.linear_velocity * 0.95;
 	
 	pass;
+
+func apply_hit(damage :float):
+	health -= damage
