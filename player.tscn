@@ -1,10 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=9 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://ynto0n3nxoxq" path="res://textures/submarine/submarine.png" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://c302h78espg6h" path="res://textures/submarine/submarine_plain.png" id="2_hqtel"]
+[ext_resource type="Texture2D" uid="uid://w8b8pa7jmgwi" path="res://textures/submarine/submarine_laser.png" id="3_sweqy"]
+[ext_resource type="Texture2D" uid="uid://cw3hc2ux3ugpm" path="res://textures/submarine/submarine_propeller.png" id="4_2hs0m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pkg7o"]
 radius = 34.0588
+
+[sub_resource type="Animation" id="Animation_sweqy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hqtel"]
+resource_name = "spin"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/Node2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.5708, 3.14159, 4.71239, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2hs0m"]
+_data = {
+&"RESET": SubResource("Animation_sweqy"),
+&"spin": SubResource("Animation_hqtel")
+}
 
 [node name="Player" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -20,7 +60,16 @@ shape = SubResource("CircleShape2D_pkg7o")
 
 [node name="Submarine" type="Sprite2D" parent="."]
 scale = Vector2(0.033, 0.033)
-texture = ExtResource("2_i3pqv")
+
+[node name="Node2D" type="Node2D" parent="Submarine"]
+position = Vector2(1090.91, 60.6062)
+
+[node name="Propeller" type="Sprite2D" parent="Submarine/Node2D"]
+position = Vector2(-1121.21, -60.6061)
+texture = ExtResource("4_2hs0m")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Submarine"]
+texture = ExtResource("2_hqtel")
 
 [node name="LaserPunkt" type="Node2D" parent="Submarine"]
 position = Vector2(-999.999, -484.849)
@@ -28,3 +77,11 @@ position = Vector2(-999.999, -484.849)
 [node name="Line2D" type="Line2D" parent="Submarine/LaserPunkt"]
 width = 100.0
 default_color = Color(0.965113, 0.335176, 0.375048, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="Submarine"]
+texture = ExtResource("3_sweqy")
+
+[node name="PropellerAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2hs0m")
+}

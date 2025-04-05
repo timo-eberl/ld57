@@ -8,6 +8,7 @@ extends RigidBody2D
 @onready var uBootSprite : Sprite2D = $Submarine;
 @onready var laser : Node2D = $Submarine/LaserPunkt
 @onready var laserLine : Line2D = $Submarine/LaserPunkt/Line2D;
+@onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
 
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
@@ -15,6 +16,8 @@ var uBootDir : Vector2 = Vector2.ZERO;
 func _ready() -> void:
 	laserLine.add_point(Vector2.ZERO)
 	laserLine.add_point(Vector2.ZERO)
+	propellerAnimation.play("spin")
+	propellerAnimation.speed_scale = 0.1
 	pass;
 
 
@@ -45,11 +48,9 @@ func _process(delta):
 	
 	if myPos.x < lookPos.x:
 		targetVec = -targetVec
-		uBootSprite.flip_h = true
-		laser.position.x = abs(laser.position.x) # i wanna cry
+		uBootSprite.scale.x = -abs(uBootSprite.scale.x)
 	else:
-		uBootSprite.flip_h = false
-		laser.position.x = -abs(laser.position.x) # i wanna cry
+		uBootSprite.scale.x = abs(uBootSprite.scale.x)
 	
 	uBootDir = lerp(uBootDir, targetVec, delta * 2.0);
 	
@@ -63,6 +64,10 @@ func _process(delta):
 	#laserLine.set_point_position(0, self.global_position)
 	laserLine.set_point_position(1, laserLine.to_local(get_global_mouse_position()) * 100.0)
 	
+	
+	var speed = self.linear_velocity.length()
+	var t = clamp(speed/ 30.0, 1.0, 3.0)
+	propellerAnimation.speed_scale = pow(t, 2)
 	
 	
 	
