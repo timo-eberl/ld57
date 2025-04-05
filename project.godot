@@ -15,6 +15,10 @@ run/main_scene="uid://bqs525b40rnn6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 Horizontal_plus={

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://2220k2uo8kuq"]
 
 [ext_resource type="Texture2D" uid="uid://c1vwcvsteuyqw" path="res://textures/submarine.png" id="1_58akw"]
-[ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_e51mn"]
+[ext_resource type="Script" path="res://PlayerSkr.gd" id="1_e51mn"]
 [ext_resource type="PackedScene" uid="uid://dwduwuk1x14w" path="res://rakete.tscn" id="3_snpff"]
 
 [node name="MovementTest" type="Node2D"]
