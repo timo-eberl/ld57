@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://2220k2uo8kuq"]
+
+[ext_resource type="Texture2D" uid="uid://c1vwcvsteuyqw" path="res://textures/submarine.png" id="1_58akw"]
+[ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_e51mn"]
+[ext_resource type="PackedScene" uid="uid://dwduwuk1x14w" path="res://rakete.tscn" id="3_snpff"]
+
+[node name="MovementTest" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Player" type="RigidBody2D" parent="."]
+gravity_scale = 0.0
+script = ExtResource("1_e51mn")
+maxSpeed = 500.0
+acell = 1000.0
+
+[node name="Submarine" type="Sprite2D" parent="Player"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_58akw")
+
+[node name="LaserPunkt" type="Node2D" parent="Player/Submarine"]
+position = Vector2(-20, -340)
+
+[node name="Line2D" type="Line2D" parent="Player/Submarine/LaserPunkt"]
+default_color = Color(0.965113, 0.335176, 0.375048, 1)
+
+[node name="Rakete" parent="." instance=ExtResource("3_snpff")]
+position = Vector2(-73, 0)
+
+[editable path="Rakete"]
