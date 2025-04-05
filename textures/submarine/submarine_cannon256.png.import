@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ynto0n3nxoxq"
-path="res://.godot/imported/submarine.png-fadcdf081e8aa52317a6b1a34810fe2b.ctex"
+uid="uid://cog5rkes82a3o"
+path="res://.godot/imported/submarine_cannon256.png-fde9725774606386d24d4a4648b1a119.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/submarine/submarine.png"
-dest_files=["res://.godot/imported/submarine.png-fadcdf081e8aa52317a6b1a34810fe2b.ctex"]
+source_file="res://textures/submarine/submarine_cannon256.png"
+dest_files=["res://.godot/imported/submarine_cannon256.png-fde9725774606386d24d4a4648b1a119.ctex"]
 
 [params]
 
