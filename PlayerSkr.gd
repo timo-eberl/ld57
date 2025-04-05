@@ -18,7 +18,7 @@ func _ready() -> void:
 	pass;
 
 
-func _process(delta):
+func _physics_process(delta):
 	movementInput = Vector2.ZERO;
 	
 	if Input.is_action_pressed("Horizontal_plus"):
@@ -36,7 +36,6 @@ func _process(delta):
 	if rocketCooldown > 0:
 		rocketCooldown -= delta;
 	
-	laserLine.visible = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT);
 	
 	var lookPos = get_global_mouse_position();
 	var myPos = self.global_position;
@@ -52,20 +51,30 @@ func _process(delta):
 		laser.position.x = -abs(laser.position.x) # i wanna cry
 	
 	uBootDir = lerp(uBootDir, targetVec, delta * 2.0);
-	
-	#targetVec.x = targetVec.x * 2.5
-	
 	uBootSprite.look_at(myPos - uBootDir)
 	
-	#print(lookPos - myPos);
-	
 	self.apply_force(movementInput * acell);
-	#laserLine.set_point_position(0, self.global_position)
-	laserLine.set_point_position(1, laserLine.to_local(get_global_mouse_position()) * 100.0)
 	
-	
-	
-	
+	laserLine.visible = false
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		laserLine.visible = true
+		
+		var space_state = get_world_2d().direct_space_state
+		var start := laserLine.global_position
+		var direction := (get_global_mouse_position() - start).normalized()
+		var target := start + direction * 10000.0
+		var query := PhysicsRayQueryParameters2D.create(start, target)
+		var exc := query.exclude # copy it and assign it again, otherwise it doesnt work
+		exc.append(self.get_rid()) # dont collide with self
+		query.exclude = exc
+		
+		var result : Dictionary = space_state.intersect_ray(query)
+		var hit_position := target # if nothing is hit, a very far away point is used as laser ending point
+		if !result.is_empty():
+			hit_position = result.position # used as endpoint for laser
+			# TODO destroy blocks / enemies
+		laserLine.set_point_position(1, laserLine.to_local(hit_position))
+
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	if self.linear_velocity.length() > maxSpeed:
 		self.linear_velocity = self.linear_velocity.normalized() * maxSpeed;
