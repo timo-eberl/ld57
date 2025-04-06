@@ -9,9 +9,9 @@ extends RigidBody2D
 @export var health : float = 50;
 
 @onready var uBootSprite : Sprite2D = $Submarine;
-@onready var laser : Node2D = $Submarine/LaserPunkt
-@onready var laserLine : Line2D = $Submarine/LaserPunkt/Line2D;
+@onready var laserLine : Line2D = $Submarine/LaserSpriteParent/LaserPunkt/Line2D
 @onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
+@onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
@@ -65,6 +65,7 @@ func _physics_process(delta):
 	
 	self.apply_force(movementInput * acell);
 	
+	laser_sprite.look_at(get_global_mouse_position())
 	laserLine.visible = false
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		laserLine.visible = true

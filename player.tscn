@@ -156,7 +156,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Submarine/laser:visible")
+tracks/5/path = NodePath("Submarine/LaserSpriteParent/laser:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -232,7 +232,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Submarine/laser:visible")
+tracks/2/path = NodePath("Submarine/LaserSpriteParent/laser:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -355,14 +355,19 @@ modulate = Color(1, 1, 1, 0)
 scale = Vector2(17.7211, 17.7211)
 texture = ExtResource("6_urp6f")
 
-[node name="LaserPunkt" type="Node2D" parent="Submarine"]
-position = Vector2(-999.999, -484.849)
+[node name="LaserSpriteParent" type="Node2D" parent="Submarine"]
+position = Vector2(-454.545, -636.364)
 
-[node name="Line2D" type="Line2D" parent="Submarine/LaserPunkt"]
+[node name="LaserPunkt" type="Node2D" parent="Submarine/LaserSpriteParent"]
+position = Vector2(454.545, 1.52588e-05)
+
+[node name="Line2D" type="Line2D" parent="Submarine/LaserSpriteParent/LaserPunkt"]
 width = 100.0
 default_color = Color(0.965113, 0.335176, 0.375048, 1)
 
-[node name="laser" type="Sprite2D" parent="Submarine"]
+[node name="laser" type="Sprite2D" parent="Submarine/LaserSpriteParent"]
+position = Vector2(-363.636, -727.273)
+rotation = 3.42783
 scale = Vector2(17.3666, 17.3666)
 texture = ExtResource("5_2hs0m")
 
