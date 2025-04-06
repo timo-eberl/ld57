@@ -76,7 +76,7 @@ func _process(delta):
 				idle.texture = puffed
 			hit_timer += delta
 		
-		if enemy_stats.health <= 0:
+		if health <= 0:
 			_kill_enemy()
 		
 	if not animationPlayer.is_playing() and not is_dead:

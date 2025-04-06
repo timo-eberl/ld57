@@ -16,9 +16,12 @@ var hit_timer = 0.0
 
 var fade_out_progress := 0.0
 
+var health := 0.0
+
 func _ready():
 	sleeping = true
-	health_bar.set_max_health(enemy_stats.health)
+	health = enemy_stats.health
+	health_bar.set_max_health(health)
 	animationPlayer.play("idle")
 
 	_awake_enemy()
@@ -40,7 +43,7 @@ func _process(delta):
 				hit_timer = 0.0
 			hit_timer += delta
 	
-		if enemy_stats.health <= 0:
+		if health <= 0:
 			_kill_enemy()
 		
 		if not animationPlayer.is_playing():
@@ -89,7 +92,7 @@ func play_hit_animation():
 func take_damage(damage):
 	health_bar.deal_damage(damage)
 	
-	enemy_stats.health -= damage
+	health -= damage
 	play_hit_animation()
 
 func _kill_enemy():
