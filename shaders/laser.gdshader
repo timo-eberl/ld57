@@ -49,6 +49,7 @@ void fragment() {
 	else {
 		float t = inv_lerp(gw, w * 2.0, d);
 		t = smoothstep(0,1.0,t);
+		t = pow(t, 2.0);
 		COLOR.a *= t;
 	}
 	//COLOR.xyz = vec3(dx);
