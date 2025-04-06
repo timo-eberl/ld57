@@ -154,4 +154,11 @@ func add_slice_to_map(slice : TileMapSlice):
 			
 			var map_coords := coords + Vector2i(0,_height)
 			self.set_cell(map_coords, sid, atlas_coords, alt_tile_id)
+	
+	# add all child nodes of the slice
+	for node in slice.get_children():
+		if node is Node2D:
+			node.position.y += _height * 64
+		self.get_parent().add_child.call_deferred(node.duplicate())
+	
 	_height += h

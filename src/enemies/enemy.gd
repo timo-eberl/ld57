@@ -49,6 +49,8 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	self.linear_velocity = self.linear_velocity * 0.95;
 
 func _move():
+	if !is_instance_valid(%Player):
+		return
 	var direction : Vector2 = (%Player.global_position - global_position).normalized()
 	if direction.x < 0.0:
 		sprites.scale.x = -abs(sprites.scale.x)
