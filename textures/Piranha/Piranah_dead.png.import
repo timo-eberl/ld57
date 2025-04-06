@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://02qnww76n6as"
-path="res://.godot/imported/UnpuffedPufferfish.png-a0c37b137ce6b9bad70de373c236ccea.ctex"
+uid="uid://de66o802x6ji2"
+path="res://.godot/imported/Piranah_dead.png-7f639665950e2c4b49d5f3c91a22e461.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/UnpuffedPufferfish.png"
-dest_files=["res://.godot/imported/UnpuffedPufferfish.png-a0c37b137ce6b9bad70de373c236ccea.ctex"]
+source_file="res://textures/Piranha/Piranah_dead.png"
+dest_files=["res://.godot/imported/Piranah_dead.png-7f639665950e2c4b49d5f3c91a22e461.ctex"]
 
 [params]
 
