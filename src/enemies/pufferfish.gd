@@ -20,8 +20,14 @@ var puff_done : bool = false
 var puff_progress := 0.0
 
 func _process(delta):
-	if is_dead and animationPlayer.current_animation == "":
-		queue_free()
+	if is_dead:
+		if fade_out_progress >= 1.0:
+			queue_free()
+		else:
+			var current_fade = lerp(0.0, 1.0, fade_out_progress)
+			sprites.get_node("DeathSprite").set_self_modulate(Color(1.0, 1.0, 1.0, 1.0 - current_fade))
+	
+		fade_out_progress += delta
 	
 	if not is_dead:
 		if puff:
@@ -70,7 +76,7 @@ func _process(delta):
 				idle.texture = puffed
 			hit_timer += delta
 		
-		if enemy_stats.health <= 0:
+		if health <= 0:
 			_kill_enemy()
 		
 	if not animationPlayer.is_playing() and not is_dead:
