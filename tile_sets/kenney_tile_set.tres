@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=4 format=3 uid="uid://c7y50lkg28t25"]
 
-[ext_resource type="Texture2D" uid="uid://clx1dd6gedxct" path="res://textures/kenney_abstract_platformer_tile_sheet.webp" id="1_rblxm"]
+[ext_resource type="Texture2D" uid="uid://ddw7ovexfqgw0" path="res://textures/kenney_abstract_platformer_tile_sheet.png" id="1_rblxm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rblxm"]
 vertices = PackedVector2Array(32, 32, -32, 32, -32, -32, 32, -32)
@@ -533,7 +533,7 @@ texture_region_size = Vector2i(64, 64)
 10:11/0/custom_data_0 = 1.0
 11:11/0 = 0
 11:11/0/custom_data_0 = 1.0
-12:11/next_alternative_id = 3
+12:11/next_alternative_id = 4
 12:11/0 = 0
 12:11/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_rblxm")
 12:11/0/custom_data_0 = 1.0
@@ -543,6 +543,7 @@ texture_region_size = Vector2i(64, 64)
 12:11/2 = 2
 12:11/2/modulate = Color(1, 1, 1, 0.364706)
 12:11/2/custom_data_0 = 1.0
+12:11/3 = 3
 13:11/0 = 0
 13:11/0/custom_data_0 = 1.0
 14:11/0 = 0
