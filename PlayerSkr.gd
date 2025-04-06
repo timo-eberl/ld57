@@ -16,6 +16,7 @@ extends RigidBody2D
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 @onready var ray_cast_start : Node2D = $Submarine/LaserSpriteParent/RayCastStart
+@onready var health_bar : ProgressBar = $HealthBar
 
 @export var rocket : PackedScene;
 
@@ -33,7 +34,7 @@ func _ready() -> void:
 	propellerAnimation.play("spin")
 	propellerAnimation.speed_scale = 0.1
 	animationPlayer.play("idle")
-	pass;
+	health_bar.set_max_health(health)
 
 func spawn_rocket():
 	var rocket_instance = rocket.instantiate()
@@ -124,8 +125,7 @@ func _physics_process(delta):
 							obstacles.take_damage_at(coords)
 					elif result.collider is Enemy: # damage enemies
 						var enemy : Enemy = result.collider
-						enemy.enemy_stats.health -= laser_damage_per_second / hits_per_second
-						enemy.play_hit_animation()
+						enemy.take_damage(laser_damage_per_second / hits_per_second)
 					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
@@ -157,6 +157,7 @@ func apply_hit(damage :float):
 	if not is_dead:
 		print("Hit")
 		health -= damage
+		health_bar.deal_damage(damage)
 		animationPlayer.play("autsch")
 
 func _kill_player():

@@ -1,10 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=33 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
 [ext_resource type="PackedScene" uid="uid://dwduwuk1x14w" path="res://rakete.tscn" id="2_u1c27"]
 [ext_resource type="Texture2D" uid="uid://d5wcx2bp1y8e" path="res://textures/submarine/submarine_propeller256.png" id="3_2hs0m"]
-[ext_resource type="Texture2D" uid="uid://cog5rkes82a3o" path="res://textures/Pufferfish/submarine_cannon256.png" id="3_sweqy"]
+[ext_resource type="Texture2D" uid="uid://cq63qkueuevgt" path="res://textures/submarine/submarine_cannon256.png" id="3_sweqy"]
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="5_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://bytc7yyopgo1i" path="res://textures/submarine/submarine_autsch.png" id="6_urp6f"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://by6xy23j4qmps" path="res://textures/submarine/submarine_die4.png" id="11_op7ga"]
 [ext_resource type="Texture2D" uid="uid://6y753dhb08f1" path="res://textures/submarine/submarine_die5.png" id="12_q13i1"]
 [ext_resource type="Animation" uid="uid://dtg230pyb26e3" path="res://autsch.res" id="13_pylmc"]
+[ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="17_op7ga"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bwjto"]
 friction = 0.0
@@ -826,3 +827,9 @@ path_postprocessing = 1
 debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0.548386, 0.0987657, 0.135833, 1)
+
+[node name="HealthBar" parent="." instance=ExtResource("17_op7ga")]
+offset_left = -50.0
+offset_top = -56.0
+offset_right = 50.0
+offset_bottom = -46.0
