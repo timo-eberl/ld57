@@ -3,17 +3,19 @@ extends Enemy
 @export var unpuffed : CompressedTexture2D
 @export var puffed : CompressedTexture2D
 
+@export var shake_amount := 1.0
+
 var puff : bool = false
 var hit_player :bool = false
 var shrink : bool = false
 var puff_done : bool = false
 
-var default_scale = 0.3
-var puffed_scale = 1.0
-var puff_speed = .5
-var unpuff_speed = .5
+var default_scale := 0.3
+var puffed_scale := 1.0
+var puff_speed := .5
+var unpuff_speed := .5
 
-var puff_progress = 0.0
+var puff_progress := 0.0
 
 func _process(delta):
 	if puff:
@@ -50,9 +52,15 @@ func _process(delta):
 	
 	if puff_done:
 		sprite.texture = unpuffed
+		sprite.position = Vector2(0.0, 0.0)
 		puff_done = false
 	
 	if player_in_area:
+		#randomize()
+		var random_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
+		sprite.position += random_dir * shake_amount
+		
+		#apply_central_impulse(random_dir * 100.0)
 		if hit_timer >= enemy_stats.hit_cooldown:
 			puff = true
 			sprite.texture = puffed
@@ -81,3 +89,4 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	_area_left(body)
 	hit_timer = 0.0
+	sprite.position = Vector2(0.0, 0.0)
