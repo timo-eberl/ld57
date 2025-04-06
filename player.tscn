@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=31 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
@@ -28,11 +28,19 @@ shader = ExtResource("7_bwjto")
 shader_parameter/width = 0.1
 shader_parameter/glow_width = 1.0
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_606se"]
+frequency = 0.0017
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1c27"]
+seamless = true
+seamless_blend_skirt = 0.385
+noise = SubResource("FastNoiseLite_606se")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q13i1"]
 shader = ExtResource("8_u1c27")
-shader_parameter/width = 0.1
-shader_parameter/glow_width = 1.0
-shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/width = 0.24
+shader_parameter/glow_width = 0.915
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_u1c27")
 
 [sub_resource type="QuadMesh" id="QuadMesh_606se"]
 
@@ -739,10 +747,10 @@ position = Vector2(454.545, 1.52588e-05)
 material = SubResource("ShaderMaterial_bwjto")
 points = PackedVector2Array(0, 0, 10000, 0)
 width = 10000.0
-default_color = Color(0.965113, 0.335176, 0.375048, 1)
+default_color = Color(0.981076, 0.229955, 0.23414, 1)
 
 [node name="LaserBlob" type="MeshInstance2D" parent="Submarine/LaserSpriteParent/LaserPunkt"]
-modulate = Color(0.964706, 0.333333, 0.376471, 1)
+modulate = Color(0.766453, 0, 0.0390124, 1)
 material = SubResource("ShaderMaterial_q13i1")
 position = Vector2(10000, 0.000346791)
 scale = Vector2(2000, 2000)
@@ -802,3 +810,5 @@ shape = SubResource("CapsuleShape2D_1jxqw")
 libraries = {
 &"": SubResource("AnimationLibrary_dx0e4")
 }
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -10,6 +10,7 @@ extends RigidBody2D
 
 @onready var uBootSprite : Sprite2D = $Submarine;
 @onready var laserLine : Line2D = $Submarine/LaserSpriteParent/LaserPunkt/Line2D
+@onready var laser_blob : MeshInstance2D = $Submarine/LaserSpriteParent/LaserPunkt/LaserBlob
 @onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
@@ -70,8 +71,10 @@ func _physics_process(delta):
 	
 	laser_sprite.look_at(get_global_mouse_position())
 	laserLine.visible = false
+	laser_blob.visible = false
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		laserLine.visible = true
+		laser_blob.visible = true
 		
 		var space_state = get_world_2d().direct_space_state
 		var start := laserLine.global_position

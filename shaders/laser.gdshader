@@ -27,7 +27,6 @@ void fragment() {
 
 	float noise = sin(pos.x * 0.003 - TIME * 25.0) * 0.03;
 	noise += sin(pos.x * 0.002 - TIME * 25.0) * 0.02;
-	noise = (noise);
 
 	dx *= 0.25;
 	dx = 1.0-dx;
