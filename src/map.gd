@@ -72,7 +72,7 @@ func explosion(pos_ws : Vector2, radius : float):
 	query.shape_rid = shape_rid
 	query.transform = Transform2D(0, pos_ws)
 	
-	var results = space_state.intersect_shape(query)
+	var results = space_state.intersect_shape(query, 512)
 	# Release the shape when done with physics queries.
 	PhysicsServer2D.free_rid(shape_rid)
 	
