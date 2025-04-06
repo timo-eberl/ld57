@@ -92,10 +92,11 @@ func _physics_process(delta):
 			hit_position = result.position # used as endpoint for laser
 			var obstacles : Map = %ObstaclesTiles
 			if result.rid == _last_laser_rid:
-				if Time.get_ticks_msec() - _last_laser_rid_change_time > (1000.0/hits_per_second):
+				var coords := obstacles.get_coords_for_body_rid(result.rid)
+				var density : float = obstacles.get_cell_tile_data(coords).get_custom_data("density")
+				if Time.get_ticks_msec() - _last_laser_rid_change_time > (1000.0 * density/hits_per_second):
 					if result.collider == obstacles: # destroy cells
 						if result.collider == obstacles:
-							var coords := obstacles.get_coords_for_body_rid(result.rid)
 							obstacles.take_damage_at(coords)
 					elif result.collider is Enemy: # damage enemies
 						var enemy : Enemy = result.collider
