@@ -3,10 +3,12 @@ class_name Enemy
 
 @export var enemy_stats : EnemyStats
 
-@onready var sprite = $Texture
-@onready var animationPlayer = $AnimationPlayer
+@onready var sprites : Node2D = $Texture
+@onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 
 var player_in_area : bool = false
+
+var is_dead : bool = false
 
 var hit_timer = 0.0
 
@@ -16,17 +18,24 @@ func _ready():
 	_awake_enemy()
 
 func _process(delta):
-	if player_in_area:
-		if hit_timer >= enemy_stats.hit_cooldown:
-			%Player.apply_hit(enemy_stats.damage)
-			hit_timer = 0.0
-		hit_timer += delta
+	if is_dead and animationPlayer.current_animation == "":
+		queue_free()
+	
+	if not is_dead:
+		if player_in_area:
+			if hit_timer >= enemy_stats.hit_cooldown:
+				%Player.apply_hit(enemy_stats.damage)
+				hit_timer = 0.0
+			hit_timer += delta
+	
+		if enemy_stats.health <= 0:
+			_kill_enemy()
 		
-	if enemy_stats.health <= 0:
-		_kill_enemy()
+		if not animationPlayer.is_playing():
+			animationPlayer.play("idle")
 
 func _physics_process(delta):
-	if not enemy_stats.asleep:
+	if not enemy_stats.asleep and not is_dead:
 		_move()
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
@@ -34,15 +43,13 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 		self.linear_velocity = self.linear_velocity.normalized() * enemy_stats.max_speed;
 	
 	self.linear_velocity = self.linear_velocity * 0.95;
-	
-	pass;
 
 func _move():
 	var direction : Vector2 = (%Player.global_position - global_position).normalized()
 	if direction.x < 0.0:
-		sprite.scale.x = -abs(sprite.scale.x)
+		sprites.scale.x = -abs(sprites.scale.x)
 	else:
-		sprite.scale.x = abs(sprite.scale.x)
+		sprites.scale.x = abs(sprites.scale.x)
 	#sprite.look_at(direction)
 	if not player_in_area:
 		apply_force(direction * enemy_stats.acell)
@@ -61,5 +68,12 @@ func _awake_enemy():
 	enemy_stats.asleep = false
 	sleeping = false
 
+func play_hit_animation():
+	if not is_dead:
+		animationPlayer.play("hit")
+
 func _kill_enemy():
-	queue_free()
+	if not is_dead:
+		animationPlayer.play("death")
+		collision_layer = 0
+		is_dead = true

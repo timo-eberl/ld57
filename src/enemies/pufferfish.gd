@@ -1,5 +1,7 @@
 extends Enemy
 
+@onready var idle : Sprite2D = $Texture/IdleTexture
+
 @export var unpuffed : CompressedTexture2D
 @export var puffed : CompressedTexture2D
 
@@ -10,67 +12,72 @@ var hit_player :bool = false
 var shrink : bool = false
 var puff_done : bool = false
 
-var default_scale := 0.3
-var puffed_scale := 1.0
-var puff_speed := .5
-var unpuff_speed := .5
+@export var default_scale := 0.7
+@export var puffed_scale := 1.4
+@export var puff_speed := .5
+@export var unpuff_speed := .5
 
 var puff_progress := 0.0
 
 func _process(delta):
-	if puff:
-		var puff_amount = lerp(default_scale, puffed_scale, puff_progress / puff_speed)
-		
-		sprite.scale = Vector2(puff_amount, puff_amount)
-		
-		if puff_progress >= puff_speed:
-			puff = false
-			hit_player = true
-			puff_progress = 0.0
-		
-		puff_progress += delta
+	if is_dead and animationPlayer.current_animation == "":
+		queue_free()
 	
-	if hit_player:
-		if player_in_area:
-			%Player.apply_hit(enemy_stats.damage)
-		hit_player = false;
-		shrink = true
+	if not is_dead:
+		if puff:
+			var puff_amount = lerp(default_scale, puffed_scale, puff_progress / puff_speed)
+			
+			idle.scale = Vector2(puff_amount, puff_amount)
+			
+			if puff_progress >= puff_speed:
+				puff = false
+				hit_player = true
+				puff_progress = 0.0
+			
+			puff_progress += delta
+		
+		if hit_player:
+			if player_in_area:
+				%Player.apply_hit(enemy_stats.damage)
+			hit_player = false;
+			shrink = true
 
-	if shrink:
-		hit_timer = 0.0
+		if shrink:
+			hit_timer = 0.0
+			
+			var unpuff_amount = lerp(puffed_scale, default_scale, puff_progress / unpuff_speed)
+			
+			idle.scale = Vector2(unpuff_amount, unpuff_amount)
+			if puff_progress >= puff_speed:
+				shrink = false
+				puff_done = true
+				puff_progress = 0.0
+			hit_timer = 0.0
+			
+			puff_progress += delta
 		
-		var unpuff_amount = lerp(puffed_scale, default_scale, puff_progress / unpuff_speed)
+		if puff_done:
+			idle.texture = unpuffed
+			sprites.position = Vector2(0.0, 0.0)
+			puff_done = false
 		
-		sprite.scale = Vector2(unpuff_amount, unpuff_amount)
-		if puff_progress >= puff_speed:
-			shrink = false
-			puff_done = true
-			puff_progress = 0.0
-		hit_timer = 0.0
+		if player_in_area:
+			var random_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
+			sprites.position += random_dir * shake_amount
+			
+			if hit_timer >= enemy_stats.hit_cooldown:
+				puff = true
+				idle.texture = puffed
+			hit_timer += delta
 		
-		puff_progress += delta
-	
-	if puff_done:
-		sprite.texture = unpuffed
-		sprite.position = Vector2(0.0, 0.0)
-		puff_done = false
-	
-	if player_in_area:
-		#randomize()
-		var random_dir = Vector2(randf() - 0.5, randf() - 0.5).normalized()
-		sprite.position += random_dir * shake_amount
+		if enemy_stats.health <= 0:
+			_kill_enemy()
 		
-		#apply_central_impulse(random_dir * 100.0)
-		if hit_timer >= enemy_stats.hit_cooldown:
-			puff = true
-			sprite.texture = puffed
-		hit_timer += delta
-		
-	if enemy_stats.health <= 0:
-		_kill_enemy()
+	if not animationPlayer.is_playing() and not is_dead:
+		animationPlayer.play("idle")
 
 func _physics_process(delta):
-	if not enemy_stats.asleep or player_in_area:
+	if not enemy_stats.asleep and not is_dead or player_in_area and not is_dead:
 		_move()
 
 func _area_entered(body):
@@ -89,4 +96,4 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	_area_left(body)
 	hit_timer = 0.0
-	sprite.position = Vector2(0.0, 0.0)
+	idle.position = Vector2(0.0, 0.0)
