@@ -9,12 +9,15 @@ extends RigidBody2D
 @export var health : float = 50;
 
 @onready var uBootSprite : Sprite2D = $Submarine;
+@onready var torpedo_rampe : Node2D = $Submarine/CannonSpawn
 @onready var laserLine : Line2D = $Submarine/LaserSpriteParent/LaserPunkt/Line2D
 @onready var laser_blob : MeshInstance2D = $Submarine/LaserSpriteParent/LaserPunkt/LaserBlob
 @onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 @onready var ray_cast_start : Node2D = $Submarine/LaserSpriteParent/RayCastStart
+
+@export var rocket : PackedScene;
 
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
@@ -30,6 +33,13 @@ func _ready() -> void:
 	propellerAnimation.play("spin")
 	propellerAnimation.speed_scale = 0.1
 	animationPlayer.play("idle")
+	pass;
+
+func spawn_rocket():
+	var rocket_instance = rocket.instantiate()
+	get_tree().root.add_child(rocket_instance)
+	rocket_instance.global_position = torpedo_rampe.global_position
+	rocket_instance.get_child(0).linear_velocity = self.linear_velocity
 	pass;
 
 func _process(delta):
@@ -73,6 +83,15 @@ func _physics_process(delta):
 	laser_sprite.look_at(get_global_mouse_position())
 	laserLine.visible = false
 	laser_blob.visible = false
+	
+	if rocketCooldown <= 0:
+		rocketCooldown -= delta
+		
+	if Input.is_action_just_pressed("mouse_click"):
+		spawn_rocket()
+		rocketCooldown = 30.0
+		
+	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		laserLine.visible = true
 		laser_blob.visible = true
@@ -124,8 +143,7 @@ func _physics_process(delta):
 	var speed = self.linear_velocity.length()
 	var t = clamp(speed/ 30.0, 1.0, 3.0)
 	propellerAnimation.speed_scale = pow(t, 2)
-	
-	
+
 	
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	if self.linear_velocity.length() > maxSpeed:
