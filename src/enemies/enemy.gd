@@ -4,6 +4,7 @@ class_name Enemy
 @export var enemy_stats : EnemyStats
 
 @onready var sprite = $Texture
+@onready var animationPlayer = $AnimationPlayer
 
 var player_in_area : bool = false
 
@@ -39,9 +40,9 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 func _move():
 	var direction : Vector2 = (%Player.global_position - global_position).normalized()
 	if direction.x < 0.0:
-		sprite.flip_h = true
+		sprite.scale.x = -abs(sprite.scale.x)
 	else:
-		sprite.flip_h = false
+		sprite.scale.x = abs(sprite.scale.x)
 	#sprite.look_at(direction)
 	if not player_in_area:
 		apply_force(direction * enemy_stats.acell)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dne6cs077rsyg"
-path="res://.godot/imported/Piranha.png-b5fba08168c5cdad131bf51f61bfbad8.ctex"
+uid="uid://bhjsx3v8tjpte"
+path="res://.godot/imported/Piranah2.png-8b2edfa1440f54b9b9de1cac25bfcc48.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Piranha.png"
-dest_files=["res://.godot/imported/Piranha.png-b5fba08168c5cdad131bf51f61bfbad8.ctex"]
+source_file="res://textures/Piranha/Piranah2.png"
+dest_files=["res://.godot/imported/Piranah2.png-8b2edfa1440f54b9b9de1cac25bfcc48.ctex"]
 
 [params]
 
