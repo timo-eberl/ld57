@@ -24,12 +24,12 @@ var _height := 0
 func generate_map():
 	_height = 0
 	# fill everything with default tile
-	for x in range(-30, 50):
-		for y in range(-30, 2000):
-			if x == -30 || x == 49 || y == -30 || y == 1999:
+	for x in range(-10, 50):
+		for y in range(0, 2000):
+			if x == -10 || x == 49 || y == 0 || y == 1999:
 				self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 			else:
-				self.set_cell(Vector2i(x,y), 0, Vector2i(0,2))
+				self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
 	var first_slice_instance : TileMapSlice = first_slice.instantiate()
 	add_slice_to_map(first_slice_instance)
@@ -57,10 +57,6 @@ func _process(delta: float) -> void:
 		water_update_timer = .1
 	else:
 		water_update_timer -= delta
-
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		explosion(get_global_mouse_position(), 128.0, 2)
 
 # only call this during _physic_process, damage should be between 1 and 4
 func explosion(pos_ws : Vector2, radius : float, damage : int):
