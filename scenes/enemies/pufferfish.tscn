@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drqjxg8mx31iw"]
+[gd_scene load_steps=8 format=3 uid="uid://drqjxg8mx31iw"]
 
 [ext_resource type="Texture2D" uid="uid://02qnww76n6as" path="res://textures/UnpuffedPufferfish.png" id="1_cnld3"]
 [ext_resource type="Script" uid="uid://b6f7wnepv0k7e" path="res://src/pufferfish.gd" id="1_sidn5"]
@@ -12,22 +12,20 @@ acell = 100.0
 damage = 1.0
 hit_cooldown = 1.0
 health = 10.0
-asleep = false
+asleep = true
 metadata/_custom_type_script = "uid://bbq6supw7aall"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cnld3"]
-load_path = "res://.godot/imported/UnpuffedPufferfish.png-a0c37b137ce6b9bad70de373c236ccea.ctex"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sidn5"]
 radius = 29.0689
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vgcdo"]
-radius = 84.006
+radius = 100.0
 
 [node name="Pufferfish" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 7
 gravity_scale = 0.0
+lock_rotation = true
 script = ExtResource("1_sidn5")
 unpuffed = ExtResource("1_cnld3")
 puffed = ExtResource("3_6uwa1")
@@ -35,7 +33,7 @@ enemy_stats = SubResource("Resource_vgcdo")
 
 [node name="Texture" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
-texture = SubResource("CompressedTexture2D_cnld3")
+texture = ExtResource("1_cnld3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sidn5")

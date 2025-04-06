@@ -10,7 +10,9 @@ var player_in_area : bool = false
 var hit_timer = 0.0
 
 func _ready():
-	sprite.flip_v = true
+	sleeping = true
+	
+	_awake_enemy()
 
 func _process(delta):
 	if player_in_area:
@@ -36,23 +38,27 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 
 func _move():
 	var direction : Vector2 = (%Player.global_position - global_position).normalized()
-	if direction.x > 0.0:
+	if direction.x < 0.0:
 		sprite.flip_h = true
 	else:
 		sprite.flip_h = false
-	sprite.look_at(direction)
+	#sprite.look_at(direction)
 	if not player_in_area:
 		apply_force(direction * enemy_stats.acell)
 
 func _area_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and not enemy_stats.asleep:
 		body.apply_hit(enemy_stats.damage)
 		player_in_area = true
 
 func _area_left(body):
-	if body.name == "Player":
+	if body.name == "Player" and not enemy_stats.asleep:
 		player_in_area = false
 		hit_timer = 0.0
+
+func _awake_enemy():
+	enemy_stats.asleep = false
+	sleeping = false
 
 func _kill_enemy():
 	queue_free()

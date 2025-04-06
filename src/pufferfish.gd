@@ -66,11 +66,11 @@ func _physics_process(delta):
 		_move()
 
 func _area_entered(body):
-	if body.name == "Player":
+	if body.name == "Player" and not enemy_stats.asleep:
 		player_in_area = true
 
 func _area_left(body):
-	if body.name == "Player":
+	if body.name == "Player" and not enemy_stats.asleep:
 		player_in_area = false
 		hit_timer = 0.0
 

@@ -19,6 +19,8 @@ var uBootDir : Vector2 = Vector2.ZERO;
 var _last_laser_rid : RID
 var _last_laser_rid_change_time : int
 
+var is_dead : bool = false
+
 func _ready() -> void:
 	laserLine.add_point(Vector2.ZERO)
 	laserLine.add_point(Vector2.ZERO)
@@ -27,9 +29,8 @@ func _ready() -> void:
 	pass;
 
 func _process(delta):
-	if health <= 0.0:
-		print("Game Over")
-		visible = false
+	if health <= 0.0 and not is_dead:
+		_kill_player()
 
 func _physics_process(delta):
 	movementInput = Vector2.ZERO;
@@ -122,4 +123,11 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	pass;
 
 func apply_hit(damage :float):
+	print("Hit")
 	health -= damage
+
+func _kill_player():
+	print("Game Over")
+	visible = false
+	
+	is_dead = true
