@@ -106,6 +106,7 @@ func _physics_process(delta):
 					elif result.collider is Enemy: # damage enemies
 						var enemy : Enemy = result.collider
 						enemy.enemy_stats.health -= laser_damage_per_second / hits_per_second
+						enemy.play_hit_animation()
 					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
