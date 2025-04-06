@@ -35,9 +35,14 @@ func generate_map():
 	add_slice_to_map(first_slice_instance)
 	first_slice_instance.free() # not sure if necessary
 	
+	var index := 0
 	for i in number_of_slices:
 		randomize() # Randomizes the seed (or the internal state) of the random number generator
-		var slice_instance : TileMapSlice = slices[randi() % slices.size()].instantiate()
+		var old_index = index
+		# two slices beneath each other cant be the same slice
+		while old_index == index:
+			index = randi() % slices.size()
+		var slice_instance : TileMapSlice = slices[index].instantiate()
 		add_slice_to_map(slice_instance)
 		slice_instance.free() # not sure if necessary
 
