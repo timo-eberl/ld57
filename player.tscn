@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=25 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="5_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://bytc7yyopgo1i" path="res://textures/submarine/submarine_autsch.png" id="6_urp6f"]
+[ext_resource type="Shader" uid="uid://c3jmhxtae7awl" path="res://shaders/laser.gdshader" id="7_bwjto"]
 [ext_resource type="Texture2D" uid="uid://dfpsrijb4g7d4" path="res://textures/submarine/submarine_die0.png" id="8_bwjto"]
 [ext_resource type="Texture2D" uid="uid://beuswwpbu0igy" path="res://textures/submarine/submarine_die1.png" id="9_606se"]
 [ext_resource type="Texture2D" uid="uid://vyf6jqcqap22" path="res://textures/submarine/submarine_die3.png" id="10_u1c27"]
@@ -17,6 +18,11 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
 radius = 29.0
 height = 88.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwjto"]
+shader = ExtResource("7_bwjto")
+shader_parameter/width = 0.1
+shader_parameter/glow_width = 1.0
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -715,7 +721,9 @@ position = Vector2(-454.545, -636.364)
 position = Vector2(454.545, 1.52588e-05)
 
 [node name="Line2D" type="Line2D" parent="Submarine/LaserSpriteParent/LaserPunkt"]
-width = 100.0
+material = SubResource("ShaderMaterial_bwjto")
+points = PackedVector2Array(0, 0, 10000, 0)
+width = 10000.0
 default_color = Color(0.965113, 0.335176, 0.375048, 1)
 
 [node name="laser" type="Sprite2D" parent="Submarine/LaserSpriteParent"]
