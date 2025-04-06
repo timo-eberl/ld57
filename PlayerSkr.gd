@@ -12,6 +12,7 @@ extends RigidBody2D
 @onready var laserLine : Line2D = $Submarine/LaserSpriteParent/LaserPunkt/Line2D
 @onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
+@onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
@@ -26,6 +27,7 @@ func _ready() -> void:
 	laserLine.add_point(Vector2.ZERO)
 	propellerAnimation.play("spin")
 	propellerAnimation.speed_scale = 0.1
+	animationPlayer.play("idle")
 	pass;
 
 func _process(delta):
@@ -123,11 +125,13 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	pass;
 
 func apply_hit(damage :float):
-	print("Hit")
-	health -= damage
+	if not is_dead:
+		print("Hit")
+		health -= damage
+		animationPlayer.play("autsch")
 
 func _kill_player():
 	print("Game Over")
-	visible = false
+	animationPlayer.play("die")
 	
 	is_dead = true
