@@ -3,17 +3,33 @@
 [ext_resource type="Script" uid="uid://tm7avnaw5xnv" path="res://src/health_bar.gd" id="1_1bvlm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3kqx"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6opq1"]
 bg_color = Color(0.878431, 0, 0.141176, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_bottom_left = 15
 
 [node name="HealthBar" type="ProgressBar"]
-visible = false
 offset_left = -95.0
 offset_right = 95.0
 offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_6opq1")
+value = 69.46
 show_percentage = false
 script = ExtResource("1_1bvlm")
