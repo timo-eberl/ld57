@@ -14,6 +14,7 @@ extends RigidBody2D
 @onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
+@onready var ray_cast_start : Node2D = $Submarine/LaserSpriteParent/RayCastStart
 
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
@@ -77,7 +78,7 @@ func _physics_process(delta):
 		laser_blob.visible = true
 		
 		var space_state = get_world_2d().direct_space_state
-		var start := laserLine.global_position
+		var start := ray_cast_start.global_position
 		var direction := (get_global_mouse_position() - start).normalized()
 		var target := start + direction * 1000.0
 		var query := PhysicsRayQueryParameters2D.create(start, target)

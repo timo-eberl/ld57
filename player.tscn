@@ -19,9 +19,8 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bwjto"]
 friction = 0.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_606se"]
 radius = 29.0
-height = 88.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bwjto"]
 shader = ExtResource("7_bwjto")
@@ -697,10 +696,9 @@ health = 5.0
 zoom = Vector2(0.72, 0.72)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 6.44)
+position = Vector2(0, 8)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_2hs0m")
+shape = SubResource("CircleShape2D_606se")
 
 [node name="Submarine" type="Sprite2D" parent="."]
 scale = Vector2(0.033, 0.033)
@@ -761,6 +759,9 @@ position = Vector2(-363.636, -727.273)
 rotation = 3.42783
 scale = Vector2(17.3666, 17.3666)
 texture = ExtResource("5_2hs0m")
+
+[node name="RayCastStart" type="Node2D" parent="Submarine/LaserSpriteParent"]
+position = Vector2(-393.94, 0.000346791)
 
 [node name="DieAnimation" type="Node2D" parent="Submarine"]
 
