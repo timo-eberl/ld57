@@ -22,7 +22,10 @@ func generate_map():
 	# fill everything with default tile
 	for x in range(-30, 50):
 		for y in range(-30, 2000):
-			self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
+			if x == -30 || x == 49 || y == -30 || y == 1999:
+				self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
+			else:
+				self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
 	var first_slice_instance : TileMapSlice = first_slice.instantiate()
 	add_slice_to_map(first_slice_instance)
