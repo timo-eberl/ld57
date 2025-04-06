@@ -8,6 +8,9 @@ extends TileMapLayer
 @export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
 
 @onready var playerController : RigidBody2D = %Player
+@onready var playerNavAgent : NavigationAgent2D = %Player/NavigationAgent2D
+
+#NavigationAgent2D
 
 var water_tile : Vector2i = Vector2i(12,11)
 var active_water_blocks_to_check : Array[Vector2i]
@@ -35,8 +38,10 @@ func generate_map():
 		slice_instance.free() # not sure if necessary
 
 func _ready() -> void:
-	if !Engine.is_editor_hint():
-		generate_map()
+	if Engine.is_editor_hint():
+		pass;
+	
+	generate_map()
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -50,11 +55,11 @@ func _process(delta: float) -> void:
 		water_update_timer -= delta
 
 
-
 func water_force():
 	for block in active_water_blocks_to_check:
-		var target_pull : Vector2 = Vector2(block.x * 64, block.y * 64) - playerController.global_position
-		playerController.apply_impulse(target_pull.normalized() * (100))
+		playerNavAgent.target_position = Vector2(block.x * 64, block.y * 64)
+		var pullPoint = playerNavAgent.get_next_path_position() - playerController.global_position
+		playerController.apply_impulse(pullPoint.normalized() * 100)
 
 
 func water_spread():
