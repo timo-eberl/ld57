@@ -38,9 +38,9 @@ func _ready() -> void:
 
 func spawn_rocket():
 	var rocket_instance = rocket.instantiate()
-	get_tree().root.add_child(rocket_instance)
 	rocket_instance.global_position = torpedo_rampe.global_position
 	rocket_instance.get_child(0).linear_velocity = self.linear_velocity
+	get_tree().root.add_child(rocket_instance)
 	pass;
 
 func _process(delta):
