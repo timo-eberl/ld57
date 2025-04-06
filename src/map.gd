@@ -25,7 +25,7 @@ func generate_map():
 			if x == -30 || x == 49 || y == -30 || y == 1999:
 				self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 			else:
-				self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
+				self.set_cell(Vector2i(x,y), 0, Vector2i(0,2))
 	
 	var first_slice_instance : TileMapSlice = first_slice.instantiate()
 	add_slice_to_map(first_slice_instance)
@@ -95,9 +95,11 @@ func take_damage_at(coords : Vector2i):
 	var atlas_coords := self.get_cell_atlas_coords(coords)
 	if atlas_coords == Vector2i(0,0): # full health -> lower health
 		atlas_coords = Vector2i(0,1)
-	elif atlas_coords == Vector2i(0,1): # lower health -> lowest health
+	elif atlas_coords == Vector2i(0,1):
 		atlas_coords = Vector2i(0,2)
-	elif atlas_coords == Vector2i(0,2): # lowest health -> remove cell
+	elif atlas_coords == Vector2i(0,2):
+		atlas_coords = Vector2i(0,3)
+	elif atlas_coords == Vector2i(0,3): # lowest health -> remove cell
 		sid = -1 # delete cell
 	self.set_cell(coords, sid, atlas_coords)
 	
