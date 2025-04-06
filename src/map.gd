@@ -3,6 +3,7 @@ class_name Map
 extends TileMapLayer
 
 @export var first_slice : PackedScene
+@export var last_slice : PackedScene
 @export var slices : Array[PackedScene]
 @export var number_of_slices := 10
 @export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
@@ -23,9 +24,11 @@ var _height := 0
 
 func generate_map():
 	_height = 0
+	self.clear()
+	
 	# fill everything with default tile
-	for x in range(-10, 50):
-		for y in range(0, 2000):
+	for x in range(-30, 70):
+		for y in range(-20, 2020):
 			if x == -10 || x == 49 || y == 0 || y == 1999:
 				self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 			else:
@@ -45,6 +48,16 @@ func generate_map():
 		var slice_instance : TileMapSlice = slices[index].instantiate()
 		add_slice_to_map(slice_instance)
 		slice_instance.free() # not sure if necessary
+	
+	var last_slice_instance : TileMapSlice = last_slice.instantiate()
+	add_slice_to_map(last_slice_instance)
+	last_slice_instance.free() # not sure if necessary
+	
+	# add border at bottom
+	
+	for x in range(-30, 70):
+		var y = _height
+		self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
