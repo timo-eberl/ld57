@@ -79,7 +79,7 @@ func _physics_process(delta):
 		var space_state = get_world_2d().direct_space_state
 		var start := laserLine.global_position
 		var direction := (get_global_mouse_position() - start).normalized()
-		var target := start + direction * 10000.0
+		var target := start + direction * 1000.0
 		var query := PhysicsRayQueryParameters2D.create(start, target)
 		var exc := query.exclude # copy it and assign it again, otherwise it doesnt work
 		exc.append(self.get_rid()) # dont collide with self
@@ -109,6 +109,7 @@ func _physics_process(delta):
 			_last_laser_rid = RID()
 			_last_laser_rid_change_time = Time.get_ticks_msec()
 		laserLine.set_point_position(1, laserLine.to_local(hit_position))
+		laser_blob.global_position = hit_position
 	else:
 		_last_laser_rid = RID()
 		_last_laser_rid_change_time = Time.get_ticks_msec()

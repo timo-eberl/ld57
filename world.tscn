@@ -25,12 +25,12 @@ script = ExtResource("2_fj7yv")
 first_slice = ExtResource("3_036b0")
 slices = Array[PackedScene]([ExtResource("3_tlwt5"), ExtResource("4_aqk2v")])
 
-[node name="Player" parent="." instance=ExtResource("6_pkg7o")]
-unique_name_in_owner = true
-position = Vector2(724, 297)
-
 [node name="Piranha" parent="." instance=ExtResource("8_gbfbk")]
 position = Vector2(282, 471)
 
 [node name="Pufferfish" parent="." instance=ExtResource("10_wse8f")]
 position = Vector2(740, 499)
+
+[node name="Player" parent="." instance=ExtResource("6_pkg7o")]
+unique_name_in_owner = true
+position = Vector2(724, 297)

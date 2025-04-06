@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://drqjxg8mx31iw"]
 
-[ext_resource type="Texture2D" uid="uid://02qnww76n6as" path="res://textures/UnpuffedPufferfish.png" id="1_cnld3"]
+[ext_resource type="Texture2D" uid="uid://02qnww76n6as" path="res://textures/Pufferfish/UnpuffedPufferfish.png" id="1_cnld3"]
 [ext_resource type="Script" uid="uid://b6f7wnepv0k7e" path="res://src/enemies/pufferfish.gd" id="1_sidn5"]
 [ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_sidn5"]
-[ext_resource type="Texture2D" uid="uid://bwcxsf3ihnx7n" path="res://textures/Pufferfish.png" id="3_6uwa1"]
+[ext_resource type="Texture2D" uid="uid://bwcxsf3ihnx7n" path="res://textures/Pufferfish/Pufferfish.png" id="3_6uwa1"]
 
 [sub_resource type="Resource" id="Resource_vgcdo"]
 script = ExtResource("2_sidn5")
