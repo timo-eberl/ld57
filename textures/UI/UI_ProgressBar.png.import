@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cq63qkueuevgt"
-path="res://.godot/imported/submarine_cannon256.png-fde9725774606386d24d4a4648b1a119.ctex"
+uid="uid://bus0uo5cn3wqh"
+path="res://.godot/imported/UI_ProgressBar.png-854a2a89ad743e62c426de17bc248614.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/submarine/submarine_cannon256.png"
-dest_files=["res://.godot/imported/submarine_cannon256.png-fde9725774606386d24d4a4648b1a119.ctex"]
+source_file="res://textures/UI/UI_ProgressBar.png"
+dest_files=["res://.godot/imported/UI_ProgressBar.png-854a2a89ad743e62c426de17bc248614.ctex"]
 
 [params]
 

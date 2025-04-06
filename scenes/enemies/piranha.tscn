@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn4e7xq7u6hrh"]
+[gd_scene load_steps=16 format=3 uid="uid://bn4e7xq7u6hrh"]
 
 [ext_resource type="Script" uid="uid://b0wa3ilstk152" path="res://src/enemies/piranha.gd" id="1_ihjt4"]
 [ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_3ub0j"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhjsx3v8tjpte" path="res://textures/Piranha/Piranah2.png" id="4_nah08"]
 [ext_resource type="Texture2D" uid="uid://3tucp318wupd" path="res://textures/Piranha/Piranah_autsch.png" id="5_k3k5w"]
 [ext_resource type="Texture2D" uid="uid://de66o802x6ji2" path="res://textures/Piranha/Piranah_dead.png" id="6_ei5gu"]
+[ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="7_k5ghw"]
 
 [sub_resource type="Resource" id="Resource_j1s6e"]
 script = ExtResource("2_3ub0j")
@@ -358,6 +359,12 @@ flip_h = true
 libraries = {
 &"": SubResource("AnimationLibrary_ei5gu")
 }
+
+[node name="HealthBar" parent="." instance=ExtResource("7_k5ghw")]
+offset_left = -50.0
+offset_top = -56.0
+offset_right = 50.0
+offset_bottom = -46.0
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

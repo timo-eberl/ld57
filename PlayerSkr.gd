@@ -9,12 +9,16 @@ extends RigidBody2D
 @export var health : float = 50;
 
 @onready var uBootSprite : Sprite2D = $Submarine;
+@onready var torpedo_rampe : Node2D = $Submarine/CannonSpawn
 @onready var laserLine : Line2D = $Submarine/LaserSpriteParent/LaserPunkt/Line2D
 @onready var laser_blob : MeshInstance2D = $Submarine/LaserSpriteParent/LaserPunkt/LaserBlob
 @onready var propellerAnimation : AnimationPlayer = $PropellerAnimation
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 @onready var ray_cast_start : Node2D = $Submarine/LaserSpriteParent/RayCastStart
+@onready var health_bar : ProgressBar = $HealthBar
+
+@export var rocket : PackedScene;
 
 var rocketCooldown : float = 100.0;
 var uBootDir : Vector2 = Vector2.ZERO;
@@ -30,6 +34,13 @@ func _ready() -> void:
 	propellerAnimation.play("spin")
 	propellerAnimation.speed_scale = 0.1
 	animationPlayer.play("idle")
+	health_bar.set_max_health(health)
+
+func spawn_rocket():
+	var rocket_instance = rocket.instantiate()
+	get_tree().root.add_child(rocket_instance)
+	rocket_instance.global_position = torpedo_rampe.global_position
+	rocket_instance.get_child(0).linear_velocity = self.linear_velocity
 	pass;
 
 func _process(delta):
@@ -73,6 +84,15 @@ func _physics_process(delta):
 	laser_sprite.look_at(get_global_mouse_position())
 	laserLine.visible = false
 	laser_blob.visible = false
+	
+	if rocketCooldown <= 0:
+		rocketCooldown -= delta
+		
+	if Input.is_action_just_pressed("mouse_click"):
+		spawn_rocket()
+		rocketCooldown = 30.0
+		
+	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		laserLine.visible = true
 		laser_blob.visible = true
@@ -104,8 +124,7 @@ func _physics_process(delta):
 							obstacles.take_damage_at(coords)
 					elif result.collider is Enemy: # damage enemies
 						var enemy : Enemy = result.collider
-						enemy.enemy_stats.health -= laser_damage_per_second / hits_per_second
-						enemy.play_hit_animation()
+						enemy.take_damage(laser_damage_per_second / hits_per_second)
 					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
@@ -123,8 +142,7 @@ func _physics_process(delta):
 	var speed = self.linear_velocity.length()
 	var t = clamp(speed/ 30.0, 1.0, 3.0)
 	propellerAnimation.speed_scale = pow(t, 2)
-	
-	
+
 	
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	if self.linear_velocity.length() > maxSpeed:
@@ -138,6 +156,7 @@ func apply_hit(damage :float):
 	if not is_dead:
 		print("Hit")
 		health -= damage
+		health_bar.deal_damage(damage)
 		animationPlayer.play("autsch")
 
 func _kill_player():
