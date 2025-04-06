@@ -93,7 +93,6 @@ func _physics_process(delta):
 			hit_position = result.position # used as endpoint for laser
 			var obstacles : Map = %ObstaclesTiles
 			if result.rid == _last_laser_rid:
-				print("result.rid: ", result.rid)
 				var density := 1.0
 				if result.collider == obstacles:
 					var coords := obstacles.get_coords_for_body_rid(result.rid)

@@ -15,6 +15,7 @@ extends TileMapLayer
 var water_tile : Vector2i = Vector2i(12,11)
 var active_water_blocks_to_check : Array[Vector2i]
 var water_update_timer := 0.0
+var water_was_added_blocks : Array[Vector2i]
 
 
 # height in number of tiles of the whole map
@@ -57,12 +58,36 @@ func _process(delta: float) -> void:
 	else:
 		water_update_timer -= delta
 
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		explosion(get_global_mouse_position(), 128.0)
+
+# only call this during _physic_process
+func explosion(pos_ws : Vector2, radius : float):
+	var space_state = get_world_2d().direct_space_state
+	var shape_rid = PhysicsServer2D.circle_shape_create()
+	PhysicsServer2D.shape_set_data(shape_rid, radius)
+	
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape_rid = shape_rid
+	query.transform = Transform2D(0, pos_ws)
+	
+	var results = space_state.intersect_shape(query)
+	# Release the shape when done with physics queries.
+	PhysicsServer2D.free_rid(shape_rid)
+	
+	for result in results:
+		if result.collider == self:
+			var coords := self.get_coords_for_body_rid(result.rid)
+			self.take_damage_at(coords)
+			self.take_damage_at(coords)
 
 func water_force():
-	for block in active_water_blocks_to_check:
+	for block in water_was_added_blocks:
 		playerNavAgent.target_position = Vector2(block.x * 64, block.y * 64)
 		var pullPoint = playerNavAgent.get_next_path_position() - playerController.global_position
 		playerController.apply_impulse(pullPoint.normalized() * 100)
+	water_was_added_blocks.clear()
 
 
 func water_spread():
@@ -81,15 +106,18 @@ func water_spread():
 			var sid := self.get_cell_source_id(v)
 			var atlas_coord := self.get_cell_atlas_coords(v)
 			
-			if sid == -1:
-				if !blocks_to_ceck_to_add.has(v):
-					blocks_to_ceck_to_add.append(v)
-			
 			if atlas_coord == water_tile:
 				found_water = true
+				
+		for v in sorounding:
+			var sid := self.get_cell_source_id(v)
+			if sid == -1 && found_water:
+				if !blocks_to_ceck_to_add.has(v):
+					blocks_to_ceck_to_add.append(v)
 		
 		if found_water:
 			self.set_cell(block, 0, water_tile)
+			water_was_added_blocks.append(block)
 			
 	active_water_blocks_to_check = blocks_to_ceck_to_add
 	pass;
