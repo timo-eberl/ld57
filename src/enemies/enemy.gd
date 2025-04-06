@@ -3,6 +3,8 @@ class_name Enemy
 
 @export var enemy_stats : EnemyStats
 
+@onready var health_bar : ProgressBar = $HealthBar
+
 @onready var sprites : Node2D = $Texture
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 
@@ -14,7 +16,9 @@ var hit_timer = 0.0
 
 func _ready():
 	sleeping = true
-	
+	health_bar.set_max_health(enemy_stats.health)
+	animationPlayer.play("idle")
+
 	_awake_enemy()
 
 func _process(delta):
@@ -71,6 +75,12 @@ func _awake_enemy():
 func play_hit_animation():
 	if not is_dead:
 		animationPlayer.play("hit")
+
+func take_damage(damage):
+	health_bar.deal_damage(damage)
+	
+	enemy_stats.health -= damage
+	play_hit_animation()
 
 func _kill_enemy():
 	if not is_dead:

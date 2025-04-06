@@ -1,14 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://dwduwuk1x14w"]
+[gd_scene load_steps=4 format=3 uid="uid://dwduwuk1x14w"]
 
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="1_nl5c6"]
-[ext_resource type="Script" path="res://Rakete.gd" id="1_oaujv"]
+[ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaujv"]
+radius = 5.0
+height = 32.0
 
 [node name="Rakete" type="Node2D"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 9
 gravity_scale = 0.0
 script = ExtResource("1_oaujv")
 
 [node name="Rakete" type="Sprite2D" parent="RigidBody2D"]
-scale = Vector2(0.02, 0.02)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_nl5c6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(11, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oaujv")

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1o5eo4ulk04b"]
+[gd_scene load_steps=8 format=3 uid="uid://c1o5eo4ulk04b"]
 
 [ext_resource type="Script" uid="uid://b1nnrnwkp7nmj" path="res://src/enemies/rock_fish.gd" id="1_281of"]
 [ext_resource type="Texture2D" uid="uid://c1vwcvsteuyqw" path="res://textures/submarine.png" id="2_281of"]
 [ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_xfaco"]
+[ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="4_tqpbf"]
 
 [sub_resource type="Resource" id="Resource_tqpbf"]
 script = ExtResource("2_xfaco")
@@ -45,6 +46,12 @@ position = Vector2(-1, 3.5)
 shape = SubResource("RectangleShape2D_tqpbf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="HealthBar" parent="." instance=ExtResource("4_tqpbf")]
+offset_left = -50.0
+offset_top = -56.0
+offset_right = 50.0
+offset_bottom = -46.0
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
