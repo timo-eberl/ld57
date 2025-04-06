@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://bqs525b40rnn6"]
+[gd_scene load_steps=9 format=4 uid="uid://bqs525b40rnn6"]
 
 [ext_resource type="TileSet" uid="uid://c7y50lkg28t25" path="res://tile_sets/kenney_tile_set.tres" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b5q72legtlg5i" path="res://src/map.gd" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://dgd5yd1eu703g" path="res://scenes/slices/tile_map_slice_tutorial.tscn" id="3_036b0"]
 [ext_resource type="PackedScene" uid="uid://cj43ehcah7dpi" path="res://scenes/slices/tile_map_slice_0.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://ciduonpgk4jyp" path="res://scenes/slices/tile_map_slice_1.tscn" id="4_aqk2v"]
-[ext_resource type="Script" uid="uid://bbanfje5hfgu4" path="res://src/water.gd" id="6_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://bud2usxskygd8" path="res://player.tscn" id="6_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://bn4e7xq7u6hrh" path="res://scenes/enemies/piranha.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://drqjxg8mx31iw" path="res://scenes/enemies/pufferfish.tscn" id="10_wse8f"]
@@ -29,10 +28,6 @@ slices = Array[PackedScene]([ExtResource("3_tlwt5"), ExtResource("4_aqk2v")])
 [node name="Player" parent="." instance=ExtResource("6_pkg7o")]
 unique_name_in_owner = true
 position = Vector2(724, 297)
-
-[node name="WaterTiles" type="TileMapLayer" parent="."]
-tile_set = ExtResource("1_f3sb7")
-script = ExtResource("6_gbfbk")
 
 [node name="Piranha" parent="." instance=ExtResource("8_gbfbk")]
 position = Vector2(282, 471)

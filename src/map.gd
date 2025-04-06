@@ -7,6 +7,13 @@ extends TileMapLayer
 @export var number_of_slices := 10
 @export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
 
+@onready var playerController : RigidBody2D = %Player
+
+var water_tile : Vector2i = Vector2i(12,11)
+var active_water_blocks_to_check : Array[Vector2i]
+var water_update_timer := 0.0
+
+
 # height in number of tiles of the whole map
 var _height := 0
 
@@ -31,6 +38,51 @@ func _ready() -> void:
 	if !Engine.is_editor_hint():
 		generate_map()
 
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+			pass;
+	
+	if water_update_timer <= 0.0: 
+		water_force();
+		water_spread();
+		water_update_timer = .1
+	else:
+		water_update_timer -= delta
+
+
+
+func water_force():
+	for block in active_water_blocks_to_check:
+		var target_pull : Vector2 = Vector2(block.x * 64, block.y * 64) - playerController.global_position
+		
+		if target_pull.length() < 300.0:
+			playerController.apply_impulse(target_pull.normalized() * (300 - target_pull.length()))
+
+
+func water_spread():
+	var blocks_to_ceck_to_add : Array[Vector2i];
+	
+	for block in active_water_blocks_to_check:
+		var sorounding = self.get_surrounding_cells(block)
+		var found_water = false
+		
+		for v in sorounding:
+			var sid := self.get_cell_source_id(v)
+			var atlas_coord := self.get_cell_atlas_coords(v)
+			
+			if sid == -1:
+				blocks_to_ceck_to_add.append(v)
+			
+			if atlas_coord == water_tile:
+				found_water = true
+		
+		if found_water:
+			self.set_cell(block, 0, water_tile)
+			
+	active_water_blocks_to_check = blocks_to_ceck_to_add
+	pass;
+
+
 func take_damage_at(coords : Vector2i):
 	var sid := self.get_cell_source_id(coords)
 	var atlas_coords := self.get_cell_atlas_coords(coords)
@@ -41,6 +93,9 @@ func take_damage_at(coords : Vector2i):
 	elif atlas_coords == Vector2i(0,2): # lowest health -> remove cell
 		sid = -1 # delete cell
 	self.set_cell(coords, sid, atlas_coords)
+	
+	if sid == -1:
+		active_water_blocks_to_check.append(coords)
 
 func add_slice_to_map(slice : TileMapSlice):
 	var w := slice.get_width()
