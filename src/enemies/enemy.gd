@@ -2,6 +2,8 @@ extends RigidBody2D
 class_name Enemy
 
 @export var enemy_stats : EnemyStats
+# %Player doesn't work if instantiated dynamically
+@onready var player : Player = self.get_parent().find_child("Player")
 
 @onready var health_bar : ProgressBar = $HealthBar
 
@@ -28,7 +30,7 @@ func _process(delta):
 	if not is_dead:
 		if player_in_area:
 			if hit_timer >= enemy_stats.hit_cooldown:
-				%Player.apply_hit(enemy_stats.damage)
+				player.apply_hit(enemy_stats.damage)
 				hit_timer = 0.0
 			hit_timer += delta
 	
@@ -49,9 +51,7 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	self.linear_velocity = self.linear_velocity * 0.95;
 
 func _move():
-	if !is_instance_valid(%Player):
-		return
-	var direction : Vector2 = (%Player.global_position - global_position).normalized()
+	var direction : Vector2 = (player.global_position - global_position).normalized()
 	if direction.x < 0.0:
 		sprites.scale.x = -abs(sprites.scale.x)
 	else:

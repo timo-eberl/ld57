@@ -1,3 +1,4 @@
+class_name Player
 extends RigidBody2D
 
 @export var movementInput : Vector2;

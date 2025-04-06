@@ -38,7 +38,7 @@ func _process(delta):
 		
 		if hit_player:
 			if player_in_area:
-				%Player.apply_hit(enemy_stats.damage)
+				player.apply_hit(enemy_stats.damage)
 			hit_player = false;
 			shrink = true
 
