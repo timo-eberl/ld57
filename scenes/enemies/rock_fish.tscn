@@ -1,0 +1,48 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1o5eo4ulk04b"]
+
+[ext_resource type="Script" uid="uid://b1nnrnwkp7nmj" path="res://src/enemies/rock_fish.gd" id="1_281of"]
+[ext_resource type="Texture2D" uid="uid://c1vwcvsteuyqw" path="res://textures/submarine.png" id="2_281of"]
+[ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_xfaco"]
+
+[sub_resource type="Resource" id="Resource_tqpbf"]
+script = ExtResource("2_xfaco")
+max_speed = 100.0
+acell = 100.0
+damage = 1.0
+hit_cooldown = 1.0
+health = 10.0
+asleep = true
+metadata/_custom_type_script = "uid://bbq6supw7aall"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfaco"]
+size = Vector2(60, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tqpbf"]
+size = Vector2(80, 77)
+
+[node name="RockFish" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 7
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_281of")
+enemy_stats = SubResource("Resource_tqpbf")
+
+[node name="Texture" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_281of")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_xfaco")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_tqpbf")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
