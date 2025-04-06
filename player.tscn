@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=29 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
@@ -9,11 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://bytc7yyopgo1i" path="res://textures/submarine/submarine_autsch.png" id="6_urp6f"]
 [ext_resource type="Shader" uid="uid://c3jmhxtae7awl" path="res://shaders/laser.gdshader" id="7_bwjto"]
 [ext_resource type="Texture2D" uid="uid://dfpsrijb4g7d4" path="res://textures/submarine/submarine_die0.png" id="8_bwjto"]
+[ext_resource type="Shader" uid="uid://bfhn3xs5nremx" path="res://shaders/laser_blob.gdshader" id="8_u1c27"]
 [ext_resource type="Texture2D" uid="uid://beuswwpbu0igy" path="res://textures/submarine/submarine_die1.png" id="9_606se"]
+[ext_resource type="Texture2D" uid="uid://bwcxsf3ihnx7n" path="res://textures/Pufferfish.png" id="9_op7ga"]
 [ext_resource type="Texture2D" uid="uid://vyf6jqcqap22" path="res://textures/submarine/submarine_die3.png" id="10_u1c27"]
 [ext_resource type="Texture2D" uid="uid://by6xy23j4qmps" path="res://textures/submarine/submarine_die4.png" id="11_op7ga"]
 [ext_resource type="Texture2D" uid="uid://6y753dhb08f1" path="res://textures/submarine/submarine_die5.png" id="12_q13i1"]
 [ext_resource type="Animation" uid="uid://dtg230pyb26e3" path="res://autsch.res" id="13_pylmc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bwjto"]
+friction = 0.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2hs0m"]
 radius = 29.0
@@ -23,6 +28,9 @@ height = 88.5
 shader = ExtResource("7_bwjto")
 shader_parameter/width = 0.1
 shader_parameter/glow_width = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q13i1"]
+shader = ExtResource("8_u1c27")
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -663,11 +671,14 @@ _data = {
 [node name="Player" type="RigidBody2D" groups=["Player"]]
 collision_layer = 2
 collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_bwjto")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_onrkg")
 maxSpeed = 500.0
 acell = 1000.0
+laser_damage_per_second = 8.0
+hits_per_second = 20.0
 health = 5.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -725,6 +736,12 @@ material = SubResource("ShaderMaterial_bwjto")
 points = PackedVector2Array(0, 0, 10000, 0)
 width = 10000.0
 default_color = Color(0.965113, 0.335176, 0.375048, 1)
+
+[node name="LaserBlob" type="Sprite2D" parent="Submarine/LaserSpriteParent/LaserPunkt"]
+material = SubResource("ShaderMaterial_q13i1")
+position = Vector2(10000, 0.000346791)
+scale = Vector2(5, 5)
+texture = ExtResource("9_op7ga")
 
 [node name="laser" type="Sprite2D" parent="Submarine/LaserSpriteParent"]
 position = Vector2(-363.636, -727.273)

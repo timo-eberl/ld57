@@ -54,15 +54,18 @@ func _process(delta: float) -> void:
 func water_force():
 	for block in active_water_blocks_to_check:
 		var target_pull : Vector2 = Vector2(block.x * 64, block.y * 64) - playerController.global_position
-		
-		if target_pull.length() < 300.0:
-			playerController.apply_impulse(target_pull.normalized() * (300 - target_pull.length()))
+		playerController.apply_impulse(target_pull.normalized() * (100))
 
 
 func water_spread():
 	var blocks_to_ceck_to_add : Array[Vector2i];
 	
 	for block in active_water_blocks_to_check:
+		
+		var block_sid := self.get_cell_source_id(block)
+		if block_sid != -1:
+			continue
+		
 		var sorounding = self.get_surrounding_cells(block)
 		var found_water = false
 		
@@ -71,7 +74,8 @@ func water_spread():
 			var atlas_coord := self.get_cell_atlas_coords(v)
 			
 			if sid == -1:
-				blocks_to_ceck_to_add.append(v)
+				if !blocks_to_ceck_to_add.has(v):
+					blocks_to_ceck_to_add.append(v)
 			
 			if atlas_coord == water_tile:
 				found_water = true
