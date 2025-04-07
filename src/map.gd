@@ -103,6 +103,9 @@ func water_force():
 		playerController.apply_impulse(pullPoint.normalized() * 100)
 	water_was_added_blocks.clear()
 
+func is_water(coords : Vector2i):
+	var atlas_coords := self.get_cell_atlas_coords(coords)
+	return atlas_coords == water_tile
 
 func water_spread():
 	var blocks_to_ceck_to_add : Array[Vector2i];
@@ -117,9 +120,7 @@ func water_spread():
 		var found_water = false
 		
 		for v in sorounding:
-			var atlas_coord := self.get_cell_atlas_coords(v)
-			
-			if atlas_coord == water_tile:
+			if is_water(v):
 				found_water = true
 				
 		for v in sorounding:

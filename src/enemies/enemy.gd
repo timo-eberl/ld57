@@ -3,7 +3,8 @@ class_name Enemy
 
 @export var enemy_stats : EnemyStats
 # %Player doesn't work if instantiated dynamically
-@onready var player : Player = self.get_parent().find_child("Player")
+@onready var player : Player = get_tree().root.get_child(0).find_child("Player")
+@onready var map : Map = get_tree().root.get_child(0).find_child("ObstaclesTiles")
 
 @onready var health_bar : ProgressBar = $HealthBar
 
@@ -13,6 +14,7 @@ class_name Enemy
 var player_in_area : bool = false
 
 var is_dead : bool = false
+var is_asleep : bool = true
 
 var hit_timer = 0.0
 
@@ -22,11 +24,10 @@ var health := 0.0
 
 func _ready():
 	sleeping = true
+	freeze = true
 	health = enemy_stats.health
 	health_bar.set_max_health(health)
 	animationPlayer.play("idle")
-
-	_awake_enemy()
 
 func _process(delta):
 	if is_dead:
@@ -51,8 +52,16 @@ func _process(delta):
 		if not animationPlayer.is_playing():
 			animationPlayer.play("idle")
 
+func awake_if_water():
+	if is_asleep and not is_dead:
+		# enemy positon to coordinates on tilemap
+		var map_coords := map.local_to_map(map.to_local(self.global_position))
+		if map.is_water(map_coords):
+			_awake_enemy()
+
 func _physics_process(_delta):
-	if not enemy_stats.asleep and not is_dead:
+	awake_if_water()
+	if not is_asleep and not is_dead:
 		_move()
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
@@ -72,18 +81,20 @@ func _move():
 		apply_force(direction * enemy_stats.acell)
 
 func _area_entered(body):
-	if body.name == "Player" and not enemy_stats.asleep:
+	if body.name == "Player" and not is_asleep:
 		body.apply_hit(enemy_stats.damage)
 		player_in_area = true
 
 func _area_left(body):
-	if body.name == "Player" and not enemy_stats.asleep:
+	if body.name == "Player" and not is_asleep:
 		player_in_area = false
 		hit_timer = 0.0
 
 func _awake_enemy():
-	enemy_stats.asleep = false
+	print("awake ", self.name)
+	is_asleep = false
 	sleeping = false
+	freeze = false
 
 func play_hit_animation():
 	if not is_dead:

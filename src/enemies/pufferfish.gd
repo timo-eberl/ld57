@@ -1,3 +1,4 @@
+class_name PufferFish
 extends Enemy
 
 @onready var idle : Sprite2D = $Texture/IdleTexture
@@ -83,15 +84,16 @@ func _process(delta):
 		animationPlayer.play("idle")
 
 func _physics_process(_delta):
-	if not enemy_stats.asleep and not is_dead or player_in_area and not is_dead:
+	awake_if_water()
+	if not is_asleep and not is_dead or player_in_area and not is_dead:
 		_move()
 
 func _area_entered(body):
-	if body.name == "Player" and not enemy_stats.asleep:
+	if body.name == "Player" and not is_asleep:
 		player_in_area = true
 
 func _area_left(body):
-	if body.name == "Player" and not enemy_stats.asleep:
+	if body.name == "Player" and not is_asleep:
 		player_in_area = false
 		hit_timer = 0.0
 
