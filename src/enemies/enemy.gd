@@ -123,7 +123,6 @@ func _area_left(body):
 		damage_timer = 0.0
 
 func _awake_enemy():
-	print("awake ", self.name)
 	animationPlayer.play("idle")
 	is_asleep = false
 	sleeping = false
@@ -138,6 +137,9 @@ func play_hit_animation():
 		#animationPlayer.play("hit")
 
 func take_damage(damage):
+	var damage_multiplier := remap(global_position.y, 0, 12800, 1.0, 0.3)
+	damage_multiplier = clampf(damage_multiplier, 0.3, 1)
+	damage *= damage_multiplier
 	health_bar.deal_damage(damage)
 	
 	health -= damage
