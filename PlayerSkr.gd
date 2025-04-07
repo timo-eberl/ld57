@@ -124,6 +124,8 @@ func _physics_process(delta):
 					var sid := obstacles.get_cell_source_id(coords)
 					if sid != -1:
 						density = obstacles.get_cell_tile_data(coords).get_custom_data("density")
+						
+					density += global_position.y / 1200.0
 				if Time.get_ticks_msec() - _last_laser_rid_change_time > (1000.0 * density/hits_per_second):
 					if result.collider == obstacles: # destroy cells
 						if result.collider == obstacles:
