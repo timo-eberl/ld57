@@ -11,8 +11,8 @@
 
 [sub_resource type="Resource" id="Resource_vgcdo"]
 script = ExtResource("2_sidn5")
-max_speed = 500.0
-acell = 300.0
+max_speed = 700.0
+acell = 500.0
 damage = 1.0
 hit_cooldown = 0.6
 health = 6.0
