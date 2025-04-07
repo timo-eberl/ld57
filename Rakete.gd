@@ -26,7 +26,7 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 
 # only call this during _physic_process
 func explode():
-	# Spawn visual explosion
+	# Spawn visual explosions
 	var explo = explosion.instantiate()
 	explo.global_position = global_position
 	explo.scale = Vector2(4,4) * (1 + rocket_power);
