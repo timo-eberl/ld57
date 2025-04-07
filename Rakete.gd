@@ -5,6 +5,7 @@ extends RigidBody2D
 @export var explosion : PackedScene;
 @onready var obstacles : Map = get_tree().root.get_child(0).get_node("ObstaclesTiles")
 @export var explosion_knockback := 5.0
+var rocket_power : float;
 
 
 func _process(_delta):
