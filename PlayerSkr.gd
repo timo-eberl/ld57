@@ -20,8 +20,9 @@ extends RigidBody2D
 @onready var health_bar : HealthBar = $HealthBar
 @onready var upgrade_counter : UpgradeCounter = $UpgradeCounter
 @onready var rocket_cooldown_bar : ProgressBar = $RocketCooldown
-
+@onready var laser_sound : AudioStreamPlayer = $AudioStreamPlayer;
 @export var rocket : PackedScene;
+
 
 var rocket_power : float = 1;
 
@@ -73,6 +74,19 @@ func _process(delta):
 			if health < health_bar.max_value:
 				health += regen_hp_per_s * delta
 		health_bar.set_health(health)
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		laser_sound.stream_paused = false
+		
+		if laser_sound.pitch_scale < 4:
+			laser_sound.pitch_scale = laser_sound.pitch_scale + delta * 10.0
+		
+	else:
+		
+		if laser_sound.pitch_scale > 1.5:
+			laser_sound.pitch_scale = laser_sound.pitch_scale - delta * 20.0
+		else:
+			laser_sound.stream_paused = true
 
 func _physics_process(delta):
 	if is_dead or won: return
