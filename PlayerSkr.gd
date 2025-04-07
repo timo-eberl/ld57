@@ -7,6 +7,7 @@ extends RigidBody2D
 @export var laser_damage_per_second := 7.5
 @export var hits_per_second := 6.0
 @export var knockback := 1.0
+@export_flags_2d_physics var laser_mask : int
 
 @export var health : float = 50;
 
@@ -108,6 +109,7 @@ func _physics_process(delta):
 		var exc := query.exclude # copy it and assign it again, otherwise it doesnt work
 		exc.append(self.get_rid()) # dont collide with self
 		query.exclude = exc
+		query.collision_mask = laser_mask
 		
 		var result : Dictionary = space_state.intersect_ray(query)
 		var hit_position := target # if nothing is hit, a very far away point is used as laser ending point

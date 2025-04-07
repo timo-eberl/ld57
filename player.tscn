@@ -692,6 +692,7 @@ maxSpeed = 500.0
 acell = 1000.0
 laser_damage_per_second = 8.0
 hits_per_second = 20.0
+laser_mask = 4294967287
 health = 10.0
 rocket = ExtResource("2_u1c27")
 
