@@ -8,6 +8,8 @@ extends RigidBody2D
 @export var hits_per_second := 6.0
 @export var knockback := 1.0
 @export_flags_2d_physics var laser_mask : int
+@export var regen_cooldown := 5.0
+@export var regen_hp_per_s := 0.25
 
 @export var health : float = 50;
 
@@ -19,7 +21,7 @@ extends RigidBody2D
 @onready var laser_sprite : Node2D = $Submarine/LaserSpriteParent
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 @onready var ray_cast_start : Node2D = $Submarine/LaserSpriteParent/RayCastStart
-@onready var health_bar : ProgressBar = $HealthBar
+@onready var health_bar : HealthBar = $HealthBar
 
 @export var rocket : PackedScene;
 
@@ -28,6 +30,8 @@ var uBootDir : Vector2 = Vector2.ZERO;
 
 var _last_laser_rid : RID
 var _last_laser_rid_change_time : int
+
+var _last_hit_time : int
 
 var is_dead : bool = false
 
@@ -46,15 +50,20 @@ func spawn_rocket():
 	get_tree().root.add_child(rocket_instance)
 	pass;
 
-func _process(_delta):
+func _process(delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
-	rocketCooldown -= _delta
+	rocketCooldown -= delta
 	
 	if is_dead:
 		if animationPlayer.current_animation == "":
 			visible = false
 			%UI.set_game_over()
+	else:
+		if Time.get_ticks_msec() - _last_hit_time > regen_cooldown * 1000.0:
+			if health < health_bar.max_value:
+				health += regen_hp_per_s * delta
+		health_bar.set_health(health)
 
 func _physics_process(delta):
 	if is_dead: return
@@ -174,8 +183,8 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 
 func apply_hit(damage :float):
 	if not is_dead:
-		print("Hit")
 		health -= damage
+		_last_hit_time = Time.get_ticks_msec()
 		health_bar.deal_damage(damage)
 		animationPlayer.play("autsch")
 

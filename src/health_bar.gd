@@ -1,3 +1,4 @@
+class_name HealthBar
 extends ProgressBar
 
 var max_health := 100.0
@@ -28,7 +29,21 @@ func _process(delta):
 		
 		visibility_timer += delta
 
+func set_health(health):
+	if value == health:
+		return
+	
+	set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
+	fade_out = false
+	fade_out_progress = 0.0
+	
+	value = health
+	
+	visibility_timer = 0.0
+
 func deal_damage(amount):
+	print("deal_damage ", amount)
+	print("value ", value)
 	set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
 	fade_out = false
 	fade_out_progress = 0.0
