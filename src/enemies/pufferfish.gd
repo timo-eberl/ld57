@@ -55,7 +55,7 @@ func _process(delta):
 			var unpuff_amount = lerp(puffed_scale, default_scale, puff_progress / unpuff_speed)
 			
 			idle.scale = Vector2(unpuff_amount, unpuff_amount)
-			if puff_progress >= puff_speed:
+			if puff_progress >= unpuff_speed:
 				shrink = false
 				puff_done = true
 				puff_progress = 0.0
