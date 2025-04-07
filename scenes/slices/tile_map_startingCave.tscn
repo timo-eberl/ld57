@@ -12,7 +12,10 @@ script = ExtResource("2_bqleg")
 metadata/_custom_type_script = "uid://71qlrrktitt3"
 
 [node name="Piranha" parent="." instance=ExtResource("3_bqleg")]
-position = Vector2(853, 325)
+position = Vector2(848, 1103)
+
+[node name="Piranha2" parent="." instance=ExtResource("3_bqleg")]
+position = Vector2(984, 1143)
 
 [node name="Pufferfish" parent="." instance=ExtResource("4_yccy3")]
-position = Vector2(421, 256)
+position = Vector2(1411, 1103)
