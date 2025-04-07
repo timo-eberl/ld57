@@ -5,6 +5,7 @@ extends RigidBody2D
 @export var explosion : PackedScene;
 @onready var obstacles : Map = get_tree().root.get_child(0).get_node("ObstaclesTiles")
 @export var explosion_knockback := 5.0
+@onready var upgrade_counter : UpgradeCounter = get_tree().root.get_child(0).find_child("Player").find_child("UpgradeCounter")
 var rocket_power : float;
 
 

@@ -38,7 +38,7 @@ func _physics_process(delta):
 		
 		var result : Dictionary = space_state.intersect_ray(query)
 		var hit_position := target # if nothing is hit, a very far away point is used as laser ending point
-		var true_laser_level = upgrade_counter.laser_level * upgrade_counter.points_for_upgrade + upgrade_counter.laser_level_progress
+		var true_laser_level = upgrade_counter.laser_level * upgrade_counter.points_for_upgrade_laser + upgrade_counter.laser_level_progress
 		
 		
 		if !result.is_empty():

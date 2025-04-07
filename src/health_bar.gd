@@ -42,8 +42,6 @@ func set_health(health):
 	visibility_timer = 0.0
 
 func deal_damage(amount):
-	print("deal_damage ", amount)
-	print("value ", value)
 	set_self_modulate(Color(1.0, 1.0, 1.0, 1.0))
 	fade_out = false
 	fade_out_progress = 0.0
