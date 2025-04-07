@@ -6,6 +6,7 @@ extends Node2D
 @onready var ray_cast_start : Node2D = $RayCastStart
 @onready var player : Player = get_tree().root.get_child(0).find_child("Player")
 @onready var obstacles : Map = get_tree().root.get_child(0).get_node("ObstaclesTiles")
+@onready var upgrade_counter : UpgradeCounter = get_tree().root.get_child(0).find_child("Player").find_child("UpgradeCounter")
 
 var _last_laser_rid : RID
 var _last_laser_rid_change_time : int
@@ -35,7 +36,7 @@ func _physics_process(delta):
 		
 		var result : Dictionary = space_state.intersect_ray(query)
 		var hit_position := target # if nothing is hit, a very far away point is used as laser ending point
-		#var true_laser_level = upgrade_counter.laser_level * upgrade_counter.points_for_upgrade + upgrade_counter.laser_level_progress
+		var true_laser_level = upgrade_counter.laser_level * upgrade_counter.points_for_upgrade + upgrade_counter.laser_level_progress
 		
 		
 		if !result.is_empty():
@@ -50,7 +51,7 @@ func _physics_process(delta):
 						density = obstacles.get_cell_tile_data(coords).get_custom_data("density")
 					
 					#Set density acording to level and depth
-					#density += max(0, global_position.y / 1200.0 - true_laser_level)
+					density += max(0, global_position.y / 1200.0 - true_laser_level)
 				if Time.get_ticks_msec() - _last_laser_rid_change_time > (1000.0 * density/player.hits_per_second):
 					if result.collider == obstacles: # destroy cells
 						if result.collider == obstacles:
