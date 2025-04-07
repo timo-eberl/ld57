@@ -794,6 +794,8 @@ show_percentage = false
 
 [node name="UpgradeCounter" type="Node2D" parent="."]
 script = ExtResource("18_q13i1")
+points_for_upgrade_laser = Array[int]([3, 6, 8, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10])
+points_for_upgrade_rocket = Array[int]([2, 4, 8, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
