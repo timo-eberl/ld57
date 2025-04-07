@@ -19,12 +19,13 @@ extends RigidBody2D
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 @onready var health_bar : HealthBar = $HealthBar
 @onready var upgrade_counter : UpgradeCounter = $UpgradeCounter
+@onready var rocket_cooldown_bar : ProgressBar = $RocketCooldown
 
 @export var rocket : PackedScene;
 
 var rocket_power : float = 1;
 
-
+@export var rocket_cooldown : float = 1.0
 var rocketCooldown : float = 1.0;
 var uBootDir : Vector2 = Vector2.ZERO;
 
@@ -41,6 +42,8 @@ func _ready() -> void:
 	propellerAnimation.speed_scale = 0.1
 	animationPlayer.play("idle")
 	health_bar.set_max_health(health)
+	rocketCooldown = 0.0
+	rocket_cooldown_bar.max_value = rocket_cooldown
 
 func spawn_rocket():
 	rocket_power = upgrade_counter.rocket_level
@@ -55,7 +58,11 @@ func spawn_rocket():
 func _process(delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
-	rocketCooldown -= delta
+	if rocketCooldown >= 0.0:
+		rocketCooldown -= delta
+		rocket_cooldown_bar.value = rocketCooldown
+	else:
+		rocket_cooldown_bar.visible = false
 	
 	if is_dead:
 		if animationPlayer.current_animation == "":
@@ -83,9 +90,6 @@ func _physics_process(delta):
 	if movementInput.length() > 1.0:
 		movementInput = movementInput.normalized();
 	
-	if rocketCooldown > 0:
-		rocketCooldown -= delta;
-	
 	var lookPos = get_global_mouse_position();
 	var myPos = self.global_position;
 	
@@ -101,13 +105,11 @@ func _physics_process(delta):
 	uBootSprite.look_at(myPos - uBootDir)
 	
 	self.apply_force(movementInput * acell);
-	
-	if rocketCooldown <= 0:
-		rocketCooldown -= delta
 		
 	if Input.is_action_just_pressed("mouse_click") && rocketCooldown <= 0:
 		spawn_rocket()
-		rocketCooldown = 3.0
+		rocketCooldown = rocket_cooldown
+		rocket_cooldown_bar.visible = true
 	
 	var speed = self.linear_velocity.length()
 	var t = clamp(speed/ 30.0, 1.0, 3.0)
