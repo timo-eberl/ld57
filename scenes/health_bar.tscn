@@ -23,6 +23,7 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 15
 corner_radius_bottom_left = 15
+anti_aliasing = false
 
 [node name="HealthBar" type="ProgressBar"]
 offset_left = -95.0

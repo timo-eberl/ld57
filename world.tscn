@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://bqs525b40rnn6"]
+[gd_scene load_steps=20 format=4 uid="uid://bqs525b40rnn6"]
 
 [ext_resource type="TileSet" uid="uid://c7y50lkg28t25" path="res://tile_sets/kenney_tile_set.tres" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://b372a8wj73m7p" path="res://parallax_background.tscn" id="1_ioo17"]
@@ -18,8 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://du8ochmeonkpo" path="res://scenes/slices/tile_map_slice_7.tscn" id="12_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://bbn3uy4lojjpx" path="res://scenes/slices/tile_map_slice_8.tscn" id="14_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://d3d5i66hjfi5e" path="res://scenes/slices/tile_map_slice_9.tscn" id="15_26xuy"]
-[ext_resource type="AudioStream" uid="uid://dytqoiki4284c" path="res://Audio/underwater-245900.mp3" id="19_cbp6q"]
-[ext_resource type="AudioStream" uid="uid://cqmm8ykyatqhx" path="res://Audio/medium-explosion-40472.mp3" id="20_26xuy"]
+[ext_resource type="AudioStream" uid="uid://dfsu11ayegogt" path="res://Audio/desolate-world-121196.mp3" id="19_cbp6q"]
 
 [node name="World" type="Node2D"]
 
@@ -48,11 +47,6 @@ position = Vector2(724, 297)
 
 [node name="Background_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_cbp6q")
-volume_db = -15.0
+volume_db = -20.0
 autoplay = true
 parameters/looping = true
-
-[node name="Explosion_SoundFx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("20_26xuy")
-volume_db = -10.0
-max_polyphony = 3

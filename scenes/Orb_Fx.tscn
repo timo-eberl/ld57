@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvr1owhbtyta5"]
+
+[ext_resource type="AudioStream" uid="uid://bek8ilwd6sy0f" path="res://Audio/bloop-2-186531.mp3" id="1_k5b1c"]
+
+[node name="OrbFx" type="AudioStreamPlayer"]
+stream = ExtResource("1_k5b1c")
+volume_db = -25.0
+autoplay = true
+max_polyphony = 10
