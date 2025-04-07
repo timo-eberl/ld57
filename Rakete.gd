@@ -34,7 +34,7 @@ func explode():
 	get_tree().root.add_child(explo)
 	
 	var radius = 150 + rocket_power * 30;
-	var damage = 2 + rocket_power # damage should be between 1 and 4
+	var damage = 4 + (rocket_power / 3) # damage should be between 1 and 4
 	
 	# damage enemies
 	var space_state = get_world_2d().direct_space_state
@@ -53,7 +53,10 @@ func explode():
 		# damage map
 		if result.collider == obstacles:
 			var coords := obstacles.get_coords_for_body_rid(result.rid)
-			for i in damage:
+			var global_coords := obstacles.to_global(obstacles.map_to_local(coords))
+			var d := (global_position - global_coords).length()
+			var damage_reduction := int(d / 70.0) # with distance, reduce damage
+			for i in (damage - damage_reduction):
 				obstacles.take_damage_at(coords)
 		if result.collider is Enemy:
 			var enemy : Enemy = result.collider
