@@ -8,12 +8,13 @@ extends RigidBody2D
 
 
 func _process(_delta):
-	rocketSprite.look_at(get_global_mouse_position())
-	self.apply_force(get_global_mouse_position() - global_position)
+	#rocketSprite.look_at(get_global_mouse_position())
+	#self.apply_force(get_global_mouse_position() - global_position)
 	pass;
 
 func _ready() -> void:
-	self.apply_impulse((get_global_mouse_position() - global_position) * 3.0)
+	rocketSprite.look_at(get_global_mouse_position())
+	self.apply_impulse((get_global_mouse_position() - global_position).normalized() * 1000.0)
 	
 	pass
 
