@@ -5,7 +5,7 @@ extends TileMapLayer
 @export var first_slice : PackedScene
 @export var last_slice : PackedScene
 @export var slices : Array[PackedScene]
-@export var number_of_slices := 10
+#@export var number_of_slices := 10
 @export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
 @export var water_pull_strength := 1.0
 
@@ -39,14 +39,8 @@ func generate_map():
 	add_slice_to_map(first_slice_instance)
 	first_slice_instance.free() # not sure if necessary
 	
-	var index := 0
-	for i in number_of_slices:
-		randomize() # Randomizes the seed (or the internal state) of the random number generator
-		var old_index = index
-		# two slices beneath each other cant be the same slice
-		while old_index == index:
-			index = randi() % slices.size()
-		var slice_instance : TileMapSlice = slices[index].instantiate()
+	for slice in slices:
+		var slice_instance : TileMapSlice = slice.instantiate()
 		add_slice_to_map(slice_instance)
 		slice_instance.free() # not sure if necessary
 	

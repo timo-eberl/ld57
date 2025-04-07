@@ -30,6 +30,7 @@ var _last_laser_rid : RID
 var _last_laser_rid_change_time : int
 
 var is_dead : bool = false
+var won : bool = false
 
 func _ready() -> void:
 	propellerAnimation.play("spin")
@@ -49,8 +50,14 @@ func _process(_delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
 	rocketCooldown -= _delta
+	
+	if is_dead:
+		if animationPlayer.current_animation == "":
+			visible = false
+			%UI.set_game_over()
 
 func _physics_process(delta):
+	if is_dead or won: return
 	movementInput = Vector2.ZERO;
 	
 	if Input.is_action_pressed("Horizontal_plus"):
@@ -106,14 +113,12 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	pass;
 
 func apply_hit(damage :float):
-	if not is_dead:
-		print("Hit")
+	if not is_dead and not won:
 		health -= damage
 		health_bar.deal_damage(damage)
 		animationPlayer.play("autsch")
 
 func _kill_player():
-	print("Game Over")
 	animationPlayer.play("die")
 	
 	is_dead = true
