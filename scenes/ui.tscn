@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://brstj8qlf7jmx"]
+[gd_scene load_steps=10 format=3 uid="uid://brstj8qlf7jmx"]
 
 [ext_resource type="Script" uid="uid://dx0jigob835ay" path="res://src/ui.gd" id="1_gdt2y"]
-[ext_resource type="Texture2D" uid="uid://t2na6m61awv5" path="res://textures/submarine_ui.png" id="1_yev5y"]
 [ext_resource type="Texture2D" uid="uid://bpr8ev3pnm2y7" path="res://textures/Orb_purple.png" id="2_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://8oxlifcsger7" path="res://textures/UI_PlayerPos_40x40.png" id="2_wm3ai"]
 [ext_resource type="Texture2D" uid="uid://b4wydytou5tgx" path="res://textures/Orb_redWhite.png" id="3_wm3ai"]
+[ext_resource type="Texture2D" uid="uid://bji2568e21g4v" path="res://textures/UI_Goal_40x40.png" id="5_8dubc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4jx1"]
 content_margin_left = 20.0
@@ -26,6 +27,12 @@ border_width_right = 3
 border_width_bottom = 3
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_wm3ai"]
+font_size = 100
+
+[sub_resource type="LabelSettings" id="LabelSettings_8dubc"]
+font_size = 20
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -53,7 +60,7 @@ theme_override_constants/margin_bottom = 150
 [node name="ProgressBar" type="VSlider" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/center_grabber = -1
-theme_override_icons/grabber_disabled = ExtResource("1_yev5y")
+theme_override_icons/grabber_disabled = ExtResource("2_wm3ai")
 theme_override_styles/slider = SubResource("StyleBoxFlat_x4jx1")
 theme_override_styles/grabber_area = SubResource("StyleBoxFlat_yev5y")
 rounded = true
@@ -124,5 +131,69 @@ grow_vertical = 2
 [node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/LaserOrbIcon/MarginContainer"]
 layout_mode = 2
 text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 39
+theme_override_constants/margin_top = 468
+
+[node name="TrophyIcon" type="TextureRect" parent="MarginContainer3"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+texture = ExtResource("5_8dubc")
+expand_mode = 2
+
+[node name="DeathScreen" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -25.0
+offset_right = 46.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -15
+alignment = 1
+
+[node name="Label" type="Label" parent="DeathScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_wm3ai")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="DeathScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "press any key to restart..."
+label_settings = SubResource("LabelSettings_8dubc")
 horizontal_alignment = 1
 vertical_alignment = 1

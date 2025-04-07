@@ -50,8 +50,14 @@ func _process(_delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
 	rocketCooldown -= _delta
+	
+	if is_dead:
+		if animationPlayer.current_animation == "":
+			visible = false
+			%UI.set_game_over()
 
 func _physics_process(delta):
+	if is_dead: return
 	movementInput = Vector2.ZERO;
 	
 	if Input.is_action_pressed("Horizontal_plus"):
