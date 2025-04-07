@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://bytc7yyopgo1i" path="res://textures/submarine/submarine_autsch.png" id="6_urp6f"]
 [ext_resource type="Texture2D" uid="uid://dfpsrijb4g7d4" path="res://textures/submarine/submarine_die0.png" id="8_bwjto"]
-[ext_resource type="PackedScene" path="res://scenes/laser_sprite_parent.tscn" id="8_op7ga"]
+[ext_resource type="PackedScene" uid="uid://vb5dd0dgi4x4" path="res://scenes/laser_sprite_parent.tscn" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://beuswwpbu0igy" path="res://textures/submarine/submarine_die1.png" id="9_606se"]
 [ext_resource type="Texture2D" uid="uid://vyf6jqcqap22" path="res://textures/submarine/submarine_die3.png" id="10_u1c27"]
 [ext_resource type="Texture2D" uid="uid://by6xy23j4qmps" path="res://textures/submarine/submarine_die4.png" id="11_op7ga"]
@@ -715,6 +715,7 @@ texture = ExtResource("6_urp6f")
 position = Vector2(-454.545, -636.364)
 
 [node name="DieAnimation" type="Node2D" parent="Submarine"]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Submarine/DieAnimation"]
 z_index = 1
