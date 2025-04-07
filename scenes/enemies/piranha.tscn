@@ -10,7 +10,7 @@
 
 [sub_resource type="Resource" id="Resource_j1s6e"]
 script = ExtResource("2_3ub0j")
-max_speed = 500.0
+max_speed = 700.0
 acell = 500.0
 damage = 1.0
 hit_cooldown = 1.0
