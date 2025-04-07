@@ -15,6 +15,7 @@ func _process(_delta):
 
 func _ready() -> void:
 	rocketSprite.look_at(get_global_mouse_position())
+	rocketSprite.scale = Vector2(0.6, 0.6) * ((4 + rocket_power) / 4.0) ;
 	self.apply_impulse((get_global_mouse_position() - global_position).normalized() * 1000.0)
 	
 	pass
