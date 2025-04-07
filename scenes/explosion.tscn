@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://4oe2i4beyt8i" path="res://textures/circle_with_outline.png" id="1_nfeox"]
 
 [sub_resource type="Gradient" id="Gradient_3oo6d"]
-colors = PackedColorArray(0.805292, 0.916294, 0.880034, 1, 0.265848, 0.552043, 0.764864, 1)
+offsets = PackedFloat32Array(0, 0.368852, 1)
+colors = PackedColorArray(0.539111, 0.756239, 0.931042, 1, 0.67096, 0.325789, 0.97937, 1, 0.370517, 0.167751, 0.628703, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_17npe"]
 gradient = SubResource("Gradient_3oo6d")
