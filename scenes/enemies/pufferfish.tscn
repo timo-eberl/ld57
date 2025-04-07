@@ -10,10 +10,10 @@
 
 [sub_resource type="Resource" id="Resource_vgcdo"]
 script = ExtResource("2_sidn5")
-max_speed = 100.0
+max_speed = 500.0
 acell = 100.0
 damage = 1.0
-hit_cooldown = 1.0
+hit_cooldown = 0.6
 health = 10.0
 metadata/_custom_type_script = "uid://bbq6supw7aall"
 
@@ -219,6 +219,7 @@ lock_rotation = true
 script = ExtResource("1_sidn5")
 unpuffed = ExtResource("1_cnld3")
 puffed = ExtResource("3_6uwa1")
+puff_speed = 0.1
 enemy_stats = SubResource("Resource_vgcdo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
