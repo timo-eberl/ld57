@@ -60,7 +60,7 @@ func _physics_process(delta):
 						var enemy : Enemy = result.collider
 						enemy.take_damage(player.laser_damage_per_second / player.hits_per_second)
 						enemy.apply_impulse(
-							(get_global_mouse_position() - global_position).normalized() * 100.0 * player.knockback
+							(get_global_mouse_position() - global_position).normalized() * 100.0 * player.knockback * enemy.enemy_stats.knockback
 						)
 					#elif result.collider is Rocket:
 						#var rocket : Rocket = result.collider

@@ -19,7 +19,8 @@ max_speed = 700.0
 acell = 500.0
 damage = 1.0
 hit_cooldown = 0.6
-health = 6.0
+health = 10.0
+knockback = 0.1
 metadata/_custom_type_script = "uid://bbq6supw7aall"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sidn5"]
