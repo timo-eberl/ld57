@@ -44,7 +44,7 @@ func spawn_rocket():
 	get_tree().root.add_child(rocket_instance)
 	pass;
 
-func _process(delta):
+func _process(_delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
 

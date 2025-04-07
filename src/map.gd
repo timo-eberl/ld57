@@ -117,7 +117,6 @@ func water_spread():
 		var found_water = false
 		
 		for v in sorounding:
-			var sid := self.get_cell_source_id(v)
 			var atlas_coord := self.get_cell_atlas_coords(v)
 			
 			if atlas_coord == water_tile:

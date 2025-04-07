@@ -82,7 +82,7 @@ func _process(delta):
 	if not animationPlayer.is_playing() and not is_dead:
 		animationPlayer.play("idle")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not enemy_stats.asleep and not is_dead or player_in_area and not is_dead:
 		_move()
 
