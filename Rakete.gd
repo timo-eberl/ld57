@@ -28,10 +28,10 @@ func explode():
 	# Spawn visual explosion
 	var explo = explosion.instantiate()
 	explo.global_position = global_position
-	explo.scale = Vector2(2,2) * (1 + rocket_power);
+	explo.scale = Vector2(4,4) * (1 + rocket_power);
 	get_tree().root.add_child(explo)
 	
-	var radius = 150 + rocket_power * 50;
+	var radius = 150 + rocket_power * 30;
 	var damage = 2 + rocket_power # damage should be between 1 and 4
 	
 	# damage enemies
