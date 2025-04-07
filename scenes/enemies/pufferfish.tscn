@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://drqjxg8mx31iw"]
+[gd_scene load_steps=18 format=3 uid="uid://drqjxg8mx31iw"]
 
 [ext_resource type="Texture2D" uid="uid://02qnww76n6as" path="res://textures/Pufferfish/UnpuffedPufferfish.png" id="1_cnld3"]
 [ext_resource type="Script" uid="uid://b6f7wnepv0k7e" path="res://src/enemies/pufferfish.gd" id="1_sidn5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwcxsf3ihnx7n" path="res://textures/Pufferfish/Pufferfish.png" id="3_6uwa1"]
 [ext_resource type="Texture2D" uid="uid://dq7rfy8l0p5k6" path="res://textures/Pufferfish/Pufferfish_autsch.png" id="5_rt7in"]
 [ext_resource type="Texture2D" uid="uid://d2f55vjf7obsq" path="res://textures/Pufferfish/Pufferfish_dead.png" id="6_rtd28"]
+[ext_resource type="Texture2D" uid="uid://be0wvgtgv8n8t" path="res://textures/Pufferfish/Pufferfish_sleep.png" id="7_5q6h4"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="7_moeon"]
 
 [sub_resource type="Resource" id="Resource_vgcdo"]
@@ -83,7 +84,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -96,6 +97,30 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Texture/AsleepSprite:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Texture/AsleepSprite:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_rt7in"]
@@ -185,10 +210,10 @@ tracks/0/path = NodePath("Texture/IdleTexture:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -202,10 +227,88 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Texture/AsleepSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Texture/HitSprite:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_53wxk"]
+resource_name = "asleep"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture/AsleepSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture/AsleepSprite:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Texture/DeathSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Texture/IdleTexture:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_moeon"]
 _data = {
 &"RESET": SubResource("Animation_moeon"),
+&"asleep": SubResource("Animation_53wxk"),
 &"death": SubResource("Animation_rt7in"),
 &"hit": SubResource("Animation_rtd28"),
 &"idle": SubResource("Animation_6uwa1")
@@ -235,6 +338,7 @@ shape = SubResource("CircleShape2D_vgcdo")
 [node name="Texture" type="Node2D" parent="."]
 
 [node name="HitSprite" type="Sprite2D" parent="Texture"]
+visible = false
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("5_rt7in")
 
@@ -245,6 +349,10 @@ texture = ExtResource("1_cnld3")
 [node name="DeathSprite" type="Sprite2D" parent="Texture"]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("6_rtd28")
+
+[node name="AsleepSprite" type="Sprite2D" parent="Texture"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_5q6h4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
