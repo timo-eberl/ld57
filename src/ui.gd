@@ -53,10 +53,8 @@ func update_laser_orb_count(new_amount):
 	laser_orb_amount.text = str(new_amount)
 
 func set_game_over():
-	fade_timer = 0.0
 	death_screen_fade = true
 
 func enable_win_screen():
-	fade_timer = 0.0
 	win_screen_fade = true
 	
