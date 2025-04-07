@@ -19,7 +19,7 @@ func on_laser_levelup():
 	laser_level += 1
 	%UI.update_laser_level(laser_level)
 	laser_level_progress -= points_for_upgrade
-	%UI.update_laser_level_progress(laser_level_progress)
+	%UI.update_laser_level_progress(laser_level_progress, points_for_upgrade)
 	var new_laser = laser_parent.duplicate()
 	var dir = 1
 	if laser_level % 2 == 0:
@@ -34,7 +34,7 @@ func on_laser_levelup():
 func progress(weapon : Weapon):
 	if weapon == Weapon.LASER:
 		laser_level_progress += 1
-		%UI.update_laser_level_progress(laser_level_progress)
+		%UI.update_laser_level_progress(laser_level_progress, points_for_upgrade)
 		if laser_level_progress >= points_for_upgrade:
 			on_laser_levelup()
 			
@@ -42,9 +42,9 @@ func progress(weapon : Weapon):
 			
 	if weapon == Weapon.ROCKET:
 		rocket_level_progress += 1
-		%UI.update_rocket_level_progress(rocket_level_progress)
+		%UI.update_rocket_level_progress(rocket_level_progress, points_for_upgrade)
 		if rocket_level_progress >= points_for_upgrade:
 			rocket_level += 1
 			%UI.update_rocket_level(rocket_level)
 			rocket_level_progress -= points_for_upgrade
-			%UI.update_rocket_level_progress(rocket_level_progress)
+			%UI.update_rocket_level_progress(rocket_level_progress, points_for_upgrade)

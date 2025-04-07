@@ -54,11 +54,13 @@ func update_rocket_level(new_level):
 func update_laser_level(new_level):
 	laser_orb_level.text = str(new_level)
 
-func update_rocket_level_progress(new_value):
+func update_rocket_level_progress(new_value, max_value):
 	rocket_orb_progress.value = new_value
+	rocket_orb_progress.max_value = max_value
 
-func update_laser_level_progress(new_value):
+func update_laser_level_progress(new_value, max_value):
 	laser_orb_progress.value = new_value
+	laser_orb_progress.max_value = max_value
 
 func set_game_over():
 	death_screen_fade = true
