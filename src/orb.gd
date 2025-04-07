@@ -4,11 +4,15 @@ extends RigidBody2D
 @export var type : UpgradeCounter.Weapon
 @export var max_speed := 50.0
 @export var accel := 500.0
+var orb_sound : PackedScene = load("res://scenes/Orb_Fx.tscn")
 
 @onready var player : Player = get_tree().root.get_child(0).find_child("Player")
 
 func _on_body_entered(body: Node) -> void:
 	if body is Player:
+		var sound = orb_sound.instantiate()
+		get_tree().root.add_child(sound)
+		
 		var upgrade_counter : UpgradeCounter = body.get_node("UpgradeCounter")
 		upgrade_counter.progress(type)
 		self.queue_free()

@@ -12,7 +12,10 @@ script = ExtResource("1_w875o")
 metadata/_custom_type_script = "uid://71qlrrktitt3"
 
 [node name="Piranha" parent="." instance=ExtResource("4_eknnc")]
-position = Vector2(521, 1153)
+position = Vector2(339, 514)
+
+[node name="Piranha7" parent="." instance=ExtResource("4_eknnc")]
+position = Vector2(427, 570)
 
 [node name="Piranha2" parent="." instance=ExtResource("4_eknnc")]
 position = Vector2(664, 1220)
@@ -31,6 +34,12 @@ position = Vector2(2197, 961)
 
 [node name="Pufferfish" parent="." instance=ExtResource("3_588eq")]
 position = Vector2(2265, 1103)
+
+[node name="Pufferfish3" parent="." instance=ExtResource("3_588eq")]
+position = Vector2(2376, 393)
+
+[node name="Pufferfish4" parent="." instance=ExtResource("3_588eq")]
+position = Vector2(259, 344)
 
 [node name="Pufferfish2" parent="." instance=ExtResource("3_588eq")]
 position = Vector2(1872, 1135)
