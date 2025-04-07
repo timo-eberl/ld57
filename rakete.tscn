@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwduwuk1x14w"]
+[gd_scene load_steps=5 format=3 uid="uid://dwduwuk1x14w"]
 
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="1_nl5c6"]
 [ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
+[ext_resource type="PackedScene" uid="uid://c7ws1o0v08mn0" path="res://scenes/explosion.tscn" id="2_jnykt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaujv"]
 radius = 5.0
@@ -17,6 +18,7 @@ continuous_cd = 2
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_oaujv")
+explosion = ExtResource("2_jnykt")
 
 [node name="Rakete" type="Sprite2D" parent="RigidBody2D"]
 scale = Vector2(0.6, 0.6)

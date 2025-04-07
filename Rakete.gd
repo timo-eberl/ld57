@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 @onready var rocketSprite : Sprite2D = $Rakete;
+@export var explosion : PackedScene;
 
 
 func _process(delta):
@@ -16,6 +17,11 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 
 func _on_body_entered(body: Node) -> void:
 	var strength = max(128, min(linear_velocity.length() / 10.0, 300))
+	
+	#Spawn explosion
+	var explo = explosion.instantiate()
+	explo.global_position = global_position
+	get_tree().root.add_child(explo)
 	
 	
 	var obstacles : Map = get_tree().root.get_child(0).get_node("ObstaclesTiles")
