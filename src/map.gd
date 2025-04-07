@@ -7,6 +7,7 @@ extends TileMapLayer
 @export var slices : Array[PackedScene]
 @export var number_of_slices := 10
 @export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
+@export var water_pull_strength := 1.0
 
 @onready var playerController : RigidBody2D = %Player
 @onready var playerNavAgent : NavigationAgent2D = %Player/NavigationAgent2D
@@ -109,7 +110,10 @@ func water_force():
 	for block in water_was_added_blocks:
 		playerNavAgent.target_position = Vector2(block.x * 64, block.y * 64)
 		var pullPoint = playerNavAgent.get_next_path_position() - playerController.global_position
-		playerController.apply_impulse(pullPoint.normalized() * 100)
+		var d := playerNavAgent.target_position.distance_to(playerController.global_position)
+		var fm := clampf( (200.0 / d), 0, 1)
+		print("fm: ", fm)
+		playerController.apply_impulse(pullPoint.normalized() * 100 * water_pull_strength * fm)
 	water_was_added_blocks.clear()
 
 func is_water(coords : Vector2i):
