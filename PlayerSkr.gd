@@ -133,9 +133,9 @@ func _physics_process(delta):
 						enemy.apply_impulse(
 							(get_global_mouse_position() - global_position).normalized() * 100.0 * knockback
 						)
-					elif result.collider is Rocket:
-						var rocket : Rocket = result.collider
-						rocket.explode()
+					#elif result.collider is Rocket:
+						#var rocket : Rocket = result.collider
+						#rocket.explode()
 					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
