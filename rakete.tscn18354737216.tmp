@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwduwuk1x14w"]
+
+[ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="1_nl5c6"]
+[ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
+[ext_resource type="PackedScene" uid="uid://bu5edv44lts7m" path="res://scenes/explosion.tscn" id="2_jnykt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaujv"]
+radius = 14.7
+height = 56.6
+
+[node name="Rakete" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 13
+gravity_scale = 0.0
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_oaujv")
+explosion = ExtResource("2_jnykt")
+
+[node name="Rakete" type="Sprite2D" parent="RigidBody2D"]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_nl5c6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_oaujv")
+
+[connection signal="body_entered" from="RigidBody2D" to="RigidBody2D" method="_on_body_entered"]

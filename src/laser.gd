@@ -11,8 +11,10 @@ extends Node2D
 var _last_laser_rid : RID
 var _last_laser_rid_change_time : int
 
+var won :bool
+
 func _physics_process(delta):
-	
+	if won : return
 	var start := ray_cast_start.global_position
 	var direction := (get_global_mouse_position() - start).normalized()
 	var target := start + direction.rotated((laser_offset / 360) * PI * 2.0) * 1000.0
