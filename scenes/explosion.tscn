@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bu5edv44lts7m"]
+[gd_scene load_steps=9 format=3 uid="uid://bu5edv44lts7m"]
 
 [ext_resource type="Script" uid="uid://d027rera85t2x" path="res://scenes/explosionSkr.gd" id="1_17npe"]
 [ext_resource type="Texture2D" uid="uid://4oe2i4beyt8i" path="res://textures/circle_with_outline.png" id="1_nfeox"]
+[ext_resource type="AudioStream" uid="uid://dog11wuq2tgkb" path="res://Audio/explosion-91872.mp3" id="3_aw4cw"]
 
 [sub_resource type="Gradient" id="Gradient_3oo6d"]
 offsets = PackedFloat32Array(0, 0.368852, 1)
@@ -44,3 +45,7 @@ explosiveness = 1.0
 collision_base_size = 0.0
 process_material = SubResource("ParticleProcessMaterial_3el85")
 script = ExtResource("1_17npe")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aw4cw")
+autoplay = true
