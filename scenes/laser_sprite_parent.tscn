@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://vb5dd0dgi4x4"]
+
+[ext_resource type="Shader" uid="uid://c3jmhxtae7awl" path="res://shaders/laser.gdshader" id="1_upl0e"]
+[ext_resource type="Shader" uid="uid://bfhn3xs5nremx" path="res://shaders/laser_blob.gdshader" id="2_j1vvi"]
+[ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="3_cj5hi"]
+[ext_resource type="Script" uid="uid://dok3rlp1j24xb" path="res://src/laser.gd" id="4_j1vvi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwjto"]
+shader = ExtResource("1_upl0e")
+shader_parameter/width = 0.1
+shader_parameter/glow_width = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_606se"]
+frequency = 0.0017
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1c27"]
+seamless = true
+seamless_blend_skirt = 0.385
+noise = SubResource("FastNoiseLite_606se")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q13i1"]
+shader = ExtResource("2_j1vvi")
+shader_parameter/width = 0.24
+shader_parameter/glow_width = 0.915
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_u1c27")
+
+[sub_resource type="QuadMesh" id="QuadMesh_606se"]
+
+[node name="LaserSpriteParent" type="Node2D"]
+script = ExtResource("4_j1vvi")
+
+[node name="LaserPunkt" type="Node2D" parent="."]
+position = Vector2(454.545, 1.52588e-05)
+
+[node name="Line2D" type="Line2D" parent="LaserPunkt"]
+material = SubResource("ShaderMaterial_bwjto")
+points = PackedVector2Array(0, 0, 10000, 0)
+width = 10000.0
+default_color = Color(0.981076, 0.229955, 0.23414, 1)
+
+[node name="LaserBlob" type="MeshInstance2D" parent="LaserPunkt"]
+modulate = Color(0.766453, 0, 0.0390124, 1)
+material = SubResource("ShaderMaterial_q13i1")
+position = Vector2(10000, 0.000346791)
+scale = Vector2(2000, 2000)
+mesh = SubResource("QuadMesh_606se")
+
+[node name="laser" type="Sprite2D" parent="."]
+position = Vector2(-363.636, -727.273)
+rotation = 3.42783
+scale = Vector2(17.3666, 17.3666)
+texture = ExtResource("3_cj5hi")
+
+[node name="RayCastStart" type="Node2D" parent="."]
+position = Vector2(-393.94, 0.000346791)
