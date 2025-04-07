@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bu5edv44lts7m"]
 
-[ext_resource type="Script" uid="uid://d027rera85t2x" path="res://scenes/explosionSkr.gd" id="1_17npe"]
+[ext_resource type="Script" path="res://scenes/explosionSkr.gd" id="1_17npe"]
 [ext_resource type="Texture2D" uid="uid://4oe2i4beyt8i" path="res://textures/circle_with_outline.png" id="1_nfeox"]
 [ext_resource type="AudioStream" uid="uid://dog11wuq2tgkb" path="res://Audio/explosion-91872.mp3" id="3_aw4cw"]
 
@@ -48,4 +48,5 @@ script = ExtResource("1_17npe")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_aw4cw")
+volume_db = -25.0
 autoplay = true
