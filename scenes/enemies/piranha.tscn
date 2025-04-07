@@ -20,6 +20,7 @@ acell = 1000.0
 damage = 1.0
 hit_cooldown = 1.0
 health = 3.0
+knockback = 1.0
 metadata/_custom_type_script = "uid://bbq6supw7aall"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5uy6h"]
@@ -465,10 +466,10 @@ libraries = {
 }
 
 [node name="HealthBar" parent="." instance=ExtResource("7_k5ghw")]
-offset_left = -50.0
-offset_top = -56.0
-offset_right = 50.0
-offset_bottom = -46.0
+offset_left = -48.0
+offset_top = -53.0
+offset_right = 48.0
+offset_bottom = -47.0
 metadata/_edit_use_anchors_ = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
