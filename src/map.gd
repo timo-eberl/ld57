@@ -29,7 +29,7 @@ func generate_map():
 	# fill everything with default tile
 	for x in range(-30, 70):
 		for y in range(-20, 2020):
-			if x == -10 || x == 49 || y == 0 || y == 1999:
+			if x < 0 || x > 42 || y < 0 || y > 1999:
 				self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 			else:
 				self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
@@ -54,10 +54,19 @@ func generate_map():
 	last_slice_instance.free() # not sure if necessary
 	
 	# add border at bottom
-	
 	for x in range(-30, 70):
 		var y = _height
+		# cringe
 		self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+1), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+2), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+3), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+4), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+5), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+6), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+7), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+8), 0, Vector2i(0,6))
+		self.set_cell(Vector2i(x,y+9), 0, Vector2i(0,6))
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
