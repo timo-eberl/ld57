@@ -381,9 +381,9 @@ libraries = {
 
 [node name="HealthBar" parent="." instance=ExtResource("7_moeon")]
 offset_left = -50.0
-offset_top = -56.0
-offset_right = 50.0
-offset_bottom = -46.0
+offset_top = -53.0
+offset_right = 46.0
+offset_bottom = -47.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_path_custom_color = Color(0.482249, 0.891986, 1.15514e-06, 1)
