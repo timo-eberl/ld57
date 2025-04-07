@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://brstj8qlf7jmx"]
+[gd_scene load_steps=11 format=3 uid="uid://brstj8qlf7jmx"]
 
 [ext_resource type="Script" uid="uid://dx0jigob835ay" path="res://src/ui.gd" id="1_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://bpr8ev3pnm2y7" path="res://textures/Orb_purple.png" id="2_gdt2y"]
@@ -33,6 +33,9 @@ font_size = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_8dubc"]
 font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_p7vwb"]
+font_size = 30
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -195,5 +198,56 @@ vertical_alignment = 1
 layout_mode = 2
 text = "press any key to restart..."
 label_settings = SubResource("LabelSettings_8dubc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WinScreen" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="WinScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -25.0
+offset_right = 46.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="WinScreen/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -15
+alignment = 1
+
+[node name="Label" type="Label" parent="WinScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "YOU WON!"
+label_settings = SubResource("LabelSettings_wm3ai")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="WinScreen/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Thank you for playing :)"
+label_settings = SubResource("LabelSettings_p7vwb")
 horizontal_alignment = 1
 vertical_alignment = 1

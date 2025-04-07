@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=28 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
@@ -6,11 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://d5wcx2bp1y8e" path="res://textures/submarine/submarine_propeller256.png" id="3_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://cq63qkueuevgt" path="res://textures/submarine/submarine_cannon256.png" id="3_sweqy"]
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="4_2hs0m"]
-[ext_resource type="Texture2D" uid="uid://cm6f16uj4jcyl" path="res://textures/submarine/submarine_laser256.png" id="5_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://bytc7yyopgo1i" path="res://textures/submarine/submarine_autsch.png" id="6_urp6f"]
-[ext_resource type="Shader" uid="uid://c3jmhxtae7awl" path="res://shaders/laser.gdshader" id="7_bwjto"]
 [ext_resource type="Texture2D" uid="uid://dfpsrijb4g7d4" path="res://textures/submarine/submarine_die0.png" id="8_bwjto"]
-[ext_resource type="Shader" uid="uid://bfhn3xs5nremx" path="res://shaders/laser_blob.gdshader" id="8_u1c27"]
+[ext_resource type="PackedScene" uid="uid://vb5dd0dgi4x4" path="res://scenes/laser_sprite_parent.tscn" id="8_op7ga"]
 [ext_resource type="Texture2D" uid="uid://beuswwpbu0igy" path="res://textures/submarine/submarine_die1.png" id="9_606se"]
 [ext_resource type="Texture2D" uid="uid://vyf6jqcqap22" path="res://textures/submarine/submarine_die3.png" id="10_u1c27"]
 [ext_resource type="Texture2D" uid="uid://by6xy23j4qmps" path="res://textures/submarine/submarine_die4.png" id="11_op7ga"]
@@ -18,34 +16,13 @@
 [ext_resource type="Animation" uid="uid://dtg230pyb26e3" path="res://autsch.res" id="13_pylmc"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="17_op7ga"]
 [ext_resource type="Script" uid="uid://d3g7xw8mcdtur" path="res://src/upgrade_counter.gd" id="18_q13i1"]
-[ext_resource type="PackedScene" uid="uid://brstj8qlf7jmx" path="res://scenes/ui.tscn" id="19_pylmc"]
+[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="19_pylmc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bwjto"]
 friction = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_606se"]
 radius = 29.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bwjto"]
-shader = ExtResource("7_bwjto")
-shader_parameter/width = 0.1
-shader_parameter/glow_width = 1.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_606se"]
-frequency = 0.0017
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_u1c27"]
-seamless = true
-seamless_blend_skirt = 0.385
-noise = SubResource("FastNoiseLite_606se")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q13i1"]
-shader = ExtResource("8_u1c27")
-shader_parameter/width = 0.24
-shader_parameter/glow_width = 0.915
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_u1c27")
-
-[sub_resource type="QuadMesh" id="QuadMesh_606se"]
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -154,7 +131,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Submarine/LaserSpriteParent/laser:visible")
+tracks/5/path = NodePath("Submarine/Node2D/Propeller:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -166,7 +143,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Submarine/Node2D/Propeller:visible")
+tracks/6/path = NodePath("Submarine/DieAnimation/Sprite2D:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -178,139 +155,139 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Submarine/DieAnimation/Sprite2D:visible")
+tracks/7/path = NodePath("Submarine/DieAnimation/Sprite2D:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Submarine/DieAnimation/Sprite2D:modulate")
+tracks/8/path = NodePath("Submarine/DieAnimation/Sprite2D2:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Submarine/DieAnimation/Sprite2D2:visible")
+tracks/9/path = NodePath("Submarine/DieAnimation/Sprite2D2:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Submarine/DieAnimation/Sprite2D2:modulate")
+tracks/10/path = NodePath("Submarine/DieAnimation/Sprite2D3:visible")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Submarine/DieAnimation/Sprite2D3:visible")
+tracks/11/path = NodePath("Submarine/DieAnimation/Sprite2D3:modulate")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Submarine/DieAnimation/Sprite2D3:modulate")
+tracks/12/path = NodePath("Submarine/DieAnimation/Sprite2D4:visible")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Submarine/DieAnimation/Sprite2D4:visible")
+tracks/13/path = NodePath("Submarine/DieAnimation/Sprite2D4:modulate")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Submarine/DieAnimation/Sprite2D4:modulate")
+tracks/14/path = NodePath("Submarine/DieAnimation/Sprite2D5:visible")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
+"update": 1,
+"values": [false]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("Submarine/DieAnimation/Sprite2D5:visible")
+tracks/15/path = NodePath("Submarine/DieAnimation/Sprite2D5:modulate")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Submarine/DieAnimation/Sprite2D5:modulate")
+tracks/16/path = NodePath("Submarine/DieAnimation/Sprite2D4:scale")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0)]
+"values": [Vector2(15.722, 15.722)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Submarine/DieAnimation/Sprite2D4:scale")
+tracks/17/path = NodePath("Submarine/DieAnimation/Sprite2D5:scale")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(15.722, 15.722)]
+"values": [Vector2(17.827, 17.827)]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Submarine/DieAnimation/Sprite2D5:scale")
+tracks/18/path = NodePath("Submarine/DieAnimation/Sprite2D3:scale")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
@@ -322,7 +299,7 @@ tracks/18/keys = {
 tracks/19/type = "value"
 tracks/19/imported = false
 tracks/19/enabled = true
-tracks/19/path = NodePath("Submarine/DieAnimation/Sprite2D3:scale")
+tracks/19/path = NodePath("Submarine/DieAnimation/Sprite2D2:scale")
 tracks/19/interp = 1
 tracks/19/loop_wrap = true
 tracks/19/keys = {
@@ -334,22 +311,10 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("Submarine/DieAnimation/Sprite2D2:scale")
+tracks/20/path = NodePath("Submarine/cannon:visible")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(17.827, 17.827)]
-}
-tracks/21/type = "value"
-tracks/21/imported = false
-tracks/21/enabled = true
-tracks/21/path = NodePath("Submarine/cannon:visible")
-tracks/21/interp = 1
-tracks/21/loop_wrap = true
-tracks/21/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -386,7 +351,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Submarine/LaserSpriteParent/laser:visible")
+tracks/2/path = NodePath("Submarine/Node2D/Propeller:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -398,190 +363,178 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Submarine/Node2D/Propeller:visible")
+tracks/3/path = NodePath("Submarine/DieAnimation/Sprite2D:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [false, true]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Submarine/DieAnimation/Sprite2D:visible")
-tracks/4/interp = 1
+tracks/4/path = NodePath("Submarine/DieAnimation/Sprite2D:modulate")
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Submarine/DieAnimation/Sprite2D:modulate")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0.100285, 0.533333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Submarine/DieAnimation/Sprite2D2:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Submarine/DieAnimation/Sprite2D2:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Submarine/DieAnimation/Sprite2D2:modulate")
-tracks/7/interp = 2
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Submarine/DieAnimation/Sprite2D2:modulate")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0.1, 0.541381, 0.733333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Submarine/DieAnimation/Sprite2D3:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Submarine/DieAnimation/Sprite2D3:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0, 0.541381),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Submarine/DieAnimation/Sprite2D3:modulate")
-tracks/9/interp = 2
-tracks/9/loop_wrap = true
-tracks/9/keys = {
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Submarine/DieAnimation/Sprite2D3:modulate")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0.541381, 0.943952, 1.13333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Submarine/DieAnimation/Sprite2D4:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Submarine/DieAnimation/Sprite2D4:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0, 0.943952),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("Submarine/DieAnimation/Sprite2D4:modulate")
-tracks/11/interp = 2
-tracks/11/loop_wrap = true
-tracks/11/keys = {
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Submarine/DieAnimation/Sprite2D4:modulate")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
 "times": PackedFloat32Array(0.956437, 1.16667, 2.06667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Submarine/DieAnimation/Sprite2D5:visible")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Submarine/DieAnimation/Sprite2D5:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(0, 1.3345),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("Submarine/DieAnimation/Sprite2D5:modulate")
-tracks/13/interp = 2
-tracks/13/loop_wrap = true
-tracks/13/keys = {
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Submarine/DieAnimation/Sprite2D5:modulate")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/keys = {
 "times": PackedFloat32Array(1.3345, 1.83636, 2.53333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("Submarine/DieAnimation/Sprite2D4:scale")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Submarine/DieAnimation/Sprite2D4:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
 "times": PackedFloat32Array(0.946981, 2.06667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(17.652, 17.652), Vector2(27.717, 27.717)]
 }
-tracks/15/type = "value"
-tracks/15/imported = false
-tracks/15/enabled = true
-tracks/15/path = NodePath("Submarine/DieAnimation/Sprite2D5:scale")
-tracks/15/interp = 1
-tracks/15/loop_wrap = true
-tracks/15/keys = {
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Submarine/DieAnimation/Sprite2D5:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
 "times": PackedFloat32Array(1.56667, 2.53333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(25.082, 25.082), Vector2(30.947, 30.947)]
 }
-tracks/16/type = "value"
-tracks/16/imported = false
-tracks/16/enabled = true
-tracks/16/path = NodePath("Submarine/DieAnimation/Sprite2D3:scale")
-tracks/16/interp = 1
-tracks/16/loop_wrap = true
-tracks/16/keys = {
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Submarine/DieAnimation/Sprite2D3:scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(0.536997, 1.13333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(17.827, 17.827), Vector2(23.112, 23.112)]
 }
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Submarine/DieAnimation/Sprite2D2:scale")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Submarine/DieAnimation/Sprite2D2:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
 "times": PackedFloat32Array(0.0953547, 0.733333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(17.827, 17.827), Vector2(19.937, 19.937)]
 }
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Submarine/cannon:visible")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Submarine/cannon:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
 "times": PackedFloat32Array(0, 0.100373),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -743,33 +696,8 @@ z_index = 1
 scale = Vector2(17.7211, 17.7211)
 texture = ExtResource("6_urp6f")
 
-[node name="LaserSpriteParent" type="Node2D" parent="Submarine"]
+[node name="LaserSpriteParent3" parent="Submarine" instance=ExtResource("8_op7ga")]
 position = Vector2(-454.545, -636.364)
-
-[node name="LaserPunkt" type="Node2D" parent="Submarine/LaserSpriteParent"]
-position = Vector2(454.545, 1.52588e-05)
-
-[node name="Line2D" type="Line2D" parent="Submarine/LaserSpriteParent/LaserPunkt"]
-material = SubResource("ShaderMaterial_bwjto")
-points = PackedVector2Array(0, 0, 10000, 0)
-width = 10000.0
-default_color = Color(0.981076, 0.229955, 0.23414, 1)
-
-[node name="LaserBlob" type="MeshInstance2D" parent="Submarine/LaserSpriteParent/LaserPunkt"]
-modulate = Color(0.766453, 0, 0.0390124, 1)
-material = SubResource("ShaderMaterial_q13i1")
-position = Vector2(10000, 0.000346791)
-scale = Vector2(2000, 2000)
-mesh = SubResource("QuadMesh_606se")
-
-[node name="laser" type="Sprite2D" parent="Submarine/LaserSpriteParent"]
-position = Vector2(-363.636, -727.273)
-rotation = 3.42783
-scale = Vector2(17.3666, 17.3666)
-texture = ExtResource("5_2hs0m")
-
-[node name="RayCastStart" type="Node2D" parent="Submarine/LaserSpriteParent"]
-position = Vector2(-393.94, 0.000346791)
 
 [node name="DieAnimation" type="Node2D" parent="Submarine"]
 
