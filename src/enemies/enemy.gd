@@ -13,6 +13,8 @@ class_name Enemy
 @onready var sprites : Node2D = $Texture
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 
+@onready var navigation : NavigationAgent2D
+
 var player_in_area : bool = false
 var is_dead : bool = false
 var is_asleep : bool = true
@@ -32,6 +34,10 @@ var health := 0.0
 #var hit_timer
 
 func _ready():
+	navigation = get_node("NavigationAgent2D")
+	navigation.target_position = player.global_position
+	
+	
 	sleeping = true
 	freeze = true
 	health = enemy_stats.health
@@ -94,7 +100,10 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	self.linear_velocity = self.linear_velocity * 0.95;
 
 func _move():
-	var direction : Vector2 = (player.global_position - global_position).normalized()
+	navigation.target_position = player.global_position
+	var targetPos = navigation.get_next_path_position()
+	
+	var direction : Vector2 = (targetPos - global_position).normalized()
 	if direction.x < 0.0:
 		sprites.scale.x = -abs(sprites.scale.x)
 	else:

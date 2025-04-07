@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://drqjxg8mx31iw"]
+[gd_scene load_steps=20 format=3 uid="uid://drqjxg8mx31iw"]
 
 [ext_resource type="Texture2D" uid="uid://02qnww76n6as" path="res://textures/Pufferfish/UnpuffedPufferfish.png" id="1_cnld3"]
 [ext_resource type="Script" uid="uid://b6f7wnepv0k7e" path="res://src/enemies/pufferfish.gd" id="1_sidn5"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://d2f55vjf7obsq" path="res://textures/Pufferfish/Pufferfish_dead.png" id="6_rtd28"]
 [ext_resource type="Texture2D" uid="uid://be0wvgtgv8n8t" path="res://textures/Pufferfish/Pufferfish_sleep.png" id="7_5q6h4"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="7_moeon"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_53wxk"]
+friction = 0.0
 
 [sub_resource type="Resource" id="Resource_vgcdo"]
 script = ExtResource("2_sidn5")
@@ -328,9 +331,9 @@ _data = {
 }
 
 [node name="Pufferfish" type="RigidBody2D"]
-position = Vector2(389, -519)
 collision_layer = 4
 collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_53wxk")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_sidn5")
@@ -380,6 +383,11 @@ offset_left = -50.0
 offset_top = -56.0
 offset_right = 50.0
 offset_bottom = -46.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_path_custom_color = Color(0.482249, 0.891986, 1.15514e-06, 1)
+debug_path_custom_point_size = 15.11
+debug_path_custom_line_width = 3.41
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

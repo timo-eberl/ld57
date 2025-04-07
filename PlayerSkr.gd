@@ -50,8 +50,14 @@ func _process(_delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
 	rocketCooldown -= _delta
+	
+	if is_dead:
+		if animationPlayer.current_animation == "":
+			visible = false
+			%UI.set_game_over()
 
 func _physics_process(delta):
+	if is_dead: return
 	movementInput = Vector2.ZERO;
 	
 	if Input.is_action_pressed("Horizontal_plus"):
@@ -155,6 +161,7 @@ func _physics_process(delta):
 	var speed = self.linear_velocity.length()
 	var t = clamp(speed/ 30.0, 1.0, 3.0)
 	propellerAnimation.speed_scale = pow(t, 2)
+	%UI.update_progress_bar(position.y)
 
 	
 func _integrate_forces(_state: PhysicsDirectBodyState2D):

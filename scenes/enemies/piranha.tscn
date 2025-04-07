@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bn4e7xq7u6hrh"]
+[gd_scene load_steps=20 format=3 uid="uid://bn4e7xq7u6hrh"]
 
 [ext_resource type="Script" uid="uid://b0wa3ilstk152" path="res://src/enemies/piranha.gd" id="1_ihjt4"]
 [ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_3ub0j"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://de66o802x6ji2" path="res://textures/Piranha/Piranah_dead.png" id="6_ei5gu"]
 [ext_resource type="Texture2D" uid="uid://vswk1nj3awi8" path="res://textures/Piranha/Piranah_sleep.png" id="7_0xxby"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="7_k5ghw"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_spion"]
+friction = 0.0
 
 [sub_resource type="Resource" id="Resource_j1s6e"]
 script = ExtResource("2_3ub0j")
@@ -404,6 +407,7 @@ _data = {
 [node name="Piranha" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 7
+physics_material_override = SubResource("PhysicsMaterial_spion")
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_ihjt4")
@@ -465,6 +469,9 @@ offset_left = -50.0
 offset_top = -56.0
 offset_right = 50.0
 offset_bottom = -46.0
+metadata/_edit_use_anchors_ = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
