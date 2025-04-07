@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bud2usxskygd8"]
+[gd_scene load_steps=34 format=3 uid="uid://bud2usxskygd8"]
 
 [ext_resource type="Script" uid="uid://c0vrkpib3uj8p" path="res://PlayerSkr.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bes2nxpo4mquk" path="res://textures/submarine/submarine_plain256.png" id="2_hqtel"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://6y753dhb08f1" path="res://textures/submarine/submarine_die5.png" id="12_q13i1"]
 [ext_resource type="Animation" uid="uid://dtg230pyb26e3" path="res://autsch.res" id="13_pylmc"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="17_op7ga"]
+[ext_resource type="Script" uid="uid://d3g7xw8mcdtur" path="res://src/upgrade_counter.gd" id="18_q13i1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bwjto"]
 friction = 0.0
@@ -692,7 +693,7 @@ maxSpeed = 500.0
 acell = 1000.0
 laser_damage_per_second = 8.0
 hits_per_second = 20.0
-laser_mask = 4294967287
+laser_mask = 4294967031
 health = 10.0
 rocket = ExtResource("2_u1c27")
 
@@ -833,3 +834,6 @@ offset_left = -50.0
 offset_top = -56.0
 offset_right = 50.0
 offset_bottom = -46.0
+
+[node name="UpgradeCounter" type="Node2D" parent="."]
+script = ExtResource("18_q13i1")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://tqqjjcvhy174"]
+
+[ext_resource type="Script" uid="uid://ckbbi3lx632uj" path="res://src/orb.gd" id="1_py374"]
+[ext_resource type="Texture2D" uid="uid://dp3fneik42kiy" path="res://textures/Orb_redWhite.png" id="2_cq5uy"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_26xuy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bc84e"]
+radius = 30.0
+
+[node name="LaserOrb" type="RigidBody2D"]
+collision_layer = 256
+collision_mask = 3
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 32
+script = ExtResource("1_py374")
+
+[node name="Sprite" type="MeshInstance2D" parent="."]
+scale = Vector2(70, 70)
+mesh = SubResource("QuadMesh_26xuy")
+texture = ExtResource("2_cq5uy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bc84e")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

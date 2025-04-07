@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bn4e7xq7u6hrh"]
+[gd_scene load_steps=19 format=3 uid="uid://bn4e7xq7u6hrh"]
 
 [ext_resource type="Script" uid="uid://b0wa3ilstk152" path="res://src/enemies/piranha.gd" id="1_ihjt4"]
 [ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_3ub0j"]
 [ext_resource type="Texture2D" uid="uid://dne6cs077rsyg" path="res://textures/Piranha/Piranha.png" id="2_md0e3"]
+[ext_resource type="PackedScene" uid="uid://tqqjjcvhy174" path="res://scenes/laser_orb.tscn" id="3_spion"]
 [ext_resource type="Texture2D" uid="uid://bhjsx3v8tjpte" path="res://textures/Piranha/Piranah2.png" id="4_nah08"]
 [ext_resource type="Texture2D" uid="uid://3tucp318wupd" path="res://textures/Piranha/Piranah_autsch.png" id="5_k3k5w"]
 [ext_resource type="Texture2D" uid="uid://de66o802x6ji2" path="res://textures/Piranha/Piranah_dead.png" id="6_ei5gu"]
@@ -407,6 +408,7 @@ gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_ihjt4")
 enemy_stats = SubResource("Resource_j1s6e")
+spawn_on_die = ExtResource("3_spion")
 hit_modulation_color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

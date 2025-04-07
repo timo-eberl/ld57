@@ -8,6 +8,8 @@ class_name Enemy
 
 @onready var health_bar : ProgressBar = $HealthBar
 
+@export var spawn_on_die : PackedScene
+
 @onready var sprites : Node2D = $Texture
 @onready var animationPlayer : AnimationPlayer = $AnimationPlayer
 
@@ -35,6 +37,11 @@ func _ready():
 	health = enemy_stats.health
 	health_bar.set_max_health(health)
 	animationPlayer.play("asleep")
+
+func spawn_scene():
+	var instance : Node2D = spawn_on_die.instantiate()
+	instance.global_position = self.global_position
+	get_tree().root.get_child(0).add_child(instance)
 
 func _process(delta):
 	if is_dead:
@@ -133,3 +140,4 @@ func _kill_enemy():
 		health_bar.fade_out = true
 		collision_layer = 0
 		is_dead = true
+		spawn_scene()
