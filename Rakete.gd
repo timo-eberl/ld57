@@ -1,3 +1,4 @@
+class_name Rocket
 extends RigidBody2D
 
 @onready var rocketSprite : Sprite2D = $Rakete;
