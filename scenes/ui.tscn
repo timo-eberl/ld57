@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://brstj8qlf7jmx"]
+[gd_scene load_steps=14 format=3 uid="uid://brstj8qlf7jmx"]
 
 [ext_resource type="Script" uid="uid://dx0jigob835ay" path="res://src/ui.gd" id="1_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://bpr8ev3pnm2y7" path="res://textures/Orb_purple.png" id="2_gdt2y"]
@@ -27,6 +27,40 @@ border_width_right = 3
 border_width_bottom = 3
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm3ai"]
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dubc"]
+bg_color = Color(0.764706, 0.188235, 0.882353, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7vwb"]
+bg_color = Color(0.901961, 0.207843, 0.207843, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_wm3ai"]
 font_size = 100
@@ -87,11 +121,33 @@ theme_override_constants/margin_bottom = 0
 layout_mode = 2
 alignment = 1
 
-[node name="RocketOrbIcon" type="TextureRect" parent="MarginContainer2/VBoxContainer"]
+[node name="RocketOrb" type="MarginContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/RocketOrb"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -170
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = -32
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_direction = 2
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_wm3ai")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8dubc")
+max_value = 10.0
+show_percentage = false
+
+[node name="RocketOrbIcon" type="TextureRect" parent="MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("2_gdt2y")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/RocketOrbIcon"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer/RocketOrbIcon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -107,17 +163,38 @@ grow_vertical = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 0
 
-[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/RocketOrbIcon/MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer/RocketOrbIcon/MarginContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LaserOrbIcon" type="TextureRect" parent="MarginContainer2/VBoxContainer"]
+[node name="LaserOrb" type="MarginContainer" parent="MarginContainer2/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer2/VBoxContainer/LaserOrb"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = -170
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = -32
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_direction = 2
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_wm3ai")
+theme_override_styles/fill = SubResource("StyleBoxFlat_p7vwb")
+max_value = 10.0
+show_percentage = false
+
+[node name="LaserOrbIcon" type="TextureRect" parent="MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer"]
 layout_mode = 2
 texture = ExtResource("3_wm3ai")
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/LaserOrbIcon"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer/LaserOrbIcon"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -131,7 +208,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/LaserOrbIcon/MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer/LaserOrbIcon/MarginContainer"]
 layout_mode = 2
 text = "0"
 horizontal_alignment = 1

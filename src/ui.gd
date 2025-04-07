@@ -1,8 +1,10 @@
 extends Control
 
 @onready var progress_bar : VSlider = $MarginContainer/ProgressBar
-@onready var rocket_orb_amount : Label = $MarginContainer2/VBoxContainer/RocketOrbIcon/MarginContainer/Label
-@onready var laser_orb_amount : Label = $MarginContainer2/VBoxContainer/LaserOrbIcon/MarginContainer/Label
+@onready var rocket_orb_level : Label = $MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer/RocketOrbIcon/MarginContainer/Label
+@onready var laser_orb_level : Label = $MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer/LaserOrbIcon/MarginContainer/Label
+@onready var rocket_orb_progress : ProgressBar = $MarginContainer2/VBoxContainer/RocketOrb/HBoxContainer/MarginContainer/ProgressBar
+@onready var laser_orb_progress : ProgressBar = $MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer/MarginContainer/ProgressBar
 @onready var death_screen : Control = $DeathScreen
 @onready var win_screen : Control = $WinScreen
 
@@ -45,12 +47,18 @@ func _input(event):
 
 func update_progress_bar(new_y):
 	progress_bar.value = new_y 
-	
-func update_rocket_orb_count(new_amount):
-	rocket_orb_amount.text = str(new_amount)
 
-func update_laser_orb_count(new_amount):
-	laser_orb_amount.text = str(new_amount)
+func update_rocket_level(new_level):
+	rocket_orb_level.text = str(new_level)
+
+func update_laser_level(new_level):
+	laser_orb_level.text = str(new_level)
+
+func update_rocket_level_progress(new_value):
+	rocket_orb_progress.value = new_value
+
+func update_laser_level_progress(new_value):
+	laser_orb_progress.value = new_value
 
 func set_game_over():
 	death_screen_fade = true

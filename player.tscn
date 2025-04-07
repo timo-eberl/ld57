@@ -792,6 +792,7 @@ show_percentage = false
 
 [node name="UpgradeCounter" type="Node2D" parent="."]
 script = ExtResource("18_q13i1")
+points_for_upgrade = 10
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
