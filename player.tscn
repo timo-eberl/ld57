@@ -16,7 +16,7 @@
 [ext_resource type="Animation" uid="uid://dtg230pyb26e3" path="res://autsch.res" id="13_pylmc"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="17_op7ga"]
 [ext_resource type="Script" uid="uid://d3g7xw8mcdtur" path="res://src/upgrade_counter.gd" id="18_q13i1"]
-[ext_resource type="PackedScene" path="res://scenes/ui.tscn" id="19_pylmc"]
+[ext_resource type="PackedScene" uid="uid://brstj8qlf7jmx" path="res://scenes/ui.tscn" id="19_pylmc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_bwjto"]
 friction = 0.0

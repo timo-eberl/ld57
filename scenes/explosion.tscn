@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bu5edv44lts7m"]
 
-[ext_resource type="Script" path="res://scenes/explosionSkr.gd" id="1_17npe"]
+[ext_resource type="Script" uid="uid://d027rera85t2x" path="res://scenes/explosionSkr.gd" id="1_17npe"]
 [ext_resource type="Texture2D" uid="uid://4oe2i4beyt8i" path="res://textures/circle_with_outline.png" id="1_nfeox"]
 
 [sub_resource type="Gradient" id="Gradient_3oo6d"]

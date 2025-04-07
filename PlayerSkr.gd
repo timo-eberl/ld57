@@ -39,6 +39,8 @@ func _ready() -> void:
 	health_bar.set_max_health(health)
 
 func spawn_rocket():
+	rocket_power = upgrade_counter.rocket_level
+	
 	var rocket_instance = rocket.instantiate()
 	rocket_instance.global_position = torpedo_rampe.global_position
 	rocket_instance.get_child(0).linear_velocity += self.linear_velocity

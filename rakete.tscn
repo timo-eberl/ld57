@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="1_nl5c6"]
 [ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
-[ext_resource type="PackedScene" path="res://scenes/explosion.tscn" id="2_jnykt"]
+[ext_resource type="PackedScene" uid="uid://bu5edv44lts7m" path="res://scenes/explosion.tscn" id="2_jnykt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaujv"]
 radius = 14.7
