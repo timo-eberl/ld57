@@ -315,6 +315,7 @@ _data = {
 }
 
 [node name="Pufferfish" type="RigidBody2D"]
+position = Vector2(389, -519)
 collision_layer = 4
 collision_mask = 7
 gravity_scale = 0.0
