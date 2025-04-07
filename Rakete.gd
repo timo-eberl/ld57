@@ -36,7 +36,6 @@ func explode():
 	var radius = 150 + rocket_power * 30;
 	var damage = 4 + (rocket_power / 3) # damage should be between 1 and 4
 	
-	# damage enemies
 	var space_state = get_world_2d().direct_space_state
 	var shape_rid = PhysicsServer2D.circle_shape_create()
 	PhysicsServer2D.shape_set_data(shape_rid, radius)
@@ -58,9 +57,10 @@ func explode():
 			var damage_reduction := int(d / 70.0) # with distance, reduce damage
 			for i in (damage - damage_reduction):
 				obstacles.take_damage_at(coords)
+		# damage enemies
 		if result.collider is Enemy:
 			var enemy : Enemy = result.collider
-			enemy.take_damage(damage)
+			enemy.take_damage(damage / 2.0)
 			enemy.apply_impulse(
 				(enemy.global_position - global_position).normalized() * 100.0 * damage * explosion_knockback
 			)
