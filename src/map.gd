@@ -112,7 +112,6 @@ func water_force():
 		var pullPoint = playerNavAgent.get_next_path_position() - playerController.global_position
 		var d := playerNavAgent.target_position.distance_to(playerController.global_position)
 		var fm := clampf( (200.0 / d), 0, 1)
-		print("fm: ", fm)
 		playerController.apply_impulse(pullPoint.normalized() * 100 * water_pull_strength * fm)
 	water_was_added_blocks.clear()
 
