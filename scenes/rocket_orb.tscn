@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://0dolccaharjo"]
 
-[ext_resource type="Script" uid="uid://ckbbi3lx632uj" path="res://src/orb.gd" id="1_vuiuu"]
+[ext_resource type="Script" path="res://src/orb.gd" id="1_vuiuu"]
 [ext_resource type="Texture2D" uid="uid://bpr8ev3pnm2y7" path="res://textures/Orb_purple.png" id="2_vuiuu"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_26xuy"]
@@ -16,6 +16,8 @@ contact_monitor = true
 max_contacts_reported = 32
 script = ExtResource("1_vuiuu")
 type = 1
+max_speed = 200.0
+accel = 400.0
 
 [node name="Sprite" type="MeshInstance2D" parent="."]
 scale = Vector2(70, 70)
