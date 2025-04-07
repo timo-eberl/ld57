@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7ws1o0v08mn0"]
+[gd_scene load_steps=8 format=3 uid="uid://c7ws1o0v08mn0"]
 
 [ext_resource type="Script" uid="uid://d027rera85t2x" path="res://scenes/explosionSkr.gd" id="1_17npe"]
+[ext_resource type="Texture2D" uid="uid://4oe2i4beyt8i" path="res://textures/circle_with_outline.png" id="1_nfeox"]
 
 [sub_resource type="Gradient" id="Gradient_3oo6d"]
 colors = PackedColorArray(0.985222, 0.850446, 0.648415, 1, 0.893912, 0.451175, 0.408228, 1)
@@ -23,8 +24,8 @@ initial_velocity_max = 146.96
 gravity = Vector3(0, 49.05, 0)
 linear_accel_min = 58.94
 linear_accel_max = 97.43
-scale_min = 9.77
-scale_max = 72.8
+scale_min = 0.2
+scale_max = 0.7
 scale_curve = SubResource("CurveTexture_aw4cw")
 color = Color(0.893392, 0.712255, 0.247855, 1)
 color_initial_ramp = SubResource("GradientTexture1D_17npe")
@@ -33,9 +34,10 @@ turbulence_noise_strength = 1.29
 turbulence_noise_scale = 5.509
 
 [node name="Explosion" type="GPUParticles2D"]
-scale = Vector2(9.965, 9.965)
+scale = Vector2(10, 10)
 emitting = false
 amount = 50
+texture = ExtResource("1_nfeox")
 lifetime = 0.36
 one_shot = true
 explosiveness = 1.0

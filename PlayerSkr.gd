@@ -21,7 +21,7 @@ extends RigidBody2D
 
 @export var rocket : PackedScene;
 
-var rocketCooldown : float = 100.0;
+var rocketCooldown : float = 1.0;
 var uBootDir : Vector2 = Vector2.ZERO;
 
 var _last_laser_rid : RID
@@ -40,13 +40,14 @@ func _ready() -> void:
 func spawn_rocket():
 	var rocket_instance = rocket.instantiate()
 	rocket_instance.global_position = torpedo_rampe.global_position
-	rocket_instance.get_child(0).linear_velocity = self.linear_velocity
+	rocket_instance.get_child(0).linear_velocity += self.linear_velocity
 	get_tree().root.add_child(rocket_instance)
 	pass;
 
 func _process(_delta):
 	if health <= 0.0 and not is_dead:
 		_kill_player()
+	rocketCooldown -= _delta
 
 func _physics_process(delta):
 	movementInput = Vector2.ZERO;
@@ -89,9 +90,9 @@ func _physics_process(delta):
 	if rocketCooldown <= 0:
 		rocketCooldown -= delta
 		
-	if Input.is_action_just_pressed("mouse_click"):
+	if Input.is_action_just_pressed("mouse_click") && rocketCooldown <= 0:
 		spawn_rocket()
-		rocketCooldown = 30.0
+		rocketCooldown = 3.0
 		
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
