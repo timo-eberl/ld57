@@ -7,9 +7,13 @@ extends Control
 @onready var laser_orb_progress : ProgressBar = $MarginContainer2/VBoxContainer/LaserOrb/HBoxContainer/MarginContainer/ProgressBar
 @onready var death_screen : Control = $DeathScreen
 @onready var win_screen : Control = $WinScreen
+@onready var win_lable : Label = $WinScreen/MarginContainer/VBoxContainer/Label2
+
 
 @export var upmost_progress := 300.0
 @export var lowest_possible := 15450.0
+
+var total_time : float = 0
 
 var death_screen_fade := false
 var fade_timer := 0.0
@@ -21,8 +25,11 @@ var win_transition_done := false
 func _ready():
 	progress_bar.min_value = upmost_progress
 	progress_bar.max_value = lowest_possible
+	total_time = 0
 
 func _process(delta):
+	total_time += delta
+	
 	if death_screen_fade:
 		if fade_timer >= 1.0:
 			death_transition_done = true
@@ -67,4 +74,5 @@ func set_game_over():
 
 func enable_win_screen():
 	win_screen_fade = true
+	win_lable.text = "Thank you for playing :) \n Time " + str(total_time).pad_decimals(2)
 	
