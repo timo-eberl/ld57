@@ -3,6 +3,7 @@ class_name Map
 extends TileMapLayer
 
 @export var first_slice : PackedScene
+@export var last_slice : PackedScene
 @export var slices : Array[PackedScene]
 @export var number_of_slices := 10
 @export_tool_button("Generate Map", "Callable") var generate_map_action = generate_map
@@ -23,23 +24,40 @@ var _height := 0
 
 func generate_map():
 	_height = 0
+	self.clear()
+	
 	# fill everything with default tile
-	for x in range(-30, 50):
-		for y in range(-30, 2000):
-			if x == -30 || x == 49 || y == -30 || y == 1999:
+	for x in range(-30, 70):
+		for y in range(-20, 2020):
+			if x == -10 || x == 49 || y == 0 || y == 1999:
 				self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 			else:
-				self.set_cell(Vector2i(x,y), 0, Vector2i(0,2))
+				self.set_cell(Vector2i(x,y), 0, Vector2i(0,0))
 	
 	var first_slice_instance : TileMapSlice = first_slice.instantiate()
 	add_slice_to_map(first_slice_instance)
 	first_slice_instance.free() # not sure if necessary
 	
+	var index := 0
 	for i in number_of_slices:
 		randomize() # Randomizes the seed (or the internal state) of the random number generator
-		var slice_instance : TileMapSlice = slices[randi() % slices.size()].instantiate()
+		var old_index = index
+		# two slices beneath each other cant be the same slice
+		while old_index == index:
+			index = randi() % slices.size()
+		var slice_instance : TileMapSlice = slices[index].instantiate()
 		add_slice_to_map(slice_instance)
 		slice_instance.free() # not sure if necessary
+	
+	var last_slice_instance : TileMapSlice = last_slice.instantiate()
+	add_slice_to_map(last_slice_instance)
+	last_slice_instance.free() # not sure if necessary
+	
+	# add border at bottom
+	
+	for x in range(-30, 70):
+		var y = _height
+		self.set_cell(Vector2i(x,y), 0, Vector2i(0,6))
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -57,10 +75,6 @@ func _process(delta: float) -> void:
 		water_update_timer = .1
 	else:
 		water_update_timer -= delta
-
-func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		explosion(get_global_mouse_position(), 128.0, 2)
 
 # only call this during _physic_process, damage should be between 1 and 4
 func explosion(pos_ws : Vector2, radius : float, damage : int):
@@ -89,6 +103,9 @@ func water_force():
 		playerController.apply_impulse(pullPoint.normalized() * 100)
 	water_was_added_blocks.clear()
 
+func is_water(coords : Vector2i):
+	var atlas_coords := self.get_cell_atlas_coords(coords)
+	return atlas_coords == water_tile
 
 func water_spread():
 	var blocks_to_ceck_to_add : Array[Vector2i];
@@ -103,10 +120,7 @@ func water_spread():
 		var found_water = false
 		
 		for v in sorounding:
-			var sid := self.get_cell_source_id(v)
-			var atlas_coord := self.get_cell_atlas_coords(v)
-			
-			if atlas_coord == water_tile:
+			if is_water(v):
 				found_water = true
 				
 		for v in sorounding:
@@ -153,4 +167,11 @@ func add_slice_to_map(slice : TileMapSlice):
 			
 			var map_coords := coords + Vector2i(0,_height)
 			self.set_cell(map_coords, sid, atlas_coords, alt_tile_id)
+	
+	# add all child nodes of the slice
+	for node in slice.get_children():
+		if node is Node2D:
+			node.position.y += _height * 64
+		self.get_parent().add_child.call_deferred(node.duplicate())
+	
 	_height += h

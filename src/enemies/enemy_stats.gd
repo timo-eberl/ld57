@@ -7,4 +7,3 @@ class_name EnemyStats
 @export var damage : float = 1.0
 @export var hit_cooldown : float = 1.0
 @export var health : float = 10.0
-@export var asleep : bool = true

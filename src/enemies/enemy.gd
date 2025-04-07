@@ -2,6 +2,9 @@ extends RigidBody2D
 class_name Enemy
 
 @export var enemy_stats : EnemyStats
+# %Player doesn't work if instantiated dynamically
+@onready var player : Player = get_tree().root.get_child(0).find_child("Player")
+@onready var map : Map = get_tree().root.get_child(0).find_child("ObstaclesTiles")
 
 @onready var health_bar : ProgressBar = $HealthBar
 
@@ -11,35 +14,54 @@ class_name Enemy
 var player_in_area : bool = false
 
 var is_dead : bool = false
+var is_asleep : bool = true
 
 var hit_timer = 0.0
 
+var fade_out_progress := 0.0
+
+var health := 0.0
+
 func _ready():
 	sleeping = true
-	health_bar.set_max_health(enemy_stats.health)
+	freeze = true
+	health = enemy_stats.health
+	health_bar.set_max_health(health)
 	animationPlayer.play("idle")
 
-	_awake_enemy()
-
 func _process(delta):
-	if is_dead and animationPlayer.current_animation == "":
-		queue_free()
+	if is_dead:
+		if fade_out_progress >= 1.0:
+			queue_free()
+		else:
+			var current_fade = lerp(0.0, 1.0, fade_out_progress)
+			sprites.get_node("DeathSprite").set_self_modulate(Color(1.0, 1.0, 1.0, 1.0 - current_fade))
+	
+		fade_out_progress += delta
 	
 	if not is_dead:
 		if player_in_area:
 			if hit_timer >= enemy_stats.hit_cooldown:
-				%Player.apply_hit(enemy_stats.damage)
+				player.apply_hit(enemy_stats.damage)
 				hit_timer = 0.0
 			hit_timer += delta
 	
-		if enemy_stats.health <= 0:
+		if health <= 0:
 			_kill_enemy()
 		
 		if not animationPlayer.is_playing():
 			animationPlayer.play("idle")
 
-func _physics_process(delta):
-	if not enemy_stats.asleep and not is_dead:
+func awake_if_water():
+	if is_asleep and not is_dead:
+		# enemy positon to coordinates on tilemap
+		var map_coords := map.local_to_map(map.to_local(self.global_position))
+		if map.is_water(map_coords):
+			_awake_enemy()
+
+func _physics_process(_delta):
+	awake_if_water()
+	if not is_asleep and not is_dead:
 		_move()
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
@@ -49,7 +71,7 @@ func _integrate_forces(_state: PhysicsDirectBodyState2D):
 	self.linear_velocity = self.linear_velocity * 0.95;
 
 func _move():
-	var direction : Vector2 = (%Player.global_position - global_position).normalized()
+	var direction : Vector2 = (player.global_position - global_position).normalized()
 	if direction.x < 0.0:
 		sprites.scale.x = -abs(sprites.scale.x)
 	else:
@@ -59,18 +81,20 @@ func _move():
 		apply_force(direction * enemy_stats.acell)
 
 func _area_entered(body):
-	if body.name == "Player" and not enemy_stats.asleep:
+	if body.name == "Player" and not is_asleep:
 		body.apply_hit(enemy_stats.damage)
 		player_in_area = true
 
 func _area_left(body):
-	if body.name == "Player" and not enemy_stats.asleep:
+	if body.name == "Player" and not is_asleep:
 		player_in_area = false
 		hit_timer = 0.0
 
 func _awake_enemy():
-	enemy_stats.asleep = false
+	print("awake ", self.name)
+	is_asleep = false
 	sleeping = false
+	freeze = false
 
 func play_hit_animation():
 	if not is_dead:
@@ -79,11 +103,12 @@ func play_hit_animation():
 func take_damage(damage):
 	health_bar.deal_damage(damage)
 	
-	enemy_stats.health -= damage
+	health -= damage
 	play_hit_animation()
 
 func _kill_enemy():
 	if not is_dead:
 		animationPlayer.play("death")
+		health_bar.fade_out = true
 		collision_layer = 0
 		is_dead = true
