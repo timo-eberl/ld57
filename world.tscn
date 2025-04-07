@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://du8ochmeonkpo" path="res://scenes/slices/tile_map_slice_7.tscn" id="12_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://bbn3uy4lojjpx" path="res://scenes/slices/tile_map_slice_8.tscn" id="14_cbp6q"]
 [ext_resource type="PackedScene" uid="uid://d3d5i66hjfi5e" path="res://scenes/slices/tile_map_slice_9.tscn" id="15_26xuy"]
-[ext_resource type="AudioStream" uid="uid://dytqoiki4284c" path="res://Audio/underwater-245900.mp3" id="19_cbp6q"]
+[ext_resource type="AudioStream" uid="uid://dfsu11ayegogt" path="res://Audio/desolate-world-121196.mp3" id="19_cbp6q"]
 
 [node name="World" type="Node2D"]
 
@@ -47,6 +47,6 @@ position = Vector2(724, 297)
 
 [node name="Background_Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("19_cbp6q")
-volume_db = -15.0
+volume_db = -20.0
 autoplay = true
 parameters/looping = true
