@@ -76,7 +76,7 @@ func _process(delta: float) -> void:
 	if water_update_timer <= 0.0: 
 		water_force();
 		water_spread();
-		water_update_timer = .18
+		water_update_timer = .12
 	else:
 		water_update_timer -= delta
 
