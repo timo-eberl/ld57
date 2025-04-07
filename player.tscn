@@ -648,6 +648,8 @@ anti_aliasing = false
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op7ga"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 anti_aliasing = false
 
@@ -775,16 +777,16 @@ debug_use_custom = true
 debug_path_custom_color = Color(0.548386, 0.0987657, 0.135833, 1)
 
 [node name="HealthBar" parent="." instance=ExtResource("17_op7ga")]
-offset_left = -50.0
-offset_top = -56.0
-offset_right = 50.0
-offset_bottom = -46.0
+offset_left = -48.0
+offset_top = -53.0
+offset_right = 48.0
+offset_bottom = -47.0
 
 [node name="RocketCooldown" type="ProgressBar" parent="."]
 offset_left = -45.0
-offset_top = -44.0
+offset_top = -43.0
 offset_right = 45.0
-offset_bottom = -39.0
+offset_bottom = -38.0
 theme_override_styles/background = SubResource("StyleBoxFlat_y3kqx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_op7ga")
 max_value = 3.0
