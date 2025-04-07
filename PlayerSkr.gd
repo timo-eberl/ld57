@@ -157,6 +157,7 @@ func _physics_process(delta):
 	var speed = self.linear_velocity.length()
 	var t = clamp(speed/ 30.0, 1.0, 3.0)
 	propellerAnimation.speed_scale = pow(t, 2)
+	%UI.update_progress_bar(position.y)
 
 	
 func _integrate_forces(_state: PhysicsDirectBodyState2D):
