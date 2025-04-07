@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bn4e7xq7u6hrh"]
+[gd_scene load_steps=18 format=3 uid="uid://bn4e7xq7u6hrh"]
 
 [ext_resource type="Script" uid="uid://b0wa3ilstk152" path="res://src/enemies/piranha.gd" id="1_ihjt4"]
 [ext_resource type="Script" uid="uid://bbq6supw7aall" path="res://src/enemies/enemy_stats.gd" id="2_3ub0j"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bhjsx3v8tjpte" path="res://textures/Piranha/Piranah2.png" id="4_nah08"]
 [ext_resource type="Texture2D" uid="uid://3tucp318wupd" path="res://textures/Piranha/Piranah_autsch.png" id="5_k3k5w"]
 [ext_resource type="Texture2D" uid="uid://de66o802x6ji2" path="res://textures/Piranha/Piranah_dead.png" id="6_ei5gu"]
+[ext_resource type="Texture2D" uid="uid://vswk1nj3awi8" path="res://textures/Piranha/Piranah_sleep.png" id="7_0xxby"]
 [ext_resource type="PackedScene" uid="uid://cjnkbmthjaxw4" path="res://scenes/health_bar.tscn" id="7_k5ghw"]
 
 [sub_resource type="Resource" id="Resource_j1s6e"]
@@ -35,7 +36,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -108,6 +109,30 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Texture/AsleepSprite:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Texture/AsleepSprite:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_k5ghw"]
@@ -299,10 +324,64 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Texture/AsleepSprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_spion"]
+resource_name = "asleep"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Texture/AsleepSprite:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture/AsleepSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("Texture/DeathSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ei5gu"]
 _data = {
 &"RESET": SubResource("Animation_k3k5w"),
+&"asleep": SubResource("Animation_spion"),
 &"death": SubResource("Animation_k5ghw"),
 &"hit": SubResource("Animation_ei5gu"),
 &"idle": SubResource("Animation_nah08")
@@ -349,9 +428,15 @@ texture = ExtResource("4_nah08")
 flip_h = true
 
 [node name="DeathSprite" type="Sprite2D" parent="Texture"]
+visible = false
 position = Vector2(0.130993, 0.0874996)
 scale = Vector2(0.443421, 0.443421)
 texture = ExtResource("6_ei5gu")
+flip_h = true
+
+[node name="AsleepSprite" type="Sprite2D" parent="Texture"]
+scale = Vector2(0.443, 0.443)
+texture = ExtResource("7_0xxby")
 flip_h = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

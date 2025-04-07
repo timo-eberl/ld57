@@ -27,7 +27,7 @@ func _ready():
 	freeze = true
 	health = enemy_stats.health
 	health_bar.set_max_health(health)
-	animationPlayer.play("idle")
+	animationPlayer.play("asleep")
 
 func _process(delta):
 	if is_dead:
@@ -92,6 +92,7 @@ func _area_left(body):
 
 func _awake_enemy():
 	print("awake ", self.name)
+	animationPlayer.play("idle")
 	is_asleep = false
 	sleeping = false
 	freeze = false
