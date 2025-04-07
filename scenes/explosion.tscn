@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7ws1o0v08mn0"]
+[gd_scene load_steps=8 format=3 uid="uid://bu5edv44lts7m"]
 
-[ext_resource type="Script" uid="uid://d027rera85t2x" path="res://scenes/explosionSkr.gd" id="1_17npe"]
+[ext_resource type="Script" path="res://scenes/explosionSkr.gd" id="1_17npe"]
 [ext_resource type="Texture2D" uid="uid://4oe2i4beyt8i" path="res://textures/circle_with_outline.png" id="1_nfeox"]
 
 [sub_resource type="Gradient" id="Gradient_3oo6d"]
-colors = PackedColorArray(0.985222, 0.850446, 0.648415, 1, 0.893912, 0.451175, 0.408228, 1)
+colors = PackedColorArray(0.805292, 0.916294, 0.880034, 1, 0.265848, 0.552043, 0.764864, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_17npe"]
 gradient = SubResource("Gradient_3oo6d")
@@ -27,7 +27,6 @@ linear_accel_max = 97.43
 scale_min = 0.2
 scale_max = 0.7
 scale_curve = SubResource("CurveTexture_aw4cw")
-color = Color(0.893392, 0.712255, 0.247855, 1)
 color_initial_ramp = SubResource("GradientTexture1D_17npe")
 turbulence_enabled = true
 turbulence_noise_strength = 1.29
