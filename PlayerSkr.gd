@@ -6,6 +6,7 @@ extends RigidBody2D
 @export var acell : float = 100.0;
 @export var laser_damage_per_second := 7.5
 @export var hits_per_second := 6.0
+@export var knockback := 1.0
 
 @export var health : float = 50;
 
@@ -129,6 +130,9 @@ func _physics_process(delta):
 					elif result.collider is Enemy: # damage enemies
 						var enemy : Enemy = result.collider
 						enemy.take_damage(laser_damage_per_second / hits_per_second)
+						enemy.apply_impulse(
+							(get_global_mouse_position() - global_position).normalized() * 100.0 * knockback
+						)
 					
 					_last_laser_rid_change_time = Time.get_ticks_msec()
 			else:
