@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://vb5dd0dgi4x4"]
+[gd_scene load_steps=10 format=3 uid="uid://cf223uy62euk3"]
 
 [ext_resource type="Shader" uid="uid://c3jmhxtae7awl" path="res://shaders/laser.gdshader" id="1_upl0e"]
 [ext_resource type="Shader" uid="uid://bfhn3xs5nremx" path="res://shaders/laser_blob.gdshader" id="2_j1vvi"]
