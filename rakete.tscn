@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://djnhj7sx1fcs6" path="res://textures/Rakete56.png" id="1_nl5c6"]
 [ext_resource type="Script" uid="uid://bawtyptenovm6" path="res://Rakete.gd" id="1_oaujv"]
-[ext_resource type="PackedScene" uid="uid://c7ws1o0v08mn0" path="res://scenes/explosion.tscn" id="2_jnykt"]
+[ext_resource type="PackedScene" path="res://scenes/explosion.tscn" id="2_jnykt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oaujv"]
-radius = 5.0
-height = 32.0
+radius = 14.7
+height = 56.6
 
 [node name="Rakete" type="Node2D"]
 
@@ -25,7 +25,6 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_nl5c6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(11, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_oaujv")
 

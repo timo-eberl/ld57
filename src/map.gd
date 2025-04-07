@@ -86,26 +86,6 @@ func _process(delta: float) -> void:
 	else:
 		water_update_timer -= delta
 
-# only call this during _physic_process, damage should be between 1 and 4
-func explosion(pos_ws : Vector2, radius : float, damage : int):
-	var space_state = get_world_2d().direct_space_state
-	var shape_rid = PhysicsServer2D.circle_shape_create()
-	PhysicsServer2D.shape_set_data(shape_rid, radius)
-	
-	var query := PhysicsShapeQueryParameters2D.new()
-	query.shape_rid = shape_rid
-	query.transform = Transform2D(0, pos_ws)
-	
-	var results = space_state.intersect_shape(query, 512)
-	# Release the shape when done with physics queries.
-	PhysicsServer2D.free_rid(shape_rid)
-	
-	for result in results:
-		if result.collider == self:
-			var coords := self.get_coords_for_body_rid(result.rid)
-			for i in damage:
-				self.take_damage_at(coords)
-
 func water_force():
 	for block in water_was_added_blocks:
 		playerNavAgent.target_position = Vector2(block.x * 64, block.y * 64)
