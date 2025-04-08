@@ -75,7 +75,9 @@ func _process(delta):
 				health += regen_hp_per_s * delta
 		health_bar.set_health(health)
 	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dead:
 		laser_sound.stream_paused = false
 		
 		if laser_sound.pitch_scale < 4:
