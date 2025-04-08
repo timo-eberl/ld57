@@ -806,4 +806,3 @@ unique_name_in_owner = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("18_pylmc")
 volume_db = -40.0
-autoplay = true

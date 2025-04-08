@@ -77,18 +77,18 @@ func _process(delta):
 	
 	
 	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dead:
-		laser_sound.stream_paused = false
-		
-		if laser_sound.pitch_scale < 4:
-			laser_sound.pitch_scale = laser_sound.pitch_scale + delta * 10.0
-		
-	else:
-		
-		if laser_sound.pitch_scale > 1.5:
-			laser_sound.pitch_scale = laser_sound.pitch_scale - delta * 20.0
-		else:
-			laser_sound.stream_paused = true
+	#if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not is_dead:
+		#laser_sound.stream_paused = false
+		#
+		#if laser_sound.pitch_scale < 4:
+			#laser_sound.pitch_scale = laser_sound.pitch_scale + delta * 10.0
+		#
+	#else:
+		#
+		#if laser_sound.pitch_scale > 1.5:
+			#laser_sound.pitch_scale = laser_sound.pitch_scale - delta * 20.0
+		#else:
+			#laser_sound.stream_paused = true
 
 func _physics_process(delta):
 	if is_dead or won: return
