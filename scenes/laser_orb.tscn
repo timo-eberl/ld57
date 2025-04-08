@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://tqqjjcvhy174"]
 
-[ext_resource type="Script" path="res://src/orb.gd" id="1_py374"]
+[ext_resource type="Script" uid="uid://ckbbi3lx632uj" path="res://src/orb.gd" id="1_py374"]
 [ext_resource type="Texture2D" uid="uid://b4wydytou5tgx" path="res://textures/Orb_redWhite.png" id="2_cq5uy"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_26xuy"]
