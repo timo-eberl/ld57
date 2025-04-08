@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brstj8qlf7jmx"]
+[gd_scene load_steps=13 format=3 uid="uid://brstj8qlf7jmx"]
 
 [ext_resource type="Script" uid="uid://dx0jigob835ay" path="res://src/ui.gd" id="1_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://bpr8ev3pnm2y7" path="res://textures/Orb_purple.png" id="2_gdt2y"]
@@ -64,9 +64,6 @@ anti_aliasing = false
 
 [sub_resource type="LabelSettings" id="LabelSettings_wm3ai"]
 font_size = 100
-
-[sub_resource type="LabelSettings" id="LabelSettings_8dubc"]
-font_size = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_p7vwb"]
 font_size = 30
@@ -268,13 +265,6 @@ alignment = 1
 layout_mode = 2
 text = "GAME OVER"
 label_settings = SubResource("LabelSettings_wm3ai")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="DeathScreen/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "press any key to restart..."
-label_settings = SubResource("LabelSettings_8dubc")
 horizontal_alignment = 1
 vertical_alignment = 1
 

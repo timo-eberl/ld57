@@ -46,10 +46,10 @@ func _process(delta):
 			win_screen.set_modulate(Color(1.0, 1.0, 1.0, fade_progress))
 			fade_timer += delta
 
-func _input(event):
-	if event is InputEventKey:
-		if death_transition_done:
-			get_tree().reload_current_scene()
+#func _input(event):
+	#if event is InputEventKey:
+		#if death_transition_done:
+			#get_tree().reload_current_scene()
 		
 
 func update_progress_bar(new_y):
